@@ -257,29 +257,51 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
 layout: default
 ---
 
-# 架構解析
+# 架構解析 — 三層設計
 
-<div class="grid grid-cols-2 gap-8">
+<div class="flex flex-col gap-3 mt-4">
+  <div class="border border-blue-500 rounded-lg p-4">
+    <div class="text-blue-400 font-bold text-sm mb-2">① 介面層</div>
+    <div class="text-sm text-gray-700">CLI・Telegram / Discord / WhatsApp・Web Dashboard・VS Code / Zed (ACP)</div>
+  </div>
+  <div class="flex justify-center text-gray-400 text-xs">▼</div>
+  <div class="border border-purple-500 rounded-lg p-4">
+    <div class="text-purple-400 font-bold text-sm mb-2">② Agent 邏輯層</div>
+    <div class="text-sm text-gray-700"><span class="font-mono">AIAgent</span>（<span class="font-mono">run_agent.py</span>）管理對話迴圈、iteration budget、工具呼叫 ／ <span class="font-mono">model_tools.py</span> 負責工具的動態發現與註冊</div>
+  </div>
+  <div class="flex justify-center text-gray-400 text-xs">▼</div>
+  <div class="border border-green-500 rounded-lg p-4">
+    <div class="text-green-400 font-bold text-sm mb-2">③ 執行層</div>
+    <div class="text-sm text-gray-700">Local・Docker・SSH・Modal・Singularity（GPU 叢集）</div>
+  </div>
+</div>
+
+---
+layout: default
+---
+
+# 架構解析 — Runtime Modes & 設定
+
+<div class="grid grid-cols-2 gap-8 mt-4">
   <div>
+    <div class="text-sm font-bold text-gray-500 mb-3">四種啟動入口</div>
 
-```
-hermes-agent/
-├── agent/       # 核心 Agent 邏輯
-├── skills/      # 技能系統（程序記憶）
-├── tools/       # 40+ 內建工具
-├── providers/   # LLM 提供商整合
-├── gateway/     # 訊息平台連接
-├── plugins/     # 擴充套件系統
-└── web/         # Web 介面
-```
+| Mode | Entry Point |
+|------|-------------|
+| CLI | `cli.py` |
+| 訊息平台 Gateway | `gateway/run.py` |
+| Editor (ACP) | VS Code / Zed 整合 |
+| Web UI | 瀏覽器 Dashboard |
 
   </div>
-  <div class="flex flex-col gap-3 justify-center text-sm text-white">
-    <div class="p-3 bg-gray-800 rounded">🐍 Python 3.11 核心</div>
-    <div class="p-3 bg-gray-800 rounded">🔍 FTS5 全文搜尋（歷史對話檢索）</div>
-    <div class="p-3 bg-gray-800 rounded">🔌 MCP 協議支援</div>
-    <div class="p-3 bg-gray-800 rounded">⏰ 內建 Cron 排程器</div>
-    <div class="p-3 bg-gray-800 rounded">🤖 子 Agent 平行工作流</div>
+  <div>
+    <div class="text-sm font-bold text-gray-500 mb-3">HERMES_HOME（<span class="font-mono">~/.hermes/</span>）</div>
+    <div class="flex flex-col gap-2 text-sm">
+      <div class="p-2 bg-gray-100 rounded font-mono">config.yaml <span class="text-gray-500 font-sans">— 模型、工具設定</span></div>
+      <div class="p-2 bg-gray-100 rounded font-mono">SOUL.md <span class="text-gray-500 font-sans">— Agent 人格定義</span></div>
+      <div class="p-2 bg-gray-100 rounded font-mono">MEMORY.md <span class="text-gray-500 font-sans">— 長期記憶</span></div>
+      <div class="p-2 bg-gray-100 rounded font-mono">.env <span class="text-gray-500 font-sans">— API 金鑰</span></div>
+    </div>
   </div>
 </div>
 
