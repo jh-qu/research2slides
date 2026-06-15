@@ -306,6 +306,217 @@ layout: default
 </div>
 
 ---
+layout: center
+class: text-center
+---
+
+# 深入解析
+
+<div class="text-gray-400 mt-4 text-lg">六個值得關注的技術特色</div>
+
+---
+layout: default
+---
+
+# Agent 越用越聰明：Learning Loop
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+  <div class="flex flex-col gap-3">
+    <div class="p-3 bg-gray-100 rounded-lg text-sm">
+      <span class="font-bold text-gray-700">① 任務完成</span>
+      <span class="text-gray-500 ml-2">→ AIAgent（run_agent.py）自動回顧</span>
+    </div>
+    <div class="flex justify-center text-gray-400 text-xs">▼</div>
+    <div class="p-3 bg-gray-100 rounded-lg text-sm">
+      <span class="font-bold text-gray-700">② 封裝 Skill</span>
+      <span class="text-gray-500 ml-2">→ skill_manage 寫成 Python 工具 + Markdown 描述</span>
+    </div>
+    <div class="flex justify-center text-gray-400 text-xs">▼</div>
+    <div class="p-3 bg-gray-100 rounded-lg text-sm">
+      <span class="font-bold text-gray-700">③ 寫回記憶層</span>
+      <span class="text-gray-500 ml-2">→ Autonomous Curator 定期維護、合併、棄用</span>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="border border-green-600 rounded p-3 text-sm">✅ 重複任務零人工撰碼：同類需求第二次起自動套用</div>
+    <div class="border border-green-600 rounded p-3 text-sm">✅ 部門隔離：多 Profile 各自維護專屬 Skill Bundle</div>
+    <div class="border border-green-600 rounded p-3 text-sm">✅ 知識不腐化：Curator 自動合併 / 棄用過時 Skill</div>
+  </div>
+</div>
+
+<div class="mt-4 p-3 border border-red-500 rounded-lg text-sm text-red-700">
+  ⚠️ 企業注意：自動生成的 Skill 無人工審核閘門，受監管環境需自建 code review 流程
+</div>
+
+---
+layout: default
+---
+
+# `SOUL.md`：Agent 行為的版本控制單元
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+  <div>
+    <div class="text-xs text-gray-400 mb-2">~/.hermes/SOUL.md</div>
+    <div class="p-3 bg-gray-800 rounded text-xs font-mono text-green-300 leading-relaxed">
+      # 身份<br>
+      你是法務部門的 AI 助理。<br><br>
+      # 行為邊界<br>
+      不得提供具體法律建議。<br>
+      回應需附加「請諮詢專業律師」。
+    </div>
+    <div class="mt-4 text-xs text-gray-500">啟動時注入 system prompt 前置區段</div>
+    <div class="mt-3 p-2 bg-gray-100 rounded text-xs text-gray-700">
+      → 可納入 Git 版控、PR review、CI/CD<br>
+      ≈ <strong>IaC for Agent behavior</strong>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="border border-gray-300 rounded p-3 text-sm text-center">⚖️ 法務 Agent<br><span class="text-xs text-gray-500">合規語氣 + 免責提示</span></div>
+    <div class="border border-gray-300 rounded p-3 text-sm text-center">🎧 客服 Agent<br><span class="text-xs text-gray-500">親切語氣 + 退款授權範圍</span></div>
+    <div class="border border-gray-300 rounded p-3 text-sm text-center">🛠 工程 Agent<br><span class="text-xs text-gray-500">技術語氣 + 生產環境禁令</span></div>
+  </div>
+</div>
+
+<div class="mt-3 p-3 border border-red-500 rounded-lg text-sm text-red-700">
+  ⚠️ 純文字，無原生 ACL — 有 HERMES_HOME 寫入權限者可靜默修改人格，建議搭配 OS 層或 Secret Manager 保護
+</div>
+
+---
+layout: default
+---
+
+# 記憶不中斷：三層記憶架構
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+  <div class="flex flex-col gap-2">
+    <div class="border border-blue-400 rounded-lg p-4">
+      <div class="text-blue-500 font-bold text-sm mb-1">短期 — Context Window</div>
+      <div class="text-xs text-gray-600">當前對話即時推理，會話結束即消失</div>
+    </div>
+    <div class="flex justify-center text-gray-400 text-xs">▼ 對話結束後寫入</div>
+    <div class="border border-purple-400 rounded-lg p-4">
+      <div class="text-purple-500 font-bold text-sm mb-1">中期 — SQLite FTS5 全文索引</div>
+      <div class="text-xs text-gray-600">跨會話關鍵字召回，毫秒級查詢 ／ Honcho 管理</div>
+    </div>
+    <div class="flex justify-center text-gray-400 text-xs">▼ 重要資訊持久化</div>
+    <div class="border border-green-400 rounded-lg p-4">
+      <div class="text-green-500 font-bold text-sm mb-1">長期 — MEMORY.md + 向量 DB</div>
+      <div class="text-xs text-gray-600">USER.md 記錄使用者偏好 ／ Skill 知識庫</div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-4 justify-center">
+    <div class="p-4 bg-blue-50 rounded-lg border border-blue-200 text-sm">
+      💡 <strong>實際場景</strong><br>
+      <span class="text-gray-600">三週後繼續同一專案，無需重新交代背景</span>
+    </div>
+    <div class="p-4 bg-green-50 rounded-lg border border-green-200 text-sm">
+      📋 <strong>稽核友善</strong><br>
+      <span class="text-gray-600">MEMORY.md 為純文字，IT 可直接備份與審計</span>
+    </div>
+    <div class="p-3 border border-red-400 rounded-lg text-xs text-red-700">
+      ⚠️ 記憶邊界由 AI 自主決定，企業需評估資料治理策略
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+---
+
+# Promptware 防禦：對抗記憶污染攻擊
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+  <div>
+    <div class="text-xs text-gray-400 mb-3">攻擊鏈（Brainworm-class）</div>
+    <div class="flex flex-col gap-2 text-sm">
+      <div class="p-2 bg-red-50 border border-red-300 rounded">📄 外部內容（網頁、文件、工具輸出）</div>
+      <div class="flex justify-center text-red-400 text-xs">▼ 混入惡意指令</div>
+      <div class="p-2 bg-red-50 border border-red-300 rounded">💾 寫入 MEMORY.md / skill_manage</div>
+      <div class="flex justify-center text-red-400 text-xs">▼ 持久化感染</div>
+      <div class="p-2 bg-red-50 border border-red-300 rounded">🔁 跨會話持續執行攻擊者指令</div>
+    </div>
+    <div class="mt-3 p-2 bg-green-50 border border-green-400 rounded text-xs text-green-700">
+      🛡 v0.15.0 在記憶寫入路徑前加入攔截驗證
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="text-xs text-gray-500 mb-1">企業導入前確認清單</div>
+    <div class="p-3 border border-gray-300 rounded text-sm">□ 防禦是否覆蓋 MCP 工具輸出？</div>
+    <div class="p-3 border border-gray-300 rounded text-sm">□ 是否有第三方滲透測試報告？</div>
+    <div class="p-3 border border-gray-300 rounded text-sm">□ 觸發日誌是否可稽核？</div>
+    <div class="mt-2 p-2 bg-gray-100 rounded text-xs text-gray-600">
+      MIT 開源 — 企業可自行審計防禦實作原始碼
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+---
+
+# Multi-agent Kanban：任務自癒能力
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+  <div>
+    <div class="text-xs text-gray-400 mb-3">子代理失效自動恢復流程</div>
+    <div class="flex flex-col gap-1 text-sm">
+      <div class="p-2 bg-gray-100 rounded">主代理 → 派生子代理 A / B / C</div>
+      <div class="flex justify-center text-gray-400 text-xs">▼ 寫入 Kanban 看板</div>
+      <div class="p-2 bg-red-50 border border-red-300 rounded">子代理 B 心跳中斷 → 殭屍標記</div>
+      <div class="flex justify-center text-gray-400 text-xs">▼ 自動偵測</div>
+      <div class="p-2 bg-green-50 border border-green-400 rounded">任務回收 → 子代理 C 承接繼續</div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="border border-green-600 rounded p-3 text-sm">✅ 無人值守長任務：子代理失效不需人工介入</div>
+    <div class="border border-green-600 rounded p-3 text-sm">✅ 任務狀態可審計：Kanban 提供完整生命週期記錄</div>
+    <div class="border border-green-600 rounded p-3 text-sm">✅ 跨 session 持久化：配合 /goal 追蹤多日工作流</div>
+    <div class="mt-2 p-2 border border-yellow-400 rounded text-xs text-yellow-700">
+      ⚠️ v0.13.0 推出，尚無公開 benchmark — 建議 PoC 自行驗證可靠性
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+---
+
+# v0.15 Velocity：更精簡的程式碼，更穩固的基礎
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+  <div class="text-center flex flex-col justify-center">
+    <div class="text-7xl font-bold text-blue-600">76%</div>
+    <div class="text-gray-500 mt-2">程式碼削減</div>
+    <div class="text-sm text-gray-400 mt-1">功能不減，架構收斂</div>
+    <div class="mt-6 flex flex-col gap-2 text-xs text-gray-500">
+      <div class="flex justify-between px-4"><span>v0.12</span><span>v0.13</span><span>v0.14</span><span class="text-blue-600 font-bold">v0.15</span></div>
+      <div class="h-1 bg-gray-200 rounded mx-4 relative">
+        <div class="absolute right-0 top-0 h-1 w-1/4 bg-blue-600 rounded"></div>
+      </div>
+      <div class="text-center">28 天で四版迭代</div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="p-3 bg-gray-100 rounded text-sm">
+      <div class="text-gray-500 text-xs mb-1">重構前</div>
+      四條平行執行路徑（CLI / Gateway / ACP / Web UI）各自維護
+    </div>
+    <div class="flex justify-center text-blue-400">▼ 收斂</div>
+    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-sm">
+      <div class="text-blue-500 text-xs mb-1">重構後</div>
+      單一 AIAgent 協調層統一入口
+    </div>
+    <div class="mt-2 flex flex-col gap-2 text-sm">
+      <div class="border border-green-600 rounded p-2">✅ 安全審計範圍縮小</div>
+      <div class="border border-green-600 rounded p-2">✅ Bitwarden 原生 API Key 管理</div>
+    </div>
+    <div class="p-2 border border-red-400 rounded text-xs text-red-700">
+      ⚠️ 距 v0.14 僅 12 天 — PoC 前確認測試覆蓋率
+    </div>
+  </div>
+</div>
+
+---
 layout: default
 ---
 
