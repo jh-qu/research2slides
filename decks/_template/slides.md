@@ -130,6 +130,34 @@ layout: default
 </div>
 
 ---
+layout: default
+---
+
+# 資料來源
+
+<div class="flex flex-col gap-4 mt-6">
+  <!-- Primary：官方 repo、官方文件 → sources/primary-*.md -->
+  <div class="border border-gray-300 rounded-lg p-4">
+    <div class="text-xs text-gray-400 mb-1">GitHub Repo</div>
+    <div class="font-mono text-sm">github.com/<!-- org/repo --></div>
+  </div>
+  <div class="border border-gray-300 rounded-lg p-4">
+    <div class="text-xs text-gray-400 mb-1">官方文件</div>
+    <div class="font-mono text-sm"><!-- 官方文件 URL --></div>
+  </div>
+  <!-- Secondary：社群文章、教學手冊 → sources/secondary-*.md -->
+  <!-- <div class="border border-gray-300 rounded-lg p-4">
+    <div class="text-xs text-gray-400 mb-1"><!-- 作者/來源 --></div>
+    <div class="font-mono text-sm"><!-- URL --></div>
+  </div> -->
+  <!-- Analysis tool：gitIngest / DeepWiki 等工具產出 → sources/tool-*.md -->
+  <!-- <div class="border border-gray-300 rounded-lg p-4">
+    <div class="text-xs text-gray-400 mb-1"><!-- 工具名稱 --></div>
+    <div class="font-mono text-sm"><!-- 說明 --></div>
+  </div> -->
+</div>
+
+---
 layout: center
 class: text-center
 ---
@@ -137,6 +165,5 @@ class: text-center
 # 謝謝
 
 <div class="text-gray-600 mt-4 text-sm">
-  資料來源：github.com/<!-- org/repo --><br>
   報告日期：<!-- YYYY.MM.DD -->
 </div>
