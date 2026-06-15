@@ -316,6 +316,27 @@ layout: default
 </div>
 
 ---
+layout: default
+---
+
+# 資料來源
+
+<div class="flex flex-col gap-4 mt-6">
+  <div class="border border-gray-300 rounded-lg p-4">
+    <div class="text-xs text-gray-400 mb-1">GitHub Repo</div>
+    <div class="font-mono text-sm">github.com/NousResearch/hermes-agent</div>
+  </div>
+  <div class="border border-gray-300 rounded-lg p-4">
+    <div class="text-xs text-gray-400 mb-1">官方文件</div>
+    <div class="font-mono text-sm">hermes-agent.nousresearch.com/docs</div>
+  </div>
+  <div class="border border-gray-300 rounded-lg p-4">
+    <div class="text-xs text-gray-400 mb-1">繁中教學手冊（chihhung, v0.15.2）</div>
+    <div class="font-mono text-sm">chihhung.github.io/Blog/posts/教學/ai開發/hermes-agent生態系教學手冊</div>
+  </div>
+</div>
+
+---
 layout: center
 class: text-center
 ---
@@ -323,6 +344,5 @@ class: text-center
 # 謝謝
 
 <div class="text-gray-600 mt-4 text-sm">
-  資料來源：github.com/NousResearch/hermes-agent<br>
   報告日期：2026.06.12
 </div>
