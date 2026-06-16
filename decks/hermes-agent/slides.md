@@ -447,11 +447,12 @@ layout: default
 
 ---
 layout: two-cols
+class: kanban-slide
 ---
 
-# Multi-agent Kanban：任務自癒能力
+# Multi-agent Kanban 自癒能力
 
-```mermaid {scale: 0.5}
+```mermaid {scale: 0.6}
 flowchart TD
     Master(["主代理"]) -->|"派生"| A["子代理 A"]
     Master -->|"派生"| B["子代理 B ⚠️"]
@@ -464,7 +465,7 @@ flowchart TD
 
 ::right::
 
-<div class="flex flex-col gap-3 mt-8">
+<div class="flex flex-col gap-3 mt-24">
   <div class="border border-green-600 rounded p-3 text-sm">✅ 無人值守長任務：子代理失效不需人工介入</div>
   <div class="border border-green-600 rounded p-3 text-sm">✅ 任務狀態可審計：Kanban 提供完整生命週期記錄</div>
   <div class="border border-green-600 rounded p-3 text-sm">✅ 跨 session 持久化：配合 /goal 追蹤多日工作流</div>
@@ -472,6 +473,13 @@ flowchart TD
     ⚠️ v0.13.0 推出，尚無公開 benchmark — 建議 PoC 自行驗證可靠性
   </div>
 </div>
+
+<style>
+.kanban-slide h1 {
+  white-space: nowrap;
+  overflow: visible;
+}
+</style>
 
 ---
 layout: default
