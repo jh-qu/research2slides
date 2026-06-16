@@ -11,7 +11,7 @@ export default ({ app }) => {
 
   const img = document.createElement('img')
   img.style.cssText = [
-    'max-width:92vw', 'max-height:92vh', 'border-radius:8px',
+    'width:90vw', 'height:88vh', 'object-fit:contain', 'border-radius:8px',
     'background:white', 'padding:1.5rem',
     'box-shadow:0 8px 40px rgba(0,0,0,.5)',
   ].join(';')
@@ -39,8 +39,13 @@ export default ({ app }) => {
     const svg = host.shadowRoot?.querySelector('svg')
     if (!svg) return
 
+    // Clone and strip mermaid's scale-constrained width/height so the
+    // serialized SVG scales freely via viewBox inside the overlay.
+    const clone = svg.cloneNode(true)
+    clone.removeAttribute('width')
+    clone.removeAttribute('height')
     img.src = 'data:image/svg+xml;charset=utf-8,' +
-      encodeURIComponent(new XMLSerializer().serializeToString(svg))
+      encodeURIComponent(new XMLSerializer().serializeToString(clone))
     overlay.style.display = 'flex'
     e.stopPropagation()
     e.preventDefault()

@@ -259,8 +259,8 @@ layout: default
 
 # 架構解析 — 三層設計
 
-```mermaid
-flowchart LR
+```mermaid {scale: 0.8}
+flowchart TB
     subgraph IF["① 介面層"]
         direction TB
         cli["CLI / TUI"]
