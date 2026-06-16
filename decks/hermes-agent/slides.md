@@ -121,11 +121,11 @@ layout: two-cols
 
 <div class="flex flex-col gap-6 mt-8 ml-8 text-center">
   <div>
-    <div class="text-5xl font-bold text-blue-600">191K</div>
+    <div class="text-5xl font-bold text-blue-600">195K</div>
     <div class="text-gray-600 text-sm mt-1">GitHub Stars</div>
   </div>
   <div>
-    <div class="text-5xl font-bold text-green-600">33.3K</div>
+    <div class="text-5xl font-bold text-green-600">34.1K</div>
     <div class="text-gray-600 text-sm mt-1">Forks</div>
   </div>
   <div>
@@ -259,22 +259,27 @@ layout: default
 
 # 架構解析 — 三層設計
 
-<div class="flex flex-col gap-3 mt-4">
-  <div class="border border-blue-500 rounded-lg p-4">
-    <div class="text-blue-400 font-bold text-sm mb-2">① 介面層</div>
-    <div class="text-sm text-gray-700">CLI・Telegram / Discord / WhatsApp・Web Dashboard・VS Code / Zed (ACP)</div>
-  </div>
-  <div class="flex justify-center text-gray-400 text-xs">▼</div>
-  <div class="border border-purple-500 rounded-lg p-4">
-    <div class="text-purple-400 font-bold text-sm mb-2">② Agent 邏輯層</div>
-    <div class="text-sm text-gray-700"><span class="font-mono">AIAgent</span>（<span class="font-mono">run_agent.py</span>）管理對話迴圈、iteration budget、工具呼叫 ／ <span class="font-mono">model_tools.py</span> 負責工具的動態發現與註冊</div>
-  </div>
-  <div class="flex justify-center text-gray-400 text-xs">▼</div>
-  <div class="border border-green-500 rounded-lg p-4">
-    <div class="text-green-400 font-bold text-sm mb-2">③ 執行層</div>
-    <div class="text-sm text-gray-700">Local・Docker・SSH・Modal・Singularity（GPU 叢集）</div>
-  </div>
-</div>
+```mermaid
+flowchart LR
+    subgraph IF["① 介面層"]
+        direction TB
+        cli["CLI / TUI"]
+        msg["Telegram · Discord\nSlack · WhatsApp"]
+        web["Web Dashboard"]
+        ide["VS Code / Zed（ACP）"]
+    end
+    subgraph AG["② Agent 邏輯層"]
+        direction TB
+        aa["AIAgent\nrun_agent.py"]
+        mt["model_tools.py\n動態工具派發"]
+    end
+    subgraph EX["③ 執行層"]
+        direction TB
+        local["Local · Docker · SSH"]
+        cloud["Modal · Singularity\n（GPU 叢集）"]
+    end
+    IF --> AG --> EX
+```
 
 ---
 layout: default
@@ -315,33 +320,25 @@ class: text-center
 <div class="text-gray-400 mt-4 text-lg">六個值得關注的技術特色</div>
 
 ---
-layout: default
+layout: two-cols
 ---
 
 # Agent 越用越聰明：Learning Loop
 
-<div class="grid grid-cols-2 gap-8 mt-4">
-  <div class="flex flex-col gap-3">
-    <div class="p-3 bg-gray-100 rounded-lg text-sm">
-      <span class="font-bold text-gray-700">① 任務完成</span>
-      <span class="text-gray-500 ml-2">→ AIAgent（run_agent.py）自動回顧</span>
-    </div>
-    <div class="flex justify-center text-gray-400 text-xs">▼</div>
-    <div class="p-3 bg-gray-100 rounded-lg text-sm">
-      <span class="font-bold text-gray-700">② 封裝 Skill</span>
-      <span class="text-gray-500 ml-2">→ skill_manage 寫成 Python 工具 + Markdown 描述</span>
-    </div>
-    <div class="flex justify-center text-gray-400 text-xs">▼</div>
-    <div class="p-3 bg-gray-100 rounded-lg text-sm">
-      <span class="font-bold text-gray-700">③ 寫回記憶層</span>
-      <span class="text-gray-500 ml-2">→ Autonomous Curator 定期維護、合併、棄用</span>
-    </div>
-  </div>
-  <div class="flex flex-col gap-3 justify-center">
-    <div class="border border-green-600 rounded p-3 text-sm">✅ 重複任務零人工撰碼：同類需求第二次起自動套用</div>
-    <div class="border border-green-600 rounded p-3 text-sm">✅ 部門隔離：多 Profile 各自維護專屬 Skill Bundle</div>
-    <div class="border border-green-600 rounded p-3 text-sm">✅ 知識不腐化：Curator 自動合併 / 棄用過時 Skill</div>
-  </div>
+```mermaid
+flowchart LR
+    A["🎯 任務完成"] -->|"自動回顧"| B["📦 封裝 Skill\nskill_manage"]
+    B -->|"Python 工具 + MD"| C["💾 MEMORY.md"]
+    C -->|"Curator 維護"| D["🤖 Autonomous\nCurator"]
+    D -->|"下次自動套用"| A
+```
+
+::right::
+
+<div class="flex flex-col gap-3 mt-8">
+  <div class="border border-green-600 rounded p-3 text-sm">✅ 重複任務零人工撰碼：同類需求第二次起自動套用</div>
+  <div class="border border-green-600 rounded p-3 text-sm">✅ 部門隔離：多 Profile 各自維護專屬 Skill Bundle</div>
+  <div class="border border-green-600 rounded p-3 text-sm">✅ 知識不腐化：Curator 自動合併 / 棄用過時 Skill</div>
 </div>
 
 <div class="mt-4 p-3 border border-red-500 rounded-lg text-sm text-red-700">
@@ -451,29 +448,30 @@ layout: default
 </div>
 
 ---
-layout: default
+layout: two-cols
 ---
 
 # Multi-agent Kanban：任務自癒能力
 
-<div class="grid grid-cols-2 gap-8 mt-4">
-  <div>
-    <div class="text-xs text-gray-400 mb-3">子代理失效自動恢復流程</div>
-    <div class="flex flex-col gap-1 text-sm">
-      <div class="p-2 bg-gray-100 rounded">主代理 → 派生子代理 A / B / C</div>
-      <div class="flex justify-center text-gray-400 text-xs">▼ 寫入 Kanban 看板</div>
-      <div class="p-2 bg-red-50 border border-red-300 rounded">子代理 B 心跳中斷 → 殭屍標記</div>
-      <div class="flex justify-center text-gray-400 text-xs">▼ 自動偵測</div>
-      <div class="p-2 bg-green-50 border border-green-400 rounded">任務回收 → 子代理 C 承接繼續</div>
-    </div>
-  </div>
-  <div class="flex flex-col gap-3 justify-center">
-    <div class="border border-green-600 rounded p-3 text-sm">✅ 無人值守長任務：子代理失效不需人工介入</div>
-    <div class="border border-green-600 rounded p-3 text-sm">✅ 任務狀態可審計：Kanban 提供完整生命週期記錄</div>
-    <div class="border border-green-600 rounded p-3 text-sm">✅ 跨 session 持久化：配合 /goal 追蹤多日工作流</div>
-    <div class="mt-2 p-2 border border-yellow-400 rounded text-xs text-yellow-700">
-      ⚠️ v0.13.0 推出，尚無公開 benchmark — 建議 PoC 自行驗證可靠性
-    </div>
+```mermaid
+flowchart TD
+    Master(["主代理"]) -->|"派生"| A["子代理 A"]
+    Master -->|"派生"| B["子代理 B ⚠️"]
+    Master -->|"派生"| C["子代理 C"]
+    A & B & C -->|"狀態寫入"| KB[("📋 Kanban")]
+    B -->|"心跳中斷"| Z["殭屍標記"]
+    Z -->|"自動偵測"| R["任務回收"]
+    R -->|"承接繼續"| C
+```
+
+::right::
+
+<div class="flex flex-col gap-3 mt-8">
+  <div class="border border-green-600 rounded p-3 text-sm">✅ 無人值守長任務：子代理失效不需人工介入</div>
+  <div class="border border-green-600 rounded p-3 text-sm">✅ 任務狀態可審計：Kanban 提供完整生命週期記錄</div>
+  <div class="border border-green-600 rounded p-3 text-sm">✅ 跨 session 持久化：配合 /goal 追蹤多日工作流</div>
+  <div class="mt-4 p-2 border border-yellow-400 rounded text-xs text-yellow-700">
+    ⚠️ v0.13.0 推出，尚無公開 benchmark — 建議 PoC 自行驗證可靠性
   </div>
 </div>
 
@@ -512,6 +510,105 @@ layout: default
     </div>
     <div class="p-2 border border-red-400 rounded text-xs text-red-700">
       ⚠️ 距 v0.14 僅 12 天 — PoC 前確認測試覆蓋率
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+---
+
+# Tool Gateway — 一訂閱全工具齊備
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="text-sm font-bold text-gray-500 mb-3">隨 Nous Portal 訂閱包含</div>
+
+| 工具 | 說明 |
+|------|------|
+| 🔍 Web 搜尋 + 擷取 | Firecrawl 無速率限制 |
+| 🎨 圖片生成 | FLUX 2 / GPT-Image / Ideogram 等 9 款 |
+| 🔊 文字轉語音 | OpenAI TTS 等多款 |
+| 🌐 瀏覽器自動化 | 雲端無頭 Chrome（Browser Use） |
+
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="p-4 bg-yellow-50 border border-yellow-400 rounded-lg text-sm">
+      💡 <strong>不需另開帳號：</strong>不必分別申請 Firecrawl、FAL、Browser Use——Tool Gateway 統一路由
+    </div>
+    <div class="p-3 bg-gray-50 border border-gray-300 rounded-lg text-sm">
+      🛠 企業自建：停用 gateway 改用內部基礎設施（<span class="font-mono text-xs">use_gateway: false</span>）
+    </div>
+    <div class="p-2 border border-red-300 rounded text-xs text-red-700">
+      ⚠️ 付費功能：Nous Portal 免費方案不含 Tool Gateway
+    </div>
+  </div>
+</div>
+
+---
+layout: default
+---
+
+# Plugin 系統 — 三種擴充類型
+
+<div class="grid grid-cols-3 gap-4 mt-6">
+  <div class="border border-blue-400 rounded-lg p-4">
+    <div class="text-2xl mb-2">🔧</div>
+    <div class="font-bold text-blue-600 mb-2">Tools / Hooks</div>
+    <div class="text-sm text-gray-600">新增自訂工具 + 設置生命週期鉤子（logging、guardrails、webhooks）</div>
+    <div class="mt-3 text-xs font-mono text-gray-400">hermes plugins install</div>
+  </div>
+  <div class="border border-purple-400 rounded-lg p-4">
+    <div class="text-2xl mb-2">🧠</div>
+    <div class="font-bold text-purple-600 mb-2">Memory Provider</div>
+    <div class="text-sm text-gray-600">替換記憶後端：Honcho、Mem0、OpenViking、RetainDB 等跨 session 記憶</div>
+    <div class="mt-3 text-xs font-mono text-gray-400">跨 session 個人化</div>
+  </div>
+  <div class="border border-green-400 rounded-lg p-4">
+    <div class="text-2xl mb-2">📋</div>
+    <div class="font-bold text-green-600 mb-2">Context Engine</div>
+    <div class="text-sm text-gray-600">替換 context 管理，自訂檔案注入與壓縮策略</div>
+    <div class="mt-3 text-xs font-mono text-gray-400">hermes plugins UI</div>
+  </div>
+</div>
+
+<div class="mt-5 p-3 bg-gray-100 rounded text-sm text-gray-700">
+  🔒 <strong>企業應用：</strong>Tools/Hooks plugin 可實作 <strong>guardrails</strong>——工具呼叫前後攔截審計，不需 fork 核心程式碼
+</div>
+
+---
+layout: default
+---
+
+# 企業可靠性：多層模型保障
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div class="flex flex-col gap-3">
+    <div class="border border-blue-400 rounded p-3 text-sm">
+      <div class="font-bold text-blue-600 mb-1">🗺 Provider Routing</div>
+      <div class="text-gray-600">依成本、速度、品質排序多個提供商，支援白名單 / 黑名單過濾</div>
+    </div>
+    <div class="border border-orange-400 rounded p-3 text-sm">
+      <div class="font-bold text-orange-600 mb-1">🔄 Fallback Providers</div>
+      <div class="text-gray-600">主要模型出錯時自動切換備援，視覺 / 壓縮任務有獨立 fallback</div>
+    </div>
+    <div class="border border-green-400 rounded p-3 text-sm">
+      <div class="font-bold text-green-600 mb-1">🔑 Credential Pools</div>
+      <div class="text-gray-600">多組 API Key 輪替，達速率上限自動換鑰，不中斷服務</div>
+    </div>
+    <div class="border border-purple-400 rounded p-3 text-sm">
+      <div class="font-bold text-purple-600 mb-1">⚡ Prompt Caching</div>
+      <div class="text-gray-600">跨 session 1 小時前綴快取（Claude / OpenRouter / Nous Portal），永遠開啟</div>
+    </div>
+  </div>
+  <div class="flex flex-col justify-center gap-4">
+    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg text-sm">
+      💡 <strong>SLA 保障</strong><br>
+      <span class="text-gray-600">供應商限速或故障時零介入自動切換，服務不中斷</span>
+    </div>
+    <div class="p-4 bg-green-50 border border-green-200 rounded-lg text-sm">
+      💰 <strong>成本控管</strong><br>
+      <span class="text-gray-600">Prompt caching 降低重複 context token 費用；Credential Pools 防單鑰達限</span>
     </div>
   </div>
 </div>
