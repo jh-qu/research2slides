@@ -320,7 +320,7 @@ class: text-center
 <div class="text-gray-400 mt-4 text-lg">六個值得關注的技術特色</div>
 
 ---
-layout: two-cols
+layout: default
 ---
 
 # Agent 越用越聰明：Learning Loop
@@ -333,15 +333,13 @@ flowchart LR
     D -->|"下次自動套用"| A
 ```
 
-::right::
-
-<div class="flex flex-col gap-3 mt-8">
-  <div class="border border-green-600 rounded p-3 text-sm">✅ 重複任務零人工撰碼：同類需求第二次起自動套用</div>
-  <div class="border border-green-600 rounded p-3 text-sm">✅ 部門隔離：多 Profile 各自維護專屬 Skill Bundle</div>
-  <div class="border border-green-600 rounded p-3 text-sm">✅ 知識不腐化：Curator 自動合併 / 棄用過時 Skill</div>
+<div class="grid grid-cols-3 gap-2 mt-3">
+  <div class="border border-green-600 rounded p-2 text-xs">✅ 重複任務零人工撰碼：同類需求第二次起自動套用</div>
+  <div class="border border-green-600 rounded p-2 text-xs">✅ 部門隔離：多 Profile 各自維護專屬 Skill Bundle</div>
+  <div class="border border-green-600 rounded p-2 text-xs">✅ 知識不腐化：Curator 自動合併 / 棄用過時 Skill</div>
 </div>
 
-<div class="mt-4 p-3 border border-red-500 rounded-lg text-sm text-red-700">
+<div class="mt-2 p-2 border border-red-500 rounded-lg text-xs text-red-700">
   ⚠️ 企業注意：自動生成的 Skill 無人工審核閘門，受監管環境需自建 code review 流程
 </div>
 
@@ -453,7 +451,7 @@ layout: two-cols
 
 # Multi-agent Kanban：任務自癒能力
 
-```mermaid
+```mermaid {scale: 0.5}
 flowchart TD
     Master(["主代理"]) -->|"派生"| A["子代理 A"]
     Master -->|"派生"| B["子代理 B ⚠️"]
