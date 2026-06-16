@@ -1,6 +1,6 @@
 ---
 theme: seriph
-background: ./assets/hero-art.webp
+background: /hero-art.webp
 class: text-center
 highlighter: shiki
 lineNumbers: false
