@@ -32,13 +32,13 @@ jobs:
         run: npx playwright install chromium
 
       - name: Build hermes-agent slides
-        run: npx slidev build decks/hermes-agent/slides.md --base /research2slides/ --out dist
+        run: npx slidev build decks/hermes-agent/slides.md --base /research2slides/ --out ${{ github.workspace }}/dist
 
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: ${{ github.workspace }}/dist
 
   deploy:
     needs: build
