@@ -895,3 +895,6 @@ class: text-center
 <div class="text-gray-600 mt-4 text-sm">
   報告日期：2026.06.12
 </div>
+<div class="text-gray-600 mt-2 text-sm">
+  Co-author：小赫（Hermes Agent）— 協助投影片內容編修與自動化流程
+</div>
