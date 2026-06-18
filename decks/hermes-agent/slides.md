@@ -527,8 +527,8 @@ layout: default
 # Tool Gateway — 一訂閱全工具齊備
 
 <div class="grid grid-cols-2 gap-6 mt-4">
-  <div>
-    <div class="text-sm font-bold text-gray-500 mb-3">隨 Nous Portal 訂閱包含</div>
+  <div class="text-[0.9rem]">
+    <div class="font-bold text-gray-500 mb-3">隨 Nous Portal 訂閱包含</div>
 
 | 工具 | 說明 |
 |------|------|
