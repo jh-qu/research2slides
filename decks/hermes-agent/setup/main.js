@@ -27,6 +27,11 @@ export default ({ app }) => {
   style.textContent = '.slidev-slide-container .mermaid { cursor: zoom-in; }'
   document.head.appendChild(style)
 
+  // Hide the right-side autocomplete/index list that blocks content during presentations
+  const hideStyle = document.createElement('style')
+  hideStyle.textContent = '.autocomplete-list{display:none !important}'
+  document.head.appendChild(hideStyle)
+
   // Capture phase: Mermaid SVG lives inside Shadow DOM of div.mermaid,
   // so clicks are retargeted to the shadow host in the light DOM.
   document.addEventListener('click', e => {
