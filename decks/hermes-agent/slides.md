@@ -19,12 +19,12 @@ mdc: true
   Nous Research ・ 技術評估報告 ・ 2026.06.12
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 今天要跟大家介紹的是 Nous Research 開發的開源 AI Agent 框架——Hermes Agent 的技術評估。
 這份報告結合了原始碼分析、實際部署測試，以及企業應用視角，目標是評估它是否值得我們進一步導入。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -38,12 +38,12 @@ class: text-center
   Hermes・Hermès・Harness
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 先來暖個場。Hermes 這個名字出現在三個完全不同的世界，但它們有同一個核心精神：穿梭、傳遞、駕馭。
 下一頁會展開說明。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -87,12 +87,12 @@ layout: default
   <span class="text-gray-100 text-sm">神話信使・奢華馬具・AI 框架——三個世界，同一個名字</span>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 希臘神話中赫爾墨斯的三個特質：靈活、穿梭邊界、傳遞訊息——恰好對應 AI Agent 要做的事：跨工具調度、跨平台操作、傳遞使用者意圖。
 Harness 英文還有「駕馭、善用」的意思，做為框架名字非常貼切。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: two-cols
 ---
@@ -126,13 +126,13 @@ layout: two-cols
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 195K stars 代表這不是一個小型實驗專案，是目前 GitHub 上 AI Agent 類別中社群規模最大的之一。
 MIT 授權很關鍵：可以自由商用、修改、部署，不需要擔心版權問題。
 「self-improving」是最核心的定位，等一下會詳細說明這代表什麼。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -162,13 +162,13 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 最重要的一點：Hermes 不綁定任何一家 AI 供應商。
 今天用 Claude，明天 GPT-5 出來覺得效果更好或更便宜，改一行 config 就換，不需要重寫任何程式碼。
 OpenRouter 是一個聚合平台，一個 API key 可以打 200+ 個模型，是最靈活的接入方式。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -196,14 +196,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 PoC 的門檻非常低：$5/月的 VPS，大約台幣 160 元，就能把 Hermes 跑起來。
 不需要先投入大量基礎設施成本就能驗證可行性。
 如果 PoC 成功，同一套程式碼可以直接擴展到 GPU 叢集，不需要重寫。
 這個彈性讓「先試再說」的策略非常合理。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -239,13 +239,13 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
   📌 <strong>實際場景：</strong>工程師或業務人員直接在 Slack 發指令給 Agent，完成自動化任務，不需切換工具
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 最大的好處：使用者完全不需要學新的介面或工具。
 業務同仁在 Slack 打個訊息，Agent 就去查資料、整理報表、回傳結果。
 後面的遊戲營運 Bot 案例就是在 Telegram 上直接操作的，可以感受一下實際的互動體驗。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -274,14 +274,14 @@ flowchart TB
     IF --> AG --> EX
 ```
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 三層分離讓我們可以「換一層不動另一層」。
 例如：今天用 Slack，改天想換成 Line，只需要改介面層的設定，Agent 邏輯完全不用動。
 或者：現在在本機跑，之後要擴展到 GPU 叢集，也只是換執行層，程式碼不變。
 這個設計對企業長期維護很友善。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -311,13 +311,13 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 右邊的 SOUL.md 和 MEMORY.md 是後面深入解析的重點，先記住它們的存在。
 所有設定集中在 ~/.hermes/ 這個資料夾，部署和備份都很容易。
 四種啟動模式覆蓋了大部分的企業使用場景：CLI 給工程師，Gateway 給業務通訊，Web UI 給管理者。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -357,12 +357,12 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 這六個是讓 Hermes 與其他 Agent 框架不同的地方。
 接下來每一項都會有一張獨立的投影片深入說明，包含原始碼層級的確認和企業風險評估。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -393,6 +393,8 @@ flowchart LR
   ⚠️ 企業注意：自動生成的 Skill 為 Python 程式碼，無人工審核閘門，受監管環境需自建 code review 流程
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 這是「self-improving」的具體實現，也是 Hermes 最核心的差異化功能。
 重點：同類任務第一次做需要時間，第二次起 Agent 會自動套用上次提取的技能，不需使用者重新說明。
@@ -400,8 +402,6 @@ flowchart LR
 Curator 機制很重要：避免技能庫一直累積舊的、過時的技能——閒置 7 天會自動整理。
 風險要特別提：自動生成的技能是 Python 程式碼，在受監管環境（例如金融、法規）需要建立 code review 流程。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -435,6 +435,8 @@ layout: default
   ⚠️ 純文字，無原生 ACL — 有 HERMES_HOME 寫入權限者可靜默修改人格，建議搭配 OS 層或 Secret Manager 保護
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 類比 IaC（Infrastructure as Code）——SOUL.md 就是「Agent 行為即程式碼」。
 把 Agent 的身份、語氣、授權範圍寫成一份 Markdown 文件，可以 Git 版控。
@@ -442,8 +444,6 @@ layout: default
 風險必須提：SOUL.md 是純文字，沒有原生的存取控制。
 任何有 ~/.hermes/ 寫入權限的人都能靜默修改 Agent 的人格，建議搭配 OS 層檔案權限或 Secret Manager 保護。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -482,14 +482,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 可以類比成三層：工作記憶（context window）、筆記本（SQLite）、知識庫（MEMORY.md）。
 最實際的場景：三週後回來繼續上次的工作，不需要重新交代背景——Agent 自己會召回相關記憶。
 對 IT 的好處：MEMORY.md 是純文字，不是黑盒子，可以直接備份、稽核、甚至手動編輯。
 風險：AI 自主決定要記什麼，原始碼沒有明確的過濾規則，敏感資訊可能被寫入。企業需要考慮資料治理策略。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -521,14 +521,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 Promptware / Brainworm 是一種新型攻擊，專門針對有持久記憶的 AI Agent。
 攻擊流程：讓 Agent 讀取含惡意指令的外部內容（例如網頁、文件）→ Agent 把指令寫入 MEMORY.md → 下次對話自動執行攻擊者的指令。
 v0.15 已有基本防護，這部分我們有看過原始碼確認。
 但仍有兩個企業需要自行處理的缺口：SOUL.md 沒有防篡改機制、auth.json 和 SOUL.md 放在同一個資料夾。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: two-cols
 class: kanban-slide
@@ -565,6 +565,8 @@ flowchart TD
 }
 </style>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 適合場景：需要長時間、多步驟的自動化任務，例如過夜跑的資料處理、多個子任務並行。
 主代理派出多個子代理同時工作，Kanban 追蹤所有子代理的狀態。
@@ -572,8 +574,6 @@ flowchart TD
 不需要人工監看或介入，讓「無人值守長任務」真正可行。
 注意：這個功能是 v0.13.0 才加入的，相對較新，建議 PoC 時自行測試可靠性，不要直接用在關鍵流程。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -605,14 +605,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 Tool Gateway 是 Nous Portal 訂閱的附加功能，等於幫你統一管理所有外部工具的帳號、配額和路由。
 不需要分別去申請 Firecrawl、FAL、Browser Use 的帳號，Tool Gateway 一個接口全包。
 企業如果有資安顧慮不想走外部 gateway，可以設定 use_gateway: false，改接自己的基礎設施。
 注意：免費方案沒有這個功能。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -644,14 +644,14 @@ layout: default
   🔒 <strong>企業應用：</strong>Tools/Hooks plugin 可實作 <strong>guardrails</strong>——工具呼叫前後攔截審計，不需 fork 核心程式碼
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 三種 Plugin 中，對企業最實用的是 Tools/Hooks。
 它可以在工具呼叫前後插入攔截邏輯——例如記錄所有查詢、過濾敏感指令、加入審批流程——這就是 guardrails 的實作方式。
 重點：不需要 fork 核心程式碼就能加這些控管，升級 Hermes 版本時 plugin 也不受影響。
 Memory Provider 可以換成企業自己信任的記憶後端，不依賴 Hermes 預設方案。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -689,14 +689,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 這四個機制合在一起解決兩個企業痛點：服務中斷和成本失控。
 Provider Routing + Fallback：主要供應商掛掉或限速，自動切換備援，不需要人工介入，服務不中斷。
 Credential Pools：多組 API Key 輪替，任何一組達到速率上限都不會卡住整個服務。
 Prompt Caching 是永遠開啟的：重複的 context（例如 SOUL.md、長篇知識庫）不會重複計費，長期使用成本明顯下降。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -706,12 +706,12 @@ class: text-center
 
 <div class="text-gray-400 mt-4 text-lg">遊戲營運 AI Bot — 自然語言查 BigQuery 的實戰驗證</div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 接下來是我們自己實際跑的一個案例，用來驗證 Hermes Agent 在我們業務場景的實際能力。
 場景是遊戲營運團隊每天需要查 BigQuery 資料做分析，但不是每個人都會寫 SQL。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -756,14 +756,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 這是真實的對話紀錄，不是精心設計的 demo。
 使用者用一句中文提問，Bot 在大約 3 分鐘內自動：理解業務語意 → 轉成 BigQuery SQL → 執行查詢 → 整理成對比報告。
 使用者完全不需要懂 SQL，也不需要知道資料在哪張表。
 「結論先講」的輸出格式是我們在知識庫裡定義的規則，Bot 自動遵守。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -775,13 +775,13 @@ class: text-center
 
 <div class="text-gray-500 text-sm mt-2">DATA · KNOWLEDGE · QUERIES</div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 Bot 能正確回答的前提，是我們事先把業務知識餵給它。
 這是一次性的準備工作，之後 Bot 會自己學習和更新。
 接下來三張投影片說明我們準備了哪三類知識。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -817,14 +817,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 三類知識缺一不可：
 01 數據儀表：讓 Bot 知道「去哪找資料」——沒有這個，Bot 不知道要查哪張表。
 02 歷史 Query：讓 Bot 有正確的 SQL 範本可以改——沒有這個，Bot 容易從零亂湊出錯誤的查詢。
 03 營運知識：讓 Bot 理解業務語言——沒有這個，Bot 可能把「新進」誤當「活躍」，算出完全不同的數字。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -862,14 +862,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 DailyUserInfoSnapshot 是 Bot 跑非即時分析的主要入口，幾乎所有 DAU、營收、留存查詢都從這裡出發。
 重要的業務口徑要講清楚：BQDate 是 partition 欄位，每次查詢都必須指定，否則費用爆炸。
 BuyNumber 是營收欄位，不需要排除員工；但 DAU 等人數查詢要排除員工帳號（在 GameAccount 表）。
 這些規則我們寫進了知識庫，Bot 自動遵守。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -908,13 +908,13 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 Bot 使用 RAG（檢索增強生成）機制：收到問題後，先找和使用者需求最相似的歷史 SQL，再修改日期範圍、條件，輸出正確的查詢。
 這個做法比讓 AI 從零生成 SQL 可靠得多，因為有正確的結構和業務口徑作為參考。
 注意左右兩張的差異：DAU 需要 NOT IN GameAccount 排除員工；營收不需要——這個口徑差異就靠範例 SQL 的註解傳達給 Bot。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -950,14 +950,14 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 這份字典解決了 AI 不懂業務語言的問題。
 沒有這個，Bot 可能把「新進」誤解為「活躍」，算出完全錯誤的用戶數。
 右側的預設規則讓 Bot 在每次回答時都自動遵守業務口徑，不需要使用者每次重複交代。
 通算金幣的公式（Coin + 25000 × Gem）是特別非直覺的業務規則，這種知識最需要明確告訴 Bot。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -990,14 +990,14 @@ layout: default
   <span class="text-white">🎯 <strong>建議：</strong>值得列為內部 AI Agent 基礎框架候選，建議以 $5 VPS 進行一個月 PoC 驗證，成本極低風險可控</span>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 整體評估：優勢明顯，風險可控，導入門檻低。
 最重要的一點：$5 VPS 一個月 PoC，大約台幣 160 元，就能在真實業務場景驗證可行性。
 資安方面需要額外規劃：SOUL.md 保護、Promptware 風險評估、資料治理策略——這些是導入前要確認的事項。
 建議行動：列為 AI Agent 基礎框架候選，啟動一個月 PoC。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -1023,13 +1023,13 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 這份報告主要參考了四個來源。
 DeepWiki 特別值得推薦：它會自動分析 GitHub repo 的程式碼並生成架構文件，對想深入了解 Hermes 內部實作的人很有幫助。
 有興趣深入研究的同仁可以從 DeepWiki 開始。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -1050,9 +1050,9 @@ class: text-center
   Co-author：Claude（Anthropic）— 原始碼分析、資安風險審查、投影片內容編修
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 <!--
 開放 Q&A。
 如果有關於資安評估、PoC 規劃、或技術細節的問題，歡迎提出。
 -->
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
