@@ -475,46 +475,6 @@ flowchart TD
 layout: default
 ---
 
-# v0.15 Velocity：更精簡的程式碼，更穩固的基礎
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-  <div class="text-center flex flex-col justify-center">
-    <div class="text-7xl font-bold text-blue-600">76%</div>
-    <div class="text-gray-500 mt-2">程式碼削減</div>
-    <div class="text-sm text-gray-400 mt-1">功能不減，架構收斂</div>
-    <div class="mt-6 flex flex-col gap-2 text-xs text-gray-500">
-      <div class="flex justify-between px-4"><span>v0.12</span><span>v0.13</span><span>v0.14</span><span class="text-blue-600 font-bold">v0.15</span></div>
-      <div class="h-1 bg-gray-200 rounded mx-4 relative">
-        <div class="absolute right-0 top-0 h-1 w-1/4 bg-blue-600 rounded"></div>
-      </div>
-      <div class="text-center">28 天四版迭代</div>
-    </div>
-  </div>
-  <div class="flex flex-col gap-3 justify-center">
-    <div class="p-3 bg-gray-100 rounded text-sm">
-      <div class="text-gray-500 text-xs mb-1">重構前</div>
-      四條平行執行路徑（CLI / Gateway / ACP / Web UI）各自維護
-    </div>
-    <div class="flex justify-center text-blue-400">▼ 收斂</div>
-    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-sm">
-      <div class="text-blue-500 text-xs mb-1">重構後</div>
-      單一 AIAgent 協調層統一入口
-    </div>
-    <div class="mt-2 flex flex-col gap-2 text-sm">
-      <div class="border border-green-600 rounded p-2">✅ 安全審計範圍縮小</div>
-      <div class="border border-green-600 rounded p-2">✅ Bitwarden 原生 API Key 管理</div>
-    </div>
-    <div class="p-2 border border-red-400 rounded text-xs text-red-700">
-      ⚠️ 距 v0.14 僅 12 天 — PoC 前確認測試覆蓋率
-    </div>
-  </div>
-</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
----
-layout: default
----
-
 # Tool Gateway — 一訂閱全工具齊備
 
 <div class="grid grid-cols-2 gap-6 mt-4">
