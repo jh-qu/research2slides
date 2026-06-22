@@ -50,7 +50,7 @@ layout: default
     </p>
     <div class="mt-4 text-sm text-gray-600">
       讀音：英文 <span class="text-gray-700 font-mono">HUR-meez</span>・法文 <span class="text-gray-700 font-mono">air-MEZ</span>
-    </p>
+    </div>
   </div>
   <div>
     <div class="grid grid-cols-3 gap-4">
