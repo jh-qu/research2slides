@@ -62,7 +62,7 @@ layout: default
       <div class="border border-gray-400 rounded-lg p-4 text-center">
         <div class="text-3xl mb-2">🔧</div>
         <div class="font-bold text-blue-700 text-sm mb-1">Harness</div>
-        <div class="text-xs text-gray-600">框架 / 控制套件</div>
+        <div class="text-xs text-gray-600">測試框架 / 控制套件</div>
       </div>
       <div class="border border-gray-400 rounded-lg p-4 text-center">
         <div class="text-3xl mb-2">🤖</div>
@@ -78,7 +78,6 @@ layout: default
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
-
 ---
 layout: two-cols
 ---
@@ -886,35 +885,6 @@ layout: default
     <div class="text-xs text-blue-400 mb-1">DeepWiki — code-level 架構分析</div>
     <div class="font-mono text-sm">deepwiki.com/NousResearch/hermes-agent</div>
   </div>
-</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
----
-layout: default
----
-
-# 為什麼 ARIA 對 AI 更友善
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-  <div>
-    <p class="text-gray-800 leading-relaxed mb-4">
-      ARIA（Accessible Rich Internet Applications）對 AI 更友善，原因在於它為 DOM 提供了語義層，讓機器能理解頁面元素的「角色」和「狀態」，而不只是視覺呈現。
-    </p>
-    <p class="text-sm text-gray-600">
-      來源：林侑霆 Facebook 貼文（2026-02-09）
-    </p>
-  </div>
-  <div>
-    <img src="/aria-info.png" class="w-full rounded shadow" alt="ARIA 對 AI 更友善說明圖" />
-  </div>
-</div>
-
-<div class="mt-4 flex flex-col gap-2 text-sm text-gray-700">
-  <div><strong>1. 明確的角色宣告</strong> — 用 <code>role="button"</code> 告訴 AI 這個元素是什麼，不需靠 CSS class 猜</div>
-  <div><strong>2. 狀態與屬性可讀</strong> — AI 直接讀 <code>aria-expanded</code>、<code>aria-checked</code>、<code>aria-disabled</code> 得知元素狀態</div>
-  <div><strong>3. 關係描述</strong> — <code>aria-labelledby</code>、<code>aria-describedby</code> 建立元素間的語言關係</div>
-  <div><strong>4. 結構化無障礙樹</strong> — 瀏覽器根據 ARIA 建立 Accessiblity Tree，AI Agent 可以直接讀取有意義的互動節點</div>
-  <div><strong>5. 降低對視覺推理的依賴</strong> — 不用截圖 → 辨識 → 推測功能，直接讀屬性即可理解</div>
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
