@@ -38,69 +38,42 @@ class: text-center
 layout: default
 ---
 
-# Hermes — 眾神的信使
+# Hermes — 從神話到 AI
 
 <div class="grid grid-cols-2 gap-8 mt-4">
   <div>
-    <div class="text-5xl mb-4">⚡</div>
     <p class="text-gray-800 leading-relaxed">
       在希臘神話中，<strong class="text-amber-600">赫爾墨斯（Hermēs）</strong>是奧林匹斯十二主神中最靈活的一位——身兼眾神信使、商業之神、邊界之神。
     </p>
     <p class="text-gray-800 leading-relaxed mt-4">
       他穿梭於神界與人界之間，傳遞訊息、調度資源，從不受邊界束縛。
     </p>
-    <div class="mt-6 text-sm text-gray-600">
+    <div class="mt-4 text-sm text-gray-600">
       讀音：英文 <span class="text-gray-700 font-mono">HUR-meez</span>・法文 <span class="text-gray-700 font-mono">air-MEZ</span>
-    </div>
+    </p>
   </div>
-  <div class="flex flex-col gap-4 justify-center">
-    <div class="border border-gray-400 rounded-lg p-4 text-sm">
-      <div class="text-yellow-700 font-bold mb-1">📨 信使</div>
-      <div class="text-gray-700">在模型、工具與平台之間傳遞指令</div>
-    </div>
-    <div class="border border-gray-400 rounded-lg p-4 text-sm">
-      <div class="text-blue-700 font-bold mb-1">🌐 邊界之神</div>
-      <div class="text-gray-700">自由穿越 Telegram、Slack、Discord 等邊界</div>
-    </div>
-    <div class="border border-gray-400 rounded-lg p-4 text-sm">
-      <div class="text-green-700 font-bold mb-1">⚡ 速度與智慧</div>
-      <div class="text-gray-700">快速、可靠地執行與學習</div>
-    </div>
-  </div>
-</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
----
-layout: default
----
-
-# Hermès → Harness — 從馬具到 AI
-
-<div class="grid grid-cols-3 gap-6 mt-6">
-  <div class="border border-gray-400 rounded-lg p-5 text-center">
-    <div class="text-4xl mb-3">🐎</div>
-    <div class="font-bold text-orange-700 mb-2">Hermès 愛馬仕</div>
-    <div class="text-sm text-gray-700">
-      1837 年，創辦人 Thierry Hermès 開設<strong class="text-gray-900">高級馬具工坊</strong>，專為貴族馴馬、駕馭烈馬
-    </div>
-  </div>
-  <div class="border border-gray-400 rounded-lg p-5 text-center">
-    <div class="text-4xl mb-3">🔧</div>
-    <div class="font-bold text-blue-700 mb-2">Harness 馬具</div>
-    <div class="text-sm text-gray-700">
-      軟體工程中，<strong class="text-gray-900">Harness</strong> 指「測試框架或控制套件」——將難以預測的事物引導、馴服
-    </div>
-  </div>
-  <div class="border border-gray-400 rounded-lg p-5 text-center">
-    <div class="text-4xl mb-3">🤖</div>
-    <div class="font-bold text-green-700 mb-2">Agent Harness</div>
-    <div class="text-sm text-gray-700">
-      <strong class="text-gray-900">駕馭大語言模型</strong>，將難以預測的 AI 引導發揮最大效能
+  <div>
+    <div class="grid grid-cols-3 gap-4">
+      <div class="border border-gray-400 rounded-lg p-4 text-center">
+        <div class="text-3xl mb-2">🐎</div>
+        <div class="font-bold text-orange-700 text-sm mb-1">Hermès</div>
+        <div class="text-xs text-gray-600">高級馬具工坊（1837）</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg p-4 text-center">
+        <div class="text-3xl mb-2">🔧</div>
+        <div class="font-bold text-blue-700 text-sm mb-1">Harness</div>
+        <div class="text-xs text-gray-600">測試框架 / 控制套件</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg p-4 text-center">
+        <div class="text-3xl mb-2">🤖</div>
+        <div class="font-bold text-green-700 text-sm mb-1">Agent</div>
+        <div class="text-xs text-gray-600">駕馭大語言模型</div>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-600 text-center">
+<div class="mt-5 p-3 bg-gray-800 rounded-lg border border-gray-600 text-center">
   <span class="text-gray-100 text-sm">神話信使・奢華馬具・AI 框架——三個世界，同一個名字</span>
 </div>
 
