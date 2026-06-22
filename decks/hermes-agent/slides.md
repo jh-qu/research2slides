@@ -861,5 +861,8 @@ class: text-center
 <div class="text-gray-600 mt-2 text-sm">
   Co-author：小赫（Hermes Agent）— 協助投影片內容編修與自動化流程
 </div>
+<div class="text-gray-600 mt-2 text-sm">
+  Co-author：佳宏 — 技術評估與內容審閱
+</div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
