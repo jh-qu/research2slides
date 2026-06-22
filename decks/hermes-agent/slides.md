@@ -116,35 +116,6 @@ layout: two-cols
 layout: default
 ---
 
-# 核心特色：自我改進學習迴圈
-
-<div class="text-gray-600 italic mb-6">
-  「Creates skills from <strong>experience</strong>, improves them during use, builds a <strong>deepening model</strong> of who you are across sessions」
-</div>
-
-<div class="grid grid-cols-3 gap-4">
-  <div class="border border-gray-400 rounded-lg p-4">
-    <div class="text-3xl mb-3">🧠</div>
-    <strong>持久記憶</strong>
-    <p class="text-sm text-gray-700 mt-2">跨對話累積知識，不需每次重頭開始，搭配全文搜尋回溯歷史</p>
-  </div>
-  <div class="border border-gray-400 rounded-lg p-4">
-    <div class="text-3xl mb-3">⚡</div>
-    <strong>自動技能生成</strong>
-    <p class="text-sm text-gray-700 mt-2">從複雜任務中自動提取可複用技能，累積組織專屬知識庫</p>
-  </div>
-  <div class="border border-gray-400 rounded-lg p-4">
-    <div class="text-3xl mb-3">👤</div>
-    <strong>用戶建模</strong>
-    <p class="text-sm text-gray-700 mt-2">持續理解使用者偏好，個人化回應方式與工作流程</p>
-  </div>
-</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
----
-layout: default
----
-
 # 多模型支援 — 200+ 模型，一套框架
 
 <div class="grid grid-cols-2 gap-8 mt-4">
@@ -295,13 +266,43 @@ layout: default
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
-layout: center
-class: text-center
+layout: default
 ---
 
-# 深入解析
+# 六大核心技術特色
 
-<div class="text-gray-400 mt-4 text-lg">六個值得關注的技術特色</div>
+<div class="grid grid-cols-3 gap-4 mt-4">
+  <div class="border border-gray-400 rounded-lg p-4">
+    <div class="text-3xl mb-2">🧠</div>
+    <strong>自我改進學習迴圈</strong>
+    <p class="text-sm text-gray-700 mt-2">任務完成自動提取可複用技能，越用越聰明</p>
+  </div>
+  <div class="border border-gray-400 rounded-lg p-4">
+    <div class="text-3xl mb-2">📋</div>
+    <strong>SOUL.md 行為控制</strong>
+    <p class="text-sm text-gray-700 mt-2">Agent 人格可版本控制，各部門隔離管理</p>
+  </div>
+  <div class="border border-gray-400 rounded-lg p-4">
+    <div class="text-3xl mb-2">💾</div>
+    <strong>三層持久記憶</strong>
+    <p class="text-sm text-gray-700 mt-2">跨對話累積知識，支援全文搜尋與稽核</p>
+  </div>
+  <div class="border border-gray-400 rounded-lg p-4">
+    <div class="text-3xl mb-2">🛡</div>
+    <strong>Promptware 防禦</strong>
+    <p class="text-sm text-gray-700 mt-2">對抗記憶污染攻擊，v0.15 已加入寫入保護</p>
+  </div>
+  <div class="border border-gray-400 rounded-lg p-4">
+    <div class="text-3xl mb-2">🤖</div>
+    <strong>Multi-agent 自癒</strong>
+    <p class="text-sm text-gray-700 mt-2">子代理失效自動偵測回收，支援無人值守長任務</p>
+  </div>
+  <div class="border border-gray-400 rounded-lg p-4">
+    <div class="text-3xl mb-2">🔧</div>
+    <strong>工具生態與企業可靠性</strong>
+    <p class="text-sm text-gray-700 mt-2">Tool Gateway + Plugin + 多層模型保障</p>
+  </div>
+</div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
@@ -310,7 +311,7 @@ layout: default
 
 # Agent 越用越聰明：Learning Loop
 
-```mermaid
+```mermaid {scale: 0.75}
 flowchart LR
     A["🎯 任務完成"] -->|"自動回顧"| B["📦 封裝 Skill\nskill_manage"]
     B -->|"Python 工具 + MD"| C["💾 MEMORY.md"]
@@ -318,14 +319,20 @@ flowchart LR
     D -->|"下次自動套用"| A
 ```
 
+<div class="grid grid-cols-2 gap-3 mt-2">
+  <div class="p-2 bg-gray-100 rounded border border-gray-400 text-xs"><span class="font-bold">記憶回顧觸發：</span>每 <span class="font-mono font-bold">10</span> 回合（使用者訊息計數）</div>
+  <div class="p-2 bg-gray-100 rounded border border-gray-400 text-xs"><span class="font-bold">技能回顧觸發：</span>每累積 <span class="font-mono font-bold">10</span> 次工具呼叫</div>
+</div>
+<div class="text-xs text-gray-500 mt-1">均可在 <span class="font-mono">config.yaml</span> 調整 <span class="font-mono">nudge_interval</span>・背景 daemon thread 執行，不阻塞使用者回應</div>
+
 <div class="grid grid-cols-3 gap-2 mt-3">
   <div class="border border-green-600 rounded p-2 text-xs">✅ 重複任務零人工撰碼：同類需求第二次起自動套用</div>
   <div class="border border-green-600 rounded p-2 text-xs">✅ 部門隔離：多 Profile 各自維護專屬 Skill Bundle</div>
-  <div class="border border-green-600 rounded p-2 text-xs">✅ 知識不腐化：Curator 自動合併 / 棄用過時 Skill</div>
+  <div class="border border-green-600 rounded p-2 text-xs">✅ 知識不腐化：Curator 閒置 7 天觸發，自動合併 / 棄用過時 Skill</div>
 </div>
 
 <div class="mt-2 p-2 border border-red-500 rounded-lg text-xs text-red-700">
-  ⚠️ 企業注意：自動生成的 Skill 無人工審核閘門，受監管環境需自建 code review 流程
+  ⚠️ 企業注意：自動生成的 Skill 為 Python 程式碼，無人工審核閘門，受監管環境需自建 code review 流程
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
@@ -375,15 +382,15 @@ layout: default
       <div class="text-blue-500 font-bold text-sm mb-1">短期 — Context Window</div>
       <div class="text-xs text-gray-600">當前對話即時推理，會話結束即消失</div>
     </div>
-    <div class="flex justify-center text-gray-400 text-xs">▼ 對話結束後寫入</div>
+    <div class="flex justify-center text-gray-400 text-xs">▼ 每回合結束 sync_all() 寫入</div>
     <div class="border border-purple-400 rounded-lg p-4">
       <div class="text-purple-500 font-bold text-sm mb-1">中期 — SQLite FTS5 全文索引</div>
-      <div class="text-xs text-gray-600">跨會話關鍵字召回，毫秒級查詢 ／ Honcho 管理</div>
+      <div class="text-xs text-gray-600">回合結束自動寫入；下回合開始 <span class="font-mono">prefetch_all()</span> 召回相關記憶注入 context</div>
     </div>
-    <div class="flex justify-center text-gray-400 text-xs">▼ 重要資訊持久化</div>
+    <div class="flex justify-center text-gray-400 text-xs">▼ 每 10 回合 background review 寫入</div>
     <div class="border border-green-400 rounded-lg p-4">
       <div class="text-green-500 font-bold text-sm mb-1">長期 — MEMORY.md + 向量 DB</div>
-      <div class="text-xs text-gray-600">USER.md 記錄使用者偏好 ／ Skill 知識庫</div>
+      <div class="text-xs text-gray-600">由背景 review agent fork 定期寫入；USER.md 記錄使用者偏好 ／ Skill 知識庫</div>
     </div>
   </div>
   <div class="flex flex-col gap-4 justify-center">
@@ -393,10 +400,10 @@ layout: default
     </div>
     <div class="p-4 bg-green-50 rounded-lg border border-green-200 text-sm">
       📋 <strong>稽核友善</strong><br>
-      <span class="text-gray-600">MEMORY.md 為純文字，IT 可直接備份與審計</span>
+      <span class="text-gray-600">MEMORY.md 為純文字，IT 可直接備份與審計；background review fork 受工具白名單保護</span>
     </div>
     <div class="p-3 border border-red-400 rounded-lg text-xs text-red-700">
-      ⚠️ 記憶邊界由 AI 自主決定，企業需評估資料治理策略
+      ⚠️ 寫入 MEMORY.md 的內容由 AI 自主判斷（原始碼無明確過濾規則），企業需評估資料治理策略
     </div>
   </div>
 </div>
@@ -422,14 +429,14 @@ layout: default
       🛡 v0.15.0 在記憶寫入路徑前加入攔截驗證
     </div>
   </div>
-  <div class="flex flex-col gap-3 justify-center">
-    <div class="text-xs text-gray-500 mb-1">企業導入前確認清單</div>
-    <div class="p-3 border border-gray-300 rounded text-sm">□ 防禦是否覆蓋 MCP 工具輸出？</div>
-    <div class="p-3 border border-gray-300 rounded text-sm">□ 是否有第三方滲透測試報告？</div>
-    <div class="p-3 border border-gray-300 rounded text-sm">□ 觸發日誌是否可稽核？</div>
-    <div class="mt-2 p-2 bg-gray-100 rounded text-xs text-gray-600">
-      MIT 開源 — 企業可自行審計防禦實作原始碼
-    </div>
+  <div class="flex flex-col gap-2 justify-center">
+    <div class="text-xs text-gray-500 font-bold mb-1">原始碼確認：已有保護</div>
+    <div class="p-2 border border-green-500 rounded text-xs text-green-700">✅ Review fork 工具白名單：危險指令全部 auto-deny</div>
+    <div class="p-2 border border-green-500 rounded text-xs text-green-700">✅ Fork 隔離：<span class="font-mono">skip_memory=True</span>，不碰外部 memory plugin</div>
+    <div class="text-xs text-gray-500 font-bold mt-2 mb-1">仍需企業自行處理</div>
+    <div class="p-2 border border-red-400 rounded text-xs text-red-700">❌ SOUL.md：純文字，無簽名 / checksum，寫入不留稽核日誌</div>
+    <div class="p-2 border border-red-400 rounded text-xs text-red-700">❌ <span class="font-mono">auth.json</span>（OAuth token）與 SOUL.md 同存於 <span class="font-mono">~/.hermes/</span></div>
+    <div class="p-2 border border-yellow-500 rounded text-xs text-yellow-800">⚠️ MCP 工具輸出是否在 Brainworm 防禦範圍內？原始碼未確認</div>
   </div>
 </div>
 
@@ -859,10 +866,13 @@ class: text-center
   報告日期：2026.06.12
 </div>
 <div class="text-gray-600 mt-2 text-sm">
+  Co-author：佳宏 — 技術評估與內容審閱
+</div>
+<div class="text-gray-600 mt-2 text-sm">
   Co-author：小赫（Hermes Agent）— 協助投影片內容編修與自動化流程
 </div>
 <div class="text-gray-600 mt-2 text-sm">
-  Co-author：佳宏 — 技術評估與內容審閱
+  Co-author：Claude（Anthropic）— 原始碼分析、資安風險審查、投影片內容編修
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
