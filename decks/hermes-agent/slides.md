@@ -19,6 +19,7 @@ mdc: true
   Nous Research ・ 技術評估報告 ・ 2026.06.12
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -32,6 +33,7 @@ class: text-center
   Hermes・Hermès・Harness
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -67,6 +69,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -101,6 +104,7 @@ layout: default
   <span class="text-gray-100 text-sm">神話信使・奢華馬具・AI 框架——三個世界，同一個名字</span>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: two-cols
 ---
@@ -134,6 +138,7 @@ layout: two-cols
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -162,6 +167,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -191,6 +197,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -218,6 +225,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -253,6 +261,7 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
   📌 <strong>實際場景：</strong>工程師或業務人員直接在 Slack 發指令給 Agent，完成自動化任務，不需切換工具
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -281,6 +290,7 @@ flowchart TB
     IF --> AG --> EX
 ```
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -310,6 +320,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -319,6 +330,7 @@ class: text-center
 
 <div class="text-gray-400 mt-4 text-lg">六個值得關注的技術特色</div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -343,6 +355,7 @@ flowchart LR
   ⚠️ 企業注意：自動生成的 Skill 無人工審核閘門，受監管環境需自建 code review 流程
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -376,6 +389,7 @@ layout: default
   ⚠️ 純文字，無原生 ACL — 有 HERMES_HOME 寫入權限者可靜默修改人格，建議搭配 OS 層或 Secret Manager 保護
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -414,6 +428,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -445,6 +460,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: two-cols
 class: kanban-slide
@@ -481,6 +497,7 @@ flowchart TD
 }
 </style>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -520,6 +537,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -551,6 +569,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -582,6 +601,7 @@ layout: default
   🔒 <strong>企業應用：</strong>Tools/Hooks plugin 可實作 <strong>guardrails</strong>——工具呼叫前後攔截審計，不需 fork 核心程式碼
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -619,6 +639,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -628,6 +649,7 @@ class: text-center
 
 <div class="text-gray-400 mt-4 text-lg">遊戲營運 AI Bot — 自然語言查 BigQuery 的實戰驗證</div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -672,6 +694,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -683,6 +706,7 @@ class: text-center
 
 <div class="text-gray-500 text-sm mt-2">DATA · KNOWLEDGE · QUERIES</div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -718,6 +742,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -755,6 +780,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -793,6 +819,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -828,6 +855,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -860,6 +888,7 @@ layout: default
   <span class="text-white">🎯 <strong>建議：</strong>值得列為內部 AI Agent 基礎框架候選，建議以 $5 VPS 進行一個月 PoC 驗證，成本極低風險可控</span>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
@@ -885,6 +914,7 @@ layout: default
   </div>
 </div>
 
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: center
 class: text-center
@@ -898,3 +928,5 @@ class: text-center
 <div class="text-gray-600 mt-2 text-sm">
   Co-author：小赫（Hermes Agent）— 協助投影片內容編修與自動化流程
 </div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
