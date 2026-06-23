@@ -79,7 +79,36 @@ Harness 英文還有「駕馭、善用」的意思，做為框架名字非常貼
 layout: two-cols
 ---
 
-# 專案概覽
+# 專案概覽 — 為什麼是 Hermes？
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="text-xs text-gray-500 font-bold mb-3">NousResearch 押注 Hermes 的三個動機</div>
+    <div class="flex flex-col gap-2">
+      <div class="p-2 border border-gray-300 rounded">
+        <span class="font-mono text-xs font-bold text-gray-700">01</span>
+        <span class="text-xs text-gray-700 ml-2">AI Agent 已經從玩具變成企業生產力工具，需要穩定的長期維護者。</span>
+      </div>
+      <div class="p-2 border border-gray-300 rounded">
+        <span class="font-mono text-xs font-bold text-gray-700">02</span>
+        <span class="text-xs text-gray-700 ml-2">開源生態的 AI 工具多數只專注「呼叫模型」，Hermes 專注「Agent 行為治理」。</span>
+      </div>
+      <div class="p-2 border border-gray-300 rounded">
+        <span class="font-mono text-xs font-bold text-gray-700">03</span>
+        <span class="text-xs text-gray-700 ml-2">企業最痛的是「無法預測 Agent」，Hermes 提供審批、技能治理、記憶隔離。</span>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="p-3 bg-green-50 border border-green-300 rounded text-xs">
+      ✅ 三個動機回答的核心問題：「為何可長期押注？」
+      <br/>不是曇花一現的 wrapper，而是可以逐年迭代的行為治理平台。
+    </div>
+    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs">
+      💡 企業選型時，問的不是「模型好不好」，而是「Agent 失控了嗎？」
+    </div>
+  </div>
+</div>
 
 <v-clicks>
 
@@ -349,15 +378,34 @@ layout: default
 layout: default
 ---
 
-# Agent 越用越聰明：Learning Loop
+# Agent 越用越聰明：Learning Loop — 三台引擎
 
 ```mermaid {scale: 0.75}
 flowchart LR
-    A["🎯 任務完成"] -->|"自動回顧"| B["📦 封裝 Skill\nskill_manage"]
-    B -->|"Python 工具 + MD"| C["💾 MEMORY.md"]
-    C -->|"Curator 維護"| D["🤖 Autonomous\nCurator"]
+    A["🎯 任務完成"] -->|"自動回顧"| B["🔨 建造 Skill\n封裝可重複流程"]
+    B -->|"skill_manage"| C["💾 維護記憶\nMEMORY.md + 偏好"]
+    C -->|"Curator 維護"| D["🧬 演化治理\n自動整理/棄用"]
     D -->|"下次自動套用"| A
 ```
+
+<div class="grid grid-cols-3 gap-3 mt-4">
+  <div class="p-2 border border-blue-300 rounded bg-blue-50 text-xs">
+    <div class="font-mono font-bold text-blue-700 mb-1">🔨 造 (Build)</div>
+    Agent 把成功流程封裝成 skill，避免重複發明輪子。
+  </div>
+  <div class="p-2 border border-green-300 rounded bg-green-50 text-xs">
+    <div class="font-mono font-bold text-green-700 mb-1">💾 修 (Maintain)</div>
+    跨對話寫入記憶，支援全文搜尋與稽核，不因換 session 就遺失。
+  </div>
+  <div class="p-2 border border-orange-300 rounded bg-orange-50 text-xs">
+    <div class="font-mono font-bold text-orange-700 mb-1">🧬 續 (Evolve)</div>
+    Curator 引擎閒置一定時間自動整理/棄用過時 skill，防止知識腐化。
+  </div>
+</div>
+
+<div class="mt-3 p-2 bg-gray-100 rounded text-xs text-gray-600">
+  三個引擎分開處理「新建/維護/演化」三件事，缺一就會退化到單純對話机器人。
+</div>
 
 <div class="grid grid-cols-2 gap-3 mt-2">
   <div class="p-2 bg-gray-100 rounded border border-gray-400 text-xs"><span class="font-bold">記憶回顧觸發：</span>每 <span class="font-mono font-bold">10</span> 回合（使用者訊息計數）</div>
@@ -375,15 +423,114 @@ flowchart LR
   ⚠️ 企業注意：自動生成的 Skill 為 Python 程式碼，無人工審核閘門，受監管環境需自建 code review 流程
 </div>
 
+<div class="mt-3 p-2 border border-blue-500 rounded-lg text-xs text-blue-700">
+  **Curator 不是萬靈丹：四道剎車設計**
+  <br/>為了回答「自改進會不會失控？」Enterprise 版在 Curator 額外加入四道剎車。
+  <br/>見下一頁。
+</div>
+
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 
-<!--
-這是「self-improving」的具體實現，也是 Hermes 最核心的差異化功能。
-重點：同類任務第一次做需要時間，第二次起 Agent 會自動套用上次提取的技能，不需使用者重新說明。
-技能是背景執行提取的，不會讓使用者等待。
-Curator 機制很重要：避免技能庫一直累積舊的、過時的技能——閒置 7 天會自動整理。
-風險要特別提：自動生成的技能是 Python 程式碼，在受監管環境（例如金融、法規）需要建立 code review 流程。
--->
+---
+layout: default
+---
+
+# Curator 四道剎車：防止自改進失控
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="text-xs text-gray-500 font-bold mb-3">四個抑制層，回答企業最擔心的事</div>
+    <div class="flex flex-col gap-2">
+      <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
+        <span class="shrink-0 px-2 py-0.5 bg-gray-700 text-white rounded text-xs font-mono font-bold">01</span>
+        <span class="text-xs text-gray-700">閒置觸發：<span class="font-mono">min_idle_hours</span> 設下限，不會剛學完就清理</span>
+      </div>
+      <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
+        <span class="shrink-0 px-2 py-0.5 bg-gray-700 text-white rounded text-xs font-mono font-bold">02</span>
+        <span class="text-xs text-gray-700">逾時歸檔：<span class="font-mono">archive_after_days</span> 強制封存，不隨意刪除</span>
+      </div>
+      <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
+        <span class="shrink-0 px-2 py-0.5 bg-gray-700 text-white rounded text-xs font-mono font-bold">03</span>
+        <span class="text-xs text-gray-700">版本保留：<span class="font-mono">backup.keep</span> 最多保留 5 份，可 rollback</span>
+      </div>
+      <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
+        <span class="shrink-0 px-2 py-0.5 bg-gray-700 text-white rounded text-xs font-mono font-bold">04</span>
+        <span class="text-xs text-gray-700">最小閾值：<span class="font-mono">stale_after_days</span> 過了才視為過期</span>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="p-3 bg-green-50 border border-green-300 rounded text-xs">
+      ✅ **每個參數都可配置**，企業可依法規要求（金融、醫療）調高保留天數。
+    </div>
+    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs">
+      💡 **與 Promptware 對齊**：自改進不是單靠「自動學習」，而是「自動學習 + 自動治理」。
+    </div>
+    <div class="p-3 bg-red-50 border border-red-300 rounded text-xs">
+      ⚠️ 企業注意：四個閾值預設值未必符合所有產業，導入前應 review config.yaml。
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+---
+layout: default
+---
+
+# Curator 四道剎車（續）— 參數對照表
+
+<div class="overflow-x-auto">
+  <table class="table-auto border-collapse w-full text-xs">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 px-2 py-1 text-left">參數</th>
+        <th class="border border-gray-300 px-2 py-1 text-left">預設值</th>
+        <th class="border border-gray-300 px-2 py-1 text-left">用途</th>
+        <th class="border border-gray-300 px-2 py-1 text-left">企業調校建議</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 font-mono">min_idle_hours</td>
+        <td class="border border-gray-300 px-2 py-1">2</td>
+        <td class="border border-gray-300 px-2 py-1">多久沒用才視為閒置</td>
+        <td class="border border-gray-300 px-2 py-1">金融/醫療調高至 24</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 font-mono">interval_hours</td>
+        <td class="border border-gray-300 px-2 py-1">168</td>
+        <td class="border border-gray-300 px-2 py-1">Curator daemon 執行頻率</td>
+        <td class="border border-gray-300 px-2 py-1">嚴格環境調低（每 24h）</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 font-mono">stale_after_days</td>
+        <td class="border border-gray-300 px-2 py-1">30</td>
+        <td class="border border-gray-300 px-2 py-1">多少天沒更新標記為過期</td>
+        <td class="border border-gray-300 px-2 py-1">快速變動領域調低至 14</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 font-mono">archive_after_days</td>
+        <td class="border border-gray-300 px-2 py-1">90</td>
+        <td class="border border-gray-300 px-2 py-1">過期多久強制封存</td>
+        <td class="border border-gray-300 px-2 py-1">法規要求調低至 30 或不归档</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 font-mono">backup.keep</td>
+        <td class="border border-gray-300 px-2 py-1">5</td>
+        <td class="border border-gray-300 px-2 py-1">最多保留備份份數</td>
+        <td class="border border-gray-300 px-2 py-1">依磁碟空間調整，不可為 0</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="mt-3 p-2 bg-gray-100 rounded text-xs text-gray-600">
+  資料來源：hermes_agent/hermes-agent/hermes_cli/config.py 段落 <span class="font-mono">curator.</span>
+  <br/>完整可見於自身 локально checkout 的 source，或上一頁提過的 GitHub repo。
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 ---
 layout: default
 ---
