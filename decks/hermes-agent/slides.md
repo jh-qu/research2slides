@@ -1008,39 +1008,47 @@ layout: default
 
 # 評估結論
 
-<div class="grid grid-cols-2 gap-6 mt-4">
-  <div class="border border-green-700 rounded-lg p-5">
-    <h3 class="text-green-700 mb-3">✅ 優勢</h3>
-    <ul class="space-y-2 text-sm">
-      <li>社群規模龐大（191K stars），成熟度高</li>
-      <li>MIT 授權，可自由商用與修改</li>
-      <li>多模型支援，降低廠商鎖定風險</li>
-      <li>部署彈性高，PoC 成本極低</li>
-      <li>自我改進機制，長期使用價值遞增</li>
+<div class="grid grid-cols-3 gap-4 mt-4">
+  <div class="border border-green-600 rounded-lg p-4">
+    <div class="font-bold text-green-700 mb-3 text-sm">它能做什麼？</div>
+    <ul class="text-xs text-gray-700 space-y-2">
+      <li>✅ 非技術人員自然語言查資料<br><span class="text-gray-400">（已驗證：遊戲營運 Bot）</span></li>
+      <li>✅ 跨工具自動化重複性任務</li>
+      <li>✅ 多 Agent 無人值守長任務</li>
+      <li>✅ 各部門隔離的 AI 助理<br><span class="text-gray-400">（SOUL.md 行為控制）</span></li>
     </ul>
   </div>
-  <div class="border border-yellow-700 rounded-lg p-5">
-    <h3 class="text-yellow-700 mb-3">⚠️ 注意事項</h3>
-    <ul class="space-y-2 text-sm">
-      <li>尚無公開效能基準測試資料</li>
-      <li>Python 為主，需具備相關技術資源</li>
-      <li>功能複雜，導入學習曲線較高</li>
-      <li>企業資料安全政策需另行評估</li>
+  <div class="border border-yellow-600 rounded-lg p-4">
+    <div class="font-bold text-yellow-700 mb-3 text-sm">資安風險如何？</div>
+    <ul class="text-xs text-gray-700 space-y-2">
+      <li>✅ 無已知 CVE，有主動 Threat Model</li>
+      <li>⚠️ 進程內防護為啟發式，非真正隔離</li>
+      <li>⚠️ 預設部署非最安全配置</li>
+      <li>🟡 <strong>容器化後</strong>可接受部署於非高敏環境</li>
+    </ul>
+  </div>
+  <div class="border border-blue-600 rounded-lg p-4">
+    <div class="font-bold text-blue-700 mb-3 text-sm">下一步</div>
+    <ul class="text-xs text-gray-700 space-y-2">
+      <li>🎯 啟動一個月 PoC<br><span class="text-gray-400">$5 VPS ≈ NT$160</span></li>
+      <li>🐳 Docker 沙箱 + Gateway 白名單為基本前提</li>
+      <li>📋 以遊戲營運查詢為起點，驗證業務場景</li>
+      <li>🔒 確認資料治理策略後再擴大部署</li>
     </ul>
   </div>
 </div>
 
-<div class="mt-5 p-4 bg-blue-900 bg-opacity-40 rounded-lg border border-blue-600">
-  <span class="text-white">🎯 <strong>建議：</strong>值得列為內部 AI Agent 基礎框架候選，建議以 $5 VPS 進行一個月 PoC 驗證，成本極低風險可控</span>
+<div class="mt-4 p-3 bg-gray-50 border border-gray-400 rounded-lg text-xs text-gray-700">
+  <strong>MIT 授權・195K Stars・Python 技術能力前提</strong>——技術能力充足的前提下，列為內部 AI Agent 基礎框架候選，建議以容器隔離 + 白名單管控在非高敏環境啟動 PoC。
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 
 <!--
-整體評估：優勢明顯，風險可控，導入門檻低。
-最重要的一點：$5 VPS 一個月 PoC，大約台幣 160 元，就能在真實業務場景驗證可行性。
-資安方面需要額外規劃：SOUL.md 保護、Promptware 風險評估、資料治理策略——這些是導入前要確認的事項。
-建議行動：列為 AI Agent 基礎框架候選，啟動一個月 PoC。
+三欄直接回答評估的核心問題。
+能做什麼：遊戲營運 Bot 是已驗證的場景，不是假設。
+資安：定性是「成長中」——無 CVE、有誠實揭露，但需要企業主動配置，不能開箱即用。
+下一步：PoC 門檻極低，NT$160 就能在真實業務場景驗證，沒有不試的理由。
 -->
 ---
 layout: default
