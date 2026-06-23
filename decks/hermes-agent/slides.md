@@ -550,12 +550,30 @@ layout: default
   <div>
     <div class="text-xs text-gray-500 font-bold mb-2">企業部署優先建議</div>
     <div class="flex flex-col gap-1.5 text-xs">
-      <div class="p-2 bg-red-50 border border-red-400 rounded"><span class="font-bold text-red-600">高</span> 啟用 Docker 沙箱（<code>terminal.backend: docker</code>）——預設 local backend 無容器隔離</div>
-      <div class="p-2 bg-red-50 border border-red-400 rounded"><span class="font-bold text-red-600">高</span> Gateway 嚴格白名單；絕不使用 <code>GATEWAY_ALLOW_ALL_USERS=true</code></div>
-      <div class="p-2 bg-red-50 border border-red-400 rounded"><span class="font-bold text-red-600">高</span> 以非 root 用戶運行，設定 CPU / 記憶體資源上限</div>
-      <div class="p-2 bg-orange-50 border border-orange-400 rounded"><span class="font-bold text-orange-600">中</span> Skills 安裝前強制人工 code review（Skills 為 Python 程式碼）</div>
-      <div class="p-2 bg-orange-50 border border-orange-400 rounded"><span class="font-bold text-orange-600">中</span> OSV-Scanner 改設 <code>fail-on-vuln: true</code>（預設為警告、不擋關）</div>
-      <div class="p-2 bg-orange-50 border border-orange-400 rounded"><span class="font-bold text-orange-600">中</span> 考慮 HashiCorp Vault / Bitwarden Secrets 替代明文 .env</div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
+        <span>啟用 Docker 沙箱（<code>terminal.backend: docker</code>）——預設 local backend 無容器隔離</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
+        <span>Gateway 嚴格白名單；絕不使用 <code>GATEWAY_ALLOW_ALL_USERS=true</code></span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
+        <span>以非 root 用戶運行，設定 CPU / 記憶體資源上限</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
+        <span>Skills 安裝前強制人工 code review（Skills 為 Python 程式碼）</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
+        <span>OSV-Scanner 改設 <code>fail-on-vuln: true</code>（預設為警告、不擋關）</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
+        <span>考慮 HashiCorp Vault / Bitwarden Secrets 替代明文 .env</span>
+      </div>
     </div>
   </div>
 </div>
