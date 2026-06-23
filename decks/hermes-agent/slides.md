@@ -511,69 +511,6 @@ v0.15 已有基本防護，這部分我們有看過原始碼確認。
 但仍有兩個企業需要自行處理的缺口：SOUL.md 沒有防篡改機制、auth.json 和 SOUL.md 放在同一個資料夾。
 -->
 ---
-layout: default
----
-
-# 資安全貌：風險與企業部署建議
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-  <div>
-    <div class="text-xs text-gray-500 font-bold mb-2">架構層面風險</div>
-    <div class="flex flex-col gap-1.5 text-xs">
-      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ 進程內防護均為<strong>啟發式（heuristics）</strong>，非真正安全邊界；LLM 被對抗操控時可被繞過</div>
-      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ <code>SOUL.md</code> / <code>MEMORY.md</code>：純文字、無 ACL、無簽名，有寫入權限可靜默篡改人格與記憶</div>
-      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ Skills / Plugins 與主進程同等權限，無自動沙箱，安裝前審查責任落在操作員</div>
-      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ API 金鑰明文儲存於 <code>~/.hermes/.env</code>，不支援 Vault / KMS</div>
-      <div class="p-2 bg-green-50 border border-green-400 rounded text-green-700">✅ 供應鏈：內建 OSV-Scanner CI；litellm / mistralai 投毒事件已列入掃描清單</div>
-      <div class="p-2 bg-green-50 border border-green-400 rounded text-green-700">✅ 無已知直接歸屬 Hermes Agent 的 CVE</div>
-    </div>
-  </div>
-  <div>
-    <div class="text-xs text-gray-500 font-bold mb-2">企業部署優先建議</div>
-    <div class="flex flex-col gap-1.5 text-xs">
-      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
-        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
-        <span>啟用 Docker 沙箱（<code>terminal.backend: docker</code>）——預設 local backend 無容器隔離</span>
-      </div>
-      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
-        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
-        <span>Gateway 嚴格白名單；絕不使用 <code>GATEWAY_ALLOW_ALL_USERS=true</code></span>
-      </div>
-      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
-        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
-        <span>以非 root 用戶運行，設定 CPU / 記憶體資源上限</span>
-      </div>
-      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
-        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
-        <span>Skills 安裝前強制人工 code review（Skills 為 Python 程式碼）</span>
-      </div>
-      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
-        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
-        <span>OSV-Scanner 改設 <code>fail-on-vuln: true</code>（預設為警告、不擋關）</span>
-      </div>
-      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
-        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
-        <span>考慮 HashiCorp Vault / Bitwarden Secrets 替代明文 .env</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="mt-3 p-2 bg-gray-50 border border-gray-300 rounded text-xs text-gray-700 flex items-center gap-3">
-  <span class="font-bold whitespace-nowrap">資安成熟度：🟡 成長中</span>
-  <span class="text-gray-500">誠實揭露防護邊界、有完整 Threat Model，但預設部署姿態非最安全——技術能力充足的企業在容器隔離後可部署，暫不建議高敏感生產環境以預設配置直接使用</span>
-</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
-
-<!--
-這頁是整個資安評估的總結，銜接上一頁的 Brainworm 防禦。
-重點一：沒有已知 CVE 是好消息；供應鏈風險是真實存在的，litellm 和 mistralai 都曾發生投毒，Hermes 的應對是內建 OSV-Scanner。
-重點二：官方 SECURITY.md 自承，所有進程內機制（審批門、輸出編輯、模式掃描）都是「啟發式」，不是真正安全邊界。唯一的真正邊界是 OS 沙箱（Docker）。
-重點三：預設部署不是最安全配置，企業上線前必須主動啟用 Docker 沙箱、設 Gateway 白名單、限制資源。
-整體定位：比同類開源 AI Agent 框架更有資安自覺，但尚不到「企業開箱即用」的成熟度。
--->
----
 layout: two-cols
 class: kanban-slide
 ---
@@ -740,6 +677,69 @@ layout: default
 Provider Routing + Fallback：主要供應商掛掉或限速，自動切換備援，不需要人工介入，服務不中斷。
 Credential Pools：多組 API Key 輪替，任何一組達到速率上限都不會卡住整個服務。
 Prompt Caching 是永遠開啟的：重複的 context（例如 SOUL.md、長篇知識庫）不會重複計費，長期使用成本明顯下降。
+-->
+---
+layout: default
+---
+
+# 資安全貌：風險與企業部署建議
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="text-xs text-gray-500 font-bold mb-2">架構層面風險</div>
+    <div class="flex flex-col gap-1.5 text-xs">
+      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ 進程內防護均為<strong>啟發式（heuristics）</strong>，非真正安全邊界；LLM 被對抗操控時可被繞過</div>
+      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ <code>SOUL.md</code> / <code>MEMORY.md</code>：純文字、無 ACL、無簽名，有寫入權限可靜默篡改人格與記憶</div>
+      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ Skills / Plugins 與主進程同等權限，無自動沙箱，安裝前審查責任落在操作員</div>
+      <div class="p-2 bg-yellow-50 border border-yellow-400 rounded">⚠️ API 金鑰明文儲存於 <code>~/.hermes/.env</code>，不支援 Vault / KMS</div>
+      <div class="p-2 bg-green-50 border border-green-400 rounded text-green-700">✅ 供應鏈：內建 OSV-Scanner CI；litellm / mistralai 投毒事件已列入掃描清單</div>
+      <div class="p-2 bg-green-50 border border-green-400 rounded text-green-700">✅ 無已知直接歸屬 Hermes Agent 的 CVE</div>
+    </div>
+  </div>
+  <div>
+    <div class="text-xs text-gray-500 font-bold mb-2">企業部署優先建議</div>
+    <div class="flex flex-col gap-1.5 text-xs">
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
+        <span>啟用 Docker 沙箱（<code>terminal.backend: docker</code>）——預設 local backend 無容器隔離</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
+        <span>Gateway 嚴格白名單；絕不使用 <code>GATEWAY_ALLOW_ALL_USERS=true</code></span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
+        <span>以非 root 用戶運行，設定 CPU / 記憶體資源上限</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
+        <span>Skills 安裝前強制人工 code review（Skills 為 Python 程式碼）</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
+        <span>OSV-Scanner 改設 <code>fail-on-vuln: true</code>（預設為警告、不擋關）</span>
+      </div>
+      <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
+        <span class="shrink-0 px-1.5 py-0.5 bg-orange-400 text-white rounded text-[10px] font-bold">中</span>
+        <span>考慮 HashiCorp Vault / Bitwarden Secrets 替代明文 .env</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3 p-2 bg-gray-50 border border-gray-300 rounded text-xs text-gray-700 flex items-center gap-3">
+  <span class="font-bold whitespace-nowrap">資安成熟度：🟡 成長中</span>
+  <span class="text-gray-500">誠實揭露防護邊界、有完整 Threat Model，但預設部署姿態非最安全——技術能力充足的企業在容器隔離後可部署，暫不建議高敏感生產環境以預設配置直接使用</span>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+這頁是技術特色章節的資安總結，整合所有特色的風險面向。
+重點一：沒有已知 CVE 是好消息；供應鏈風險是真實存在的，litellm 和 mistralai 都曾發生投毒，Hermes 的應對是內建 OSV-Scanner。
+重點二：官方 SECURITY.md 自承，所有進程內機制（審批門、輸出編輯、模式掃描）都是「啟發式」，不是真正安全邊界。唯一的真正邊界是 OS 沙箱（Docker）。
+重點三：預設部署不是最安全配置，企業上線前必須主動啟用 Docker 沙箱、設 Gateway 白名單、限制資源。
+整體定位：比同類開源 AI Agent 框架更有資安自覺，但尚不到「企業開箱即用」的成熟度。
 -->
 ---
 layout: center
