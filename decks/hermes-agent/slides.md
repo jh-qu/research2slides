@@ -25,6 +25,7 @@ mdc: true
 今天要跟大家介紹的是 Nous Research 開發的開源 AI Agent 框架——Hermes Agent 的技術評估。
 這份報告結合了原始碼分析、實際部署測試，以及企業應用視角，目標是評估它是否值得我們進一步導入。
 -->
+
 ---
 layout: default
 ---
@@ -686,27 +687,23 @@ layout: default
 
 <div class="grid grid-cols-2 gap-6 mt-4">
   <div>
-    <div class="text-xs text-gray-500 font-bold mb-3">四種審批模式（<span class="font-mono">terminal.approval_mode</span>）</div>
+    <div class="text-xs text-gray-500 font-bold mb-3">三種審批模式（<span class="font-mono">approvals.mode</span>）+ cron 安全邊界</div>
     <div class="flex flex-col gap-2">
       <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
-        <span class="shrink-0 px-2 py-0.5 bg-green-600 text-white rounded text-xs font-mono font-bold">auto</span>
-        <span class="text-xs text-gray-700">白名單內的指令自動執行，不中斷使用者</span>
+        <span class="shrink-0 px-2 py-0.5 bg-orange-500 text-white rounded text-xs font-mono font-bold">manual</span>
+        <span class="text-xs text-gray-700">每次都手動確認（最安全，預設）</span>
       </div>
       <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
-        <span class="shrink-0 px-2 py-0.5 bg-blue-500 text-white rounded text-xs font-mono font-bold">suggest</span>
-        <span class="text-xs text-gray-700">Agent 提出指令建議，等待確認後才執行</span>
+        <span class="shrink-0 px-2 py-0.5 bg-blue-500 text-white rounded text-xs font-mono font-bold">smart</span>
+        <span class="text-xs text-gray-700">LLM 輔助判斷，低風險自動放行、高風險提示確認</span>
       </div>
       <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
-        <span class="shrink-0 px-2 py-0.5 bg-orange-500 text-white rounded text-xs font-mono font-bold">ask</span>
-        <span class="text-xs text-gray-700">每次工具呼叫前均詢問，最高人工掌控</span>
-      </div>
-      <div class="flex items-center gap-3 p-2 border border-gray-300 rounded">
-        <span class="shrink-0 px-2 py-0.5 bg-red-600 text-white rounded text-xs font-mono font-bold">deny</span>
-        <span class="text-xs text-gray-700">拒絕所有工具執行（純對話模式）</span>
+        <span class="shrink-0 px-2 py-0.5 bg-red-600 text-white rounded text-xs font-mono font-bold">off</span>
+        <span class="text-xs text-gray-700">等同 YOLO，跳過所有審批（不建議）</span>
       </div>
     </div>
     <div class="mt-3 p-2 bg-gray-100 rounded text-xs text-gray-600">
-      白名單 / 黑名單：可設定特定指令模式永遠允許或永遠拒絕
+      cron 任務另設 <span class="font-mono">approvals.cron_mode: deny</span>，排程預設不允許危險指令。
     </div>
   </div>
   <div class="flex flex-col gap-3 justify-center">
@@ -961,6 +958,42 @@ layout: default
 01 數據儀表：讓 Bot 知道「去哪找資料」——沒有這個，Bot 不知道要查哪張表。
 02 歷史 Query：讓 Bot 有正確的 SQL 範本可以改——沒有這個，Bot 容易從零亂湊出錯誤的查詢。
 03 營運知識：讓 Bot 理解業務語言——沒有這個，Bot 可能把「新進」誤當「活躍」，算出完全不同的數字。
+-->
+---
+layout: default
+---
+
+# 社群驗證：262 則真實案例
+
+<div class="grid grid-cols-2 gap-6 mt-3">
+  <div>
+    <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" />
+    <div class="text-xs text-gray-500 mt-2 text-center">hermes-agent.nousresearch.com/docs/user-stories</div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="text-xs text-gray-500 font-bold mb-1">Business Ops 精選場景</div>
+    <div class="border border-blue-300 rounded-lg p-3 bg-blue-50">
+      <div class="font-bold text-blue-700 text-sm">定時自動推報</div>
+      <div class="text-xs text-gray-600 mt-1">「每個工作日早上 9 點整理收件夾推到 Slack」——現有 BQ Bot 延伸：每日 KPI 摘要主動推送，不需人工觸發</div>
+    </div>
+    <div class="border border-green-300 rounded-lg p-3 bg-green-50">
+      <div class="font-bold text-green-700 text-sm">會議記錄自動化</div>
+      <div class="text-xs text-gray-600 mt-1">自動轉錄 Google Meet／Teams，產出摘要與行動項目；敏感資料走本地模型不出機器</div>
+    </div>
+    <div class="border border-purple-300 rounded-lg p-3 bg-purple-50">
+      <div class="font-bold text-purple-700 text-sm">多遊戲 Chief of Staff 架構</div>
+      <div class="text-xs text-gray-600 mt-1">主 Agent 跨專案統覽；每個遊戲 / 部門有獨立 sub-agent + 各自記憶，1 個 Slack 頻道 = 1 個 Agent</div>
+    </div>
+    <div class="text-xs text-gray-400 mt-1 text-right">來源：官方 User Stories · Enterprise / Business Ops 分類</div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+這頁說明我們自己的 BQ Bot 不是孤例——官方文件有 262 則來自社群的真實案例，涵蓋 15 個分類。
+Enterprise 分類有 9 則，Business Ops 有 16 則，都是真實的企業或團隊部署。
+三個延伸場景：定時推報（現有 Bot 功能延伸）、會議記錄（可立即應用）、多遊戲 Chief of Staff（組織擴展的藍圖）。
 -->
 ---
 layout: default
