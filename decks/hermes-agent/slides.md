@@ -79,36 +79,7 @@ Harness 英文還有「駕馭、善用」的意思，做為框架名字非常貼
 layout: two-cols
 ---
 
-# 專案概覽 — 為什麼是 Hermes？
-
-<div class="grid grid-cols-2 gap-6 mt-4">
-  <div>
-    <div class="text-xs text-gray-500 font-bold mb-3">NousResearch 押注 Hermes 的三個動機</div>
-    <div class="flex flex-col gap-2">
-      <div class="p-2 border border-gray-300 rounded">
-        <span class="font-mono text-xs font-bold text-gray-700">01</span>
-        <span class="text-xs text-gray-700 ml-2">AI Agent 已經從玩具變成企業生產力工具，需要穩定的長期維護者。</span>
-      </div>
-      <div class="p-2 border border-gray-300 rounded">
-        <span class="font-mono text-xs font-bold text-gray-700">02</span>
-        <span class="text-xs text-gray-700 ml-2">開源生態的 AI 工具多數只專注「呼叫模型」，Hermes 專注「Agent 行為治理」。</span>
-      </div>
-      <div class="p-2 border border-gray-300 rounded">
-        <span class="font-mono text-xs font-bold text-gray-700">03</span>
-        <span class="text-xs text-gray-700 ml-2">企業最痛的是「無法預測 Agent」，Hermes 提供審批、技能治理、記憶隔離。</span>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-col gap-3 justify-center">
-    <div class="p-3 bg-green-50 border border-green-300 rounded text-xs">
-      ✅ 三個動機回答的核心問題：「為何可長期押注？」
-      <br/>不是曇花一現的 wrapper，而是可以逐年迭代的行為治理平台。
-    </div>
-    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs">
-      💡 企業選型時，問的不是「模型好不好」，而是「Agent 失控了嗎？」
-    </div>
-  </div>
-</div>
+# 專案概覽
 
 <v-clicks>
 
@@ -144,6 +115,43 @@ layout: two-cols
 MIT 授權很關鍵：可以自由商用、修改、部署，不需要擔心版權問題。
 「self-improving」是最核心的定位，等一下會詳細說明這代表什麼。
 -->
+---
+layout: default
+---
+
+# 專案概覽 — 為什麼是 Hermes？
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="text-xs text-gray-500 font-bold mb-3">NousResearch 押注 Hermes 的三個動機</div>
+    <div class="flex flex-col gap-2">
+      <div class="p-2 border border-gray-300 rounded">
+        <span class="font-mono text-xs font-bold text-gray-700">01</span>
+        <span class="text-xs text-gray-700 ml-2">AI Agent 已經從玩具變成企業生產力工具，需要穩定的長期維護者。</span>
+      </div>
+      <div class="p-2 border border-gray-300 rounded">
+        <span class="font-mono text-xs font-bold text-gray-700">02</span>
+        <span class="text-xs text-gray-700 ml-2">開源生態的 AI 工具多數只專注「呼叫模型」，Hermes 專注「Agent 行為治理」。</span>
+      </div>
+      <div class="p-2 border border-gray-300 rounded">
+        <span class="font-mono text-xs font-bold text-gray-700">03</span>
+        <span class="text-xs text-gray-700 ml-2">企業最痛的是「無法預測 Agent」，Hermes 提供審批、技能治理、記憶隔離。</span>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="p-3 bg-green-50 border border-green-300 rounded text-xs">
+      ✅ 三個動機回答的核心問題：「為何可長期押注？」
+      <br/>不是曇花一現的 wrapper，而是可以逐年迭代的行為治理平台。
+    </div>
+    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs">
+      💡 企業選型時，問的不是「模型好不好」，而是「Agent 失控了嗎？」
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 ---
 layout: default
 ---
