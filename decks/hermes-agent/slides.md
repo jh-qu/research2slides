@@ -1195,76 +1195,74 @@ layout: default
 
 # 八種協作模式：從 1 個 Bot 到 50 個 Agent
 
-<div class="text-xs text-gray-500 mb-3">橙皮書 §17 — 依複雜度由低到高，按卡片控成本</div>
+<div class="text-xs text-gray-500 mb-1">橙皮書 §17 — 依複雜度由低到高，按卡片控成本</div>
 
-<div class="overflow-x-auto">
-  <table class="table-auto border-collapse w-full text-xs">
-    <thead>
-      <tr class="bg-gray-100">
-        <th class="border border-gray-300 px-2 py-1 text-center">模式</th>
-        <th class="border border-gray-300 px-2 py-1 text-left">說明</th>
-        <th class="border border-gray-300 px-2 py-1 text-center">Agent 數</th>
-        <th class="border border-gray-300 px-2 py-1 text-left">適用場景</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P1</td>
-        <td class="border border-gray-300 px-2 py-1">單 Agent 直接執行</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">1</td>
-        <td class="border border-gray-300 px-2 py-1">查詢、單步任務（⚠️ Fan-out 慎用）</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P2</td>
-        <td class="border border-gray-300 px-2 py-1">主 + 子 Agent 串行</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">2–5</td>
-        <td class="border border-gray-300 px-2 py-1">多步驟、跨工具自動化（現有 BQ Bot 約此層）</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P3</td>
-        <td class="border border-gray-300 px-2 py-1">Pipeline 流水線</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">3–8</td>
-        <td class="border border-gray-300 px-2 py-1">資料清洗、報告生成流程</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P4</td>
-        <td class="border border-gray-300 px-2 py-1">Review 審核迴圈</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">2–4</td>
-        <td class="border border-gray-300 px-2 py-1">需要品質把關的內容生成</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-purple-600">P5</td>
-        <td class="border border-gray-300 px-2 py-1">Fan-out 並行</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">5–20</td>
-        <td class="border border-gray-300 px-2 py-1">大量同質任務並行處理</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-purple-600">P6</td>
-        <td class="border border-gray-300 px-2 py-1">Kanban 自癒看板</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">5–15</td>
-        <td class="border border-gray-300 px-2 py-1">無人值守長任務（已有 Multi-agent Kanban 頁）</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-orange-600">P7</td>
-        <td class="border border-gray-300 px-2 py-1">Chief of Staff 架構</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">10–30</td>
-        <td class="border border-gray-300 px-2 py-1">跨部門多遊戲統覽（社群案例）</td>
-      </tr>
-      <tr class="bg-gray-50">
-        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-orange-600">P8</td>
-        <td class="border border-gray-300 px-2 py-1">全自主 Agent 網絡</td>
-        <td class="border border-gray-300 px-2 py-1 text-center">20–50+</td>
-        <td class="border border-gray-300 px-2 py-1">高度自動化企業流程（需充分 PoC 驗證）</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table class="table-auto border-collapse w-full text-xs">
+  <thead>
+    <tr class="bg-gray-100">
+      <th class="border border-gray-300 px-2 py-0.5 text-center">模式</th>
+      <th class="border border-gray-300 px-2 py-0.5 text-left">說明</th>
+      <th class="border border-gray-300 px-2 py-0.5 text-center">Agent 數</th>
+      <th class="border border-gray-300 px-2 py-0.5 text-left">適用場景</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P1</td>
+      <td class="border border-gray-300 px-2 py-0.5">單 Agent 直接執行</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">1</td>
+      <td class="border border-gray-300 px-2 py-0.5">查詢、單步任務（⚠️ Fan-out 慎用）</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P2</td>
+      <td class="border border-gray-300 px-2 py-0.5">主 + 子 Agent 串行</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">2–5</td>
+      <td class="border border-gray-300 px-2 py-0.5">多步驟、跨工具自動化（現有 BQ Bot 約此層）</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P3</td>
+      <td class="border border-gray-300 px-2 py-0.5">Pipeline 流水線</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">3–8</td>
+      <td class="border border-gray-300 px-2 py-0.5">資料清洗、報告生成流程</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P4</td>
+      <td class="border border-gray-300 px-2 py-0.5">Review 審核迴圈</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">2–4</td>
+      <td class="border border-gray-300 px-2 py-0.5">需要品質把關的內容生成</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-purple-600">P5</td>
+      <td class="border border-gray-300 px-2 py-0.5">Fan-out 並行</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">5–20</td>
+      <td class="border border-gray-300 px-2 py-0.5">大量同質任務並行處理</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-purple-600">P6</td>
+      <td class="border border-gray-300 px-2 py-0.5">Kanban 自癒看板</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">5–15</td>
+      <td class="border border-gray-300 px-2 py-0.5">無人值守長任務（已有 Multi-agent Kanban 頁）</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-orange-600">P7</td>
+      <td class="border border-gray-300 px-2 py-0.5">Chief of Staff 架構</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">10–30</td>
+      <td class="border border-gray-300 px-2 py-0.5">跨部門多遊戲統覽（社群案例）</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-orange-600">P8</td>
+      <td class="border border-gray-300 px-2 py-0.5">全自主 Agent 網絡</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">20–50+</td>
+      <td class="border border-gray-300 px-2 py-0.5">高度自動化企業流程（需充分 PoC 驗證）</td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="grid grid-cols-2 gap-3 mt-3">
-  <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+<div class="grid grid-cols-2 gap-2 mt-2">
+  <div class="p-1.5 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
     💰 <strong>按卡片控成本：</strong>每個子 Agent 是一張 Kanban 卡片，Token 消耗可追蹤；從 P2 開始試點，確認成本效益後再升級模式
   </div>
-  <div class="p-2 bg-orange-50 border border-orange-400 rounded text-xs text-orange-800">
+  <div class="p-1.5 bg-orange-50 border border-orange-400 rounded text-xs text-orange-800">
     ⚠️ <strong>P1 Fan-out 警告：</strong>P1 單 Agent 若被用於大量 Fan-out 任務，Token 消耗會爆炸性增長；Fan-out 場景應選 P5 並設資源上限
   </div>
 </div>
