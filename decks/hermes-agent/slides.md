@@ -162,41 +162,6 @@ OpenRouter 是一個聚合平台，一個 API key 可以打 200+ 個模型，是
 layout: default
 ---
 
-<!--
-# 部署彈性 — 從個人到企業規模（已移至 Appendix）
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-  <div class="border border-green-700 rounded-lg p-5">
-    <h3 class="text-green-700 mb-4">🚀 輕量部署</h3>
-    <ul class="space-y-2 text-sm">
-      <li>✅ 本機終端機（立即可用）</li>
-      <li>✅ $5/月 VPS（低成本驗證）</li>
-      <li>✅ Docker 容器化</li>
-      <li>✅ SSH 遠端機器</li>
-    </ul>
-  </div>
-  <div class="border border-blue-700 rounded-lg p-5">
-    <h3 class="text-blue-700 mb-4">🏢 企業部署</h3>
-    <ul class="space-y-2 text-sm">
-      <li>✅ GPU 叢集（Singularity）</li>
-      <li>✅ Serverless（Modal）</li>
-      <li>✅ 雲端沙箱（Daytona）</li>
-      <li>✅ 多平台訊息閘道</li>
-    </ul>
-  </div>
-</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
-
-PoC 的門檻非常低：$5/月的 VPS，大約台幣 160 元，就能把 Hermes 跑起來。
-不需要先投入大量基礎設施成本就能驗證可行性。
-如果 PoC 成功，同一套程式碼可以直接擴展到 GPU 叢集，不需要重寫。
-這個彈性讓「先試再說」的策略非常合理。
--->
----
-layout: default
----
-
 # 多平台整合 — 在現有工具中使用 AI
 
 Agent 透過主流通訊平台操作，使用者不需學新介面
@@ -261,7 +226,8 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
 layout: default
 ---
 
-# 架構解析 — 三層設計
+<!--
+# 架構解析 — 三層設計（已移至 Appendix）
 
 ```mermaid {scale: 0.75}
 flowchart TB
@@ -287,7 +253,6 @@ flowchart TB
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 
-<!--
 三層分離讓我們可以「換一層不動另一層」。
 例如：今天用 Slack，改天想換成 Line，只需要改介面層的設定，Agent 邏輯完全不用動。
 或者：現在在本機跑，之後要擴展到 GPU 叢集，也只是換執行層，程式碼不變。
