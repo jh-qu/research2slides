@@ -20,7 +20,7 @@ mdc: true
 </div>
 
 <div class="pt-12 text-gray-200">
-  Nous Research ・ 技術評估報告 ・ 2026.06.12
+  Nous Research ・ 技術評估報告 ・ 2026.06.24
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
@@ -161,7 +161,8 @@ layout: default
 layout: default
 ---
 
-# 多模型支援 — 200+ 模型，一套框架
+<!--
+# 多模型支援 — 200+ 模型，一套框架（已移至 Appendix）
 
 <div class="grid grid-cols-2 gap-8 mt-4">
   <div>
@@ -188,7 +189,6 @@ layout: default
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 
-<!--
 最重要的一點：Hermes 不綁定任何一家 AI 供應商。
 今天用 Claude，明天 GPT-5 出來覺得效果更好或更便宜，改一行 config 就換，不需要重寫任何程式碼。
 OpenRouter 是一個聚合平台，一個 API key 可以打 200+ 個模型，是最靈活的接入方式。
@@ -1341,6 +1341,39 @@ class: text-center
 ---
 
 # Appendix
+
+## 附錄A：多模型支援 — 200+ 模型，一套框架（原P4，已由主要流程移除）
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+  <div>
+
+| 提供商 | 類型 |
+|--------|------|
+| OpenRouter | 多模型聚合平台 |
+| Nous Portal | Nous 自家模型 |
+| OpenAI | GPT 系列 |
+| NVIDIA NIM | 企業級推論 |
+| Hugging Face | 開源模型 |
+| 自訂 Endpoint | 本地 / 私有雲 |
+
+  </div>
+  <div class="flex flex-col justify-center">
+    <div class="p-4 bg-blue-900 bg-opacity-30 rounded-lg border border-blue-700">
+      <div class="font-bold text-black mb-2">💡 對企業的意義</div>
+      <p class="text-sm text-black">
+        無需改動程式碼即可切換底層模型，降低廠商鎖定風險。未來若有更好或更便宜的模型，可隨時替換。
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+最重要的一點：Hermes 不綁定任何一家 AI 供應商。
+今天用 Claude，明天 GPT-5 出來覺得效果更好或更便宜，改一行 config 就換，不需要重寫任何程式碼。
+OpenRouter 是一個聚合平台，一個 API key 可以打 200+ 個模型，是最靈活的接入方式。
+
+---
 
 <div class="text-gray-400 mt-4 text-lg">案例實作細節參考</div>
 
