@@ -226,42 +226,6 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
 layout: default
 ---
 
-<!--
-# 架構解析 — 三層設計（已移至 Appendix）
-
-```mermaid {scale: 0.75}
-flowchart TB
-    subgraph IF["① 介面層"]
-        direction TB
-        cli["CLI / TUI"]
-        msg["Telegram · Discord\nSlack · WhatsApp"]
-        web["Web Dashboard"]
-        ide["VS Code / Zed（ACP）"]
-    end
-    subgraph AG["② Agent 邏輯層"]
-        direction TB
-        aa["AIAgent\nrun_agent.py"]
-        mt["model_tools.py\n動態工具派發"]
-    end
-    subgraph EX["③ 執行層"]
-        direction TB
-        local["Local · Docker · SSH"]
-        cloud["Modal · Singularity\n（GPU 叢集）"]
-    end
-    IF --> AG --> EX
-```
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
-
-三層分離讓我們可以「換一層不動另一層」。
-例如：今天用 Slack，改天想換成 Line，只需要改介面層的設定，Agent 邏輯完全不用動。
-或者：現在在本機跑，之後要擴展到 GPU 叢集，也只是換執行層，程式碼不變。
-這個設計對企業長期維護很友善。
--->
----
-layout: default
----
-
 # 架構解析 — Runtime Modes & 設定
 
 <div class="grid grid-cols-2 gap-8 mt-4">
@@ -1464,7 +1428,42 @@ layout: default
 這份字典解決了 AI 不懂業務語言的問題。
 沒有這個，Bot 可能把「新進」誤解為「活躍」，算出完全錯誤的用戶數。
 通算金幣的公式（Coin + 25000 × Gem）是特別非直覺的業務規則，這種知識最需要明確告訴 Bot。
+通算金幣的公式（Coin + 25000 × Gem）是特別非直覺的業務規則，這種知識最需要明確告訴 Bot。
 -->
+---
+layout: default
+---
+
+## 附錄C：架構解析 — 三層設計（原P7，已由主要流程移除）
+
+```mermaid {scale: 0.75}
+flowchart TB
+    subgraph IF[\"① 介面層\"]
+        direction TB
+        cli[\"CLI / TUI\"]
+        msg[\"Telegram · Discord\\nSlack · WhatsApp\"]
+        web[\"Web Dashboard\"]
+        ide[\"VS Code / Zed（ACP）\"]
+    end
+    subgraph AG[\"② Agent 邏輯層\"]
+        direction TB
+        aa[\"AIAgent\\nrun_agent.py\"]
+        mt[\"model_tools.py\\n動態工具派發\"]
+    end
+    subgraph EX[\"③ 執行層\"]
+        direction TB
+        local[\"Local · Docker · SSH\"]
+        cloud[\"Modal · Singularity\\n（GPU 叢集）\"]
+    end
+    IF --> AG --> EX
+```
+
+<div class=\"absolute bottom-4 right-4 text-sm text-gray-500\"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+三層分離讓我們可以「換一層不動另一層」。
+例如：今天用 Slack，改天想換成 Line，只需要改介面層的設定，Agent 邏輯完全不用動。
+或者：現在在本機跑，之後要擴展到 GPU 叢集，也只是換執行層，程式碼不變。
+這個設計對企業長期維護很友善。
 
 ---
 layout: default
