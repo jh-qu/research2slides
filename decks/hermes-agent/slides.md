@@ -11,19 +11,30 @@ title: Hermes Agent 技術評估
 mdc: true
 ---
 
+<div class="absolute inset-0" style="background:rgba(5,5,25,0.55)" />
+
+<div class="relative z-10">
+
 # Hermes Agent
 
 ### 自我改進 AI Agent 框架技術評估
 
-<div class="text-xl text-gray-300 mt-6 mb-4 italic">
+<div class="text-xl text-gray-200 mt-6 mb-4 italic">
   "The Agent That Grows With You"
 </div>
 
-<div class="pt-12 text-gray-200">
+<div class="pt-12 text-gray-300">
   Nous Research ・ 技術評估報告 ・ 2026.06.24
 </div>
 
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-400 z-10"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<style>
+h1 { text-shadow: 0 2px 16px rgba(0,0,0,0.9) !important; }
+h3 { text-shadow: 0 1px 10px rgba(0,0,0,0.9) !important; }
+</style>
 
 <!--
 今天要跟大家介紹的是 Nous Research 開發的開源 AI Agent 框架——Hermes Agent 的技術評估。
