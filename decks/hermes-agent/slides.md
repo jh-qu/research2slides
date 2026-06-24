@@ -15,6 +15,10 @@ mdc: true
 
 ### 自我改進 AI Agent 框架技術評估
 
+<div class="text-xl text-gray-300 mt-6 mb-4 italic">
+  "The Agent That Grows With You"
+</div>
+
 <div class="pt-12 text-gray-200">
   Nous Research ・ 技術評估報告 ・ 2026.06.12
 </div>
