@@ -920,54 +920,13 @@ layout: default
 
 # Token 消耗 — 實際用量與成本分析
 
-<div class="text-xs text-gray-500 font-bold mb-3">Hermes 實際 API 用量（2026-06-18 ~ 2026-06-22）</div>
+<div class="text-xs text-gray-500 font-bold mb-2">Hermes 實際 API 用量（2026-06-18 ~ 2026-06-22）</div>
 
-<div class="overflow-x-auto">
-  <table class="table-auto border-collapse w-full text-xs">
-    <thead>
-      <tr class="bg-gray-100">
-        <th class="border border-gray-300 px-2 py-1 text-left">日期</th>
-        <th class="border border-gray-300 px-2 py-1 text-left">模型</th>
-        <th class="border border-gray-300 px-2 py-1 text-right">Token 用量</th>
-        <th class="border border-gray-300 px-2 py-1 text-right">成本（USD）</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1">2026-06-22</td>
-        <td class="border border-gray-300 px-2 py-1 font-mono">claude-sonnet-4-6</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono">11,579,765</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$8.71</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1">2026-06-22</td>
-        <td class="border border-gray-300 px-2 py-1 font-mono">stepfun/step-3.7-flash:free</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono">12,065,283</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$1.33</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1">2026-06-19</td>
-        <td class="border border-gray-300 px-2 py-1 font-mono">claude-sonnet-4-6</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono">198,187</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$0.15</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1">2026-06-18</td>
-        <td class="border border-gray-300 px-2 py-1 font-mono">claude-sonnet-4-6</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono">9,546,855</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$5.60</td>
-      </tr>
-      <tr>
-        <td class="border border-gray-300 px-2 py-1">2026-06-18</td>
-        <td class="border border-gray-300 px-2 py-1 font-mono">stepfun/step-3.7-flash:free</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono">21,102,926</td>
-        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$2.14</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<ZoomImg src="/token-usage-table.jpg">
+  <img src="/token-usage-table.jpg" class="rounded-lg border border-gray-300 w-full shadow-sm" style="max-height: 170px; object-fit: contain; object-position: left;" />
+</ZoomImg>
 
-<div class="grid grid-cols-3 gap-3 mt-4">
+<div class="grid grid-cols-3 gap-3 mt-3">
   <div class="p-2 border border-blue-300 rounded bg-blue-50 text-xs">
     <div class="font-bold text-blue-700 mb-1">模型分散</div>
     Sonnet 4-6 用於高推理任務，Step 3.7 Flash 處理大量輕量請求，兩者並行執行。
@@ -982,17 +941,17 @@ layout: default
   </div>
 </div>
 
-<div class="grid grid-cols-2 gap-3 mt-3">
+<div class="grid grid-cols-2 gap-3 mt-2">
   <div class="p-2 bg-yellow-50 border border-yellow-400 rounded text-xs text-yellow-800">
-    ⚠️ <strong>用量尖峰說明：</strong>6/22 用量（23.6M tokens）遠高於 6/19（198k）——尖峰通常來自 Multi-agent Fan-out 或大量 session_search；按需暴露（on-demand Skill 載入）可降低背景 context 常駐成本約 30–50%
+    ⚠️ <strong>用量尖峰說明：</strong>6/22 用量（23.6M tokens）遠高於 6/19（198k）——尖峰通常來自 Multi-agent Fan-out；按需暴露 Skill 可降低常駐 context 成本 30–50%
   </div>
   <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
-    📊 <strong>成本估算：</strong>以 $3.59/天估算，單一重度用戶月費 ~$107；若啟用 Prompt caching + 免費備用模型，實際費用可降至 $50–70/月；多人共用 Gateway 時邊際成本顯著下降
+    📊 <strong>成本估算：</strong>以 $3.59/天估算，單一重度用戶月費 ~$107；啟用 Prompt caching + 免費備用模型可降至 $50–70/月
   </div>
 </div>
 
 <div class="mt-2 p-2 bg-gray-100 rounded text-xs text-gray-600">
-  💡 Prompt caching 已啟用（token 重複率高時命中率可達 60–80%）；Step 3.7 Flash 大幅降低批量處理成本，但推理能力較弱，建議僅用於輕量分類與摘要任務。
+  💡 Prompt caching 已啟用；Step 3.7 Flash 大幅降低批量處理成本，建議僅用於輕量分類與摘要任務。
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
