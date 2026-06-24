@@ -158,11 +158,8 @@ layout: default
 今天用 Claude，明天 GPT-5 出來覺得效果更好或更便宜，改一行 config 就換，不需要重寫任何程式碼。
 OpenRouter 是一個聚合平台，一個 API key 可以打 200+ 個模型，是最靈活的接入方式。
 -->
----
-layout: default
----
-
-# 多平台整合 — 在現有工具中使用 AI
+<!--
+# 多平台整合 — 在現有工具中使用 AI（原P6，已移至 Appendix）
 
 Agent 透過主流通訊平台操作，使用者不需學新介面
 
