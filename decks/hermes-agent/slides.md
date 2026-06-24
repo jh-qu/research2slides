@@ -296,14 +296,132 @@ flowchart LR
   三個引擎分開處理「新建/維護/演化」三件事，缺一就會退化到單純對話机器人。
 </div>
 
-<div class="grid grid-cols-2 gap-3 mt-2">
+<div class="grid grid-cols-3 gap-2 mt-2">
   <div class="p-2 bg-gray-100 rounded border border-gray-400 text-xs"><span class="font-bold">記憶回顧觸發：</span>每 <span class="font-mono font-bold">10</span> 回合（使用者訊息計數）</div>
   <div class="p-2 bg-gray-100 rounded border border-gray-400 text-xs"><span class="font-bold">技能回顧觸發：</span>每累積 <span class="font-mono font-bold">10</span> 次工具呼叫</div>
+  <div class="p-2 bg-orange-50 rounded border border-orange-400 text-xs"><span class="font-bold text-orange-700">負面過濾觸發：</span>background_review.py 偵測失敗模式，加入黑名單</div>
 </div>
 <div class="text-xs text-gray-500 mt-1">均可在 <span class="font-mono">config.yaml</span> 調整 <span class="font-mono">nudge_interval</span>・背景 daemon thread 執行，不阻塞使用者回應</div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 
+---
+layout: default
+---
+
+# Skill 生命週期：三態狀態機
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="text-xs text-gray-500 mb-3">Skill 永不刪除，只沿三態流轉</div>
+    <div class="flex flex-col items-center gap-1">
+      <div class="px-6 py-3 bg-green-100 border-2 border-green-500 rounded-xl text-center">
+        <div class="font-bold text-green-700 text-sm">active</div>
+        <div class="text-xs text-gray-600 mt-0.5">正常使用中，自動套用</div>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-gray-500">
+        <span>← rollback</span>
+        <span>閒置 7 天 →</span>
+      </div>
+      <div class="px-6 py-3 bg-yellow-100 border-2 border-yellow-500 rounded-xl text-center">
+        <div class="font-bold text-yellow-700 text-sm">stale</div>
+        <div class="text-xs text-gray-600 mt-0.5">Curator 標記，等待複查</div>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-gray-500">
+        <span>← 人工 pin 保留</span>
+        <span>Curator 審定 →</span>
+      </div>
+      <div class="px-6 py-3 bg-gray-100 border-2 border-gray-400 rounded-xl text-center">
+        <div class="font-bold text-gray-600 text-sm">archived</div>
+        <div class="text-xs text-gray-600 mt-0.5">歸檔，不再自動套用，可隨時 rollback</div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs">
+      🔒 <strong>永不刪除原則：</strong>所有 Skill 保留版本歷史，任何時候都可以 rollback 到上一個版本，防止知識意外流失
+    </div>
+    <div class="p-3 bg-green-50 border border-green-300 rounded text-xs">
+      📌 <strong>pin 機制：</strong>對重要 Skill 加 pin 標記，Curator 不會自動將其標為 stale，即使長期閒置
+    </div>
+    <div class="p-3 bg-purple-50 border border-purple-300 rounded text-xs">
+      🧪 <strong>dry-run 模式：</strong>新 Skill 可先以 dry-run 執行，確認行為符合預期後再切換為 active
+    </div>
+    <div class="p-2 bg-gray-100 rounded text-xs text-gray-600">
+      閒置閾值（7 天）可在 <span class="font-mono">config.yaml</span> 的 <span class="font-mono">curator.stale_days</span> 調整
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+Skill 生命週期管理是 Hermes 與一般對話機器人的根本差異之一。
+三態模型：active（使用中）→ stale（閒置標記）→ archived（歸檔保留）。
+永不刪除原則讓企業放心：知識不會因為 AI 自動清理而消失。
+pin 機制是企業部署的重要工具——針對業務核心的 Skill（例如報表格式規範），加 pin 防止 Curator 自動淘汰。
+-->
+---
+layout: default
+---
+
+# 負面學習：background_review.py 黑名單
+
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="text-xs text-gray-500 mb-2">四類應被屏蔽的 Skill 模式</div>
+    <div class="overflow-x-auto">
+      <table class="table-auto border-collapse w-full text-xs">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-2 py-1.5 text-left">類型</th>
+            <th class="border border-gray-300 px-2 py-1.5 text-left">說明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-gray-300 px-2 py-1.5 font-bold text-red-700">錯誤結果</td>
+            <td class="border border-gray-300 px-2 py-1.5">執行後產生錯誤或不正確輸出的 Skill</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="border border-gray-300 px-2 py-1.5 font-bold text-orange-700">過度通用</td>
+            <td class="border border-gray-300 px-2 py-1.5">適用範圍太廣導致被濫用（例如：「回答所有問題」）</td>
+          </tr>
+          <tr>
+            <td class="border border-gray-300 px-2 py-1.5 font-bold text-yellow-700">重複冗餘</td>
+            <td class="border border-gray-300 px-2 py-1.5">與現有 Skill 高度重疊，功能差異不大</td>
+          </tr>
+          <tr class="bg-gray-50">
+            <td class="border border-gray-300 px-2 py-1.5 font-bold text-gray-700">低頻低效</td>
+            <td class="border border-gray-300 px-2 py-1.5">使用率極低且封裝無效率，與直接對話相比無明顯優勢</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 justify-center">
+    <div class="p-3 bg-gray-800 rounded text-xs font-mono text-green-300 leading-relaxed">
+      <div class="text-gray-400 mb-1"># 橙皮書 §06 原文（英文）</div>
+      "The goal of negative learning is not to punish the agent for mistakes, but to ensure the skill library only retains patterns that genuinely improve performance."
+    </div>
+    <div class="p-3 bg-orange-50 border border-orange-300 rounded text-xs text-orange-800">
+      🔄 <strong>與 Curator 的分工：</strong><br>
+      background_review.py 負責「哪些不該學」（負面過濾）；Curator 負責「哪些該整理」（正向治理）。兩個機制獨立運行，互補。
+    </div>
+    <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+      💡 差異化亮點：大多數 Agent 框架只有「學習」機制；Hermes 明確設計「不該學什麼」，防止 Skill 庫腐化
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+大多數 AI Agent 框架只關注「學到了什麼」，Hermes 的差異化在於同樣關注「不該學什麼」。
+background_review.py 是負面學習的核心——定期掃描 Skill 庫，把四類問題 Skill 加入黑名單。
+這解決了一個實際痛點：AI 自動學習可能積累很多低品質或冗餘的 Skill，時間久了 Skill 庫就變成垃圾場。
+黑名單機制確保 Skill 庫保持精簡、高品質。
+-->
 ---
 layout: default
 ---
@@ -367,6 +485,11 @@ layout: default
       <div class="text-green-500 font-bold text-sm mb-1">長期 — MEMORY.md + 向量 DB</div>
       <div class="text-xs text-gray-600">由背景 review agent fork 定期寫入；USER.md 記錄使用者偏好 ／ Skill 知識庫</div>
     </div>
+    <div class="flex justify-center text-gray-400 text-xs">▼ 選用外部插件</div>
+    <div class="border border-indigo-300 rounded-lg p-3 bg-indigo-50">
+      <div class="text-indigo-600 font-bold text-sm mb-1">第四層（選用）— Honcho / 外部記憶服務</div>
+      <div class="text-xs text-gray-600">Honcho 插件（<span class="font-mono">plugins/memory/honcho/</span>）；跨用戶、跨 Agent 的共享長期記憶，需額外部署</div>
+    </div>
   </div>
   <div class="flex flex-col gap-4 justify-center">
     <div class="p-4 bg-blue-50 rounded-lg border border-blue-200 text-sm">
@@ -395,30 +518,96 @@ layout: default
 layout: default
 ---
 
+# session_search：把不該用 LLM 的活還給 SQLite
+
+<div class="text-xs text-gray-500 mb-3">跨對話召回不靠 LLM 生成——直接查索引，快 4500 倍</div>
+
+<div class="overflow-x-auto">
+  <table class="table-auto border-collapse w-full text-xs">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 px-2 py-1.5 text-center">模式</th>
+        <th class="border border-gray-300 px-2 py-1.5 text-left">說明</th>
+        <th class="border border-gray-300 px-2 py-1.5 text-left">典型用途</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1.5 text-center font-mono font-bold text-blue-600">DISCOVERY</td>
+        <td class="border border-gray-300 px-2 py-1.5">列出所有歷史對話索引</td>
+        <td class="border border-gray-300 px-2 py-1.5">瀏覽有哪些過去的工作</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-2 py-1.5 text-center font-mono font-bold text-blue-600">SCROLL</td>
+        <td class="border border-gray-300 px-2 py-1.5">按時間線瀏覽對話片段</td>
+        <td class="border border-gray-300 px-2 py-1.5">「找上週同一時間做的事」</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1.5 text-center font-mono font-bold text-blue-600">READ</td>
+        <td class="border border-gray-300 px-2 py-1.5">全文搜尋 + FTS5 索引精確召回</td>
+        <td class="border border-gray-300 px-2 py-1.5">「找所有提到 BigQuery 的對話」</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-2 py-1.5 text-center font-mono font-bold text-blue-600">BROWSE</td>
+        <td class="border border-gray-300 px-2 py-1.5">語意向量搜尋（近義召回）</td>
+        <td class="border border-gray-300 px-2 py-1.5">「找所有類似這次報表任務的對話」</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid grid-cols-2 gap-3 mt-3">
+  <div class="p-3 bg-green-50 border border-green-300 rounded text-xs text-green-800">
+    🚀 <strong>4500x 加速：</strong>SQLite FTS5 全文索引比 LLM 召回快 4500 倍，且結果確定性更高——查「BigQuery」一定找到包含這個詞的對話，不會有 LLM 幻覺
+  </div>
+  <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+    🧠 <strong>設計哲學：</strong>「不該讓 LLM 做的事，就不要讓 LLM 做」——記憶搜尋是確定性問題，用確定性工具（SQLite）解，省 Token 又可靠
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+session_search 是 Hermes 記憶架構中最低調但最有技術含量的設計決策之一。
+四種模式覆蓋了不同的召回需求：從按時間瀏覽到語意搜尋。
+4500x 加速不是誇大——SQLite FTS5 全文索引的搜尋速度遠超 LLM 生成，而且結果可重現、無幻覺。
+設計哲學：只有需要「理解」才用 LLM；「搜尋」是確定性問題，用確定性工具。
+-->
+---
+layout: default
+---
+
 # Promptware 防禦：對抗記憶污染攻擊
 
-<div class="grid grid-cols-2 gap-8 mt-4">
+<div class="grid grid-cols-2 gap-6 mt-3">
   <div>
-    <div class="text-xs text-gray-400 mb-3">攻擊鏈（Brainworm-class）</div>
-    <div class="flex flex-col gap-2 text-sm">
-      <div class="p-2 bg-red-50 border border-red-300 rounded">📄 外部內容（網頁、文件、工具輸出）</div>
-      <div class="flex justify-center text-red-400 text-xs">▼ 混入惡意指令</div>
-      <div class="p-2 bg-red-50 border border-red-300 rounded">💾 寫入 MEMORY.md / skill_manage</div>
-      <div class="flex justify-center text-red-400 text-xs">▼ 持久化感染</div>
-      <div class="p-2 bg-red-50 border border-red-300 rounded">🔁 跨會話持續執行攻擊者指令</div>
+    <div class="text-xs text-gray-400 mb-2">三個注入入口</div>
+    <div class="flex flex-col gap-1.5 text-xs">
+      <div class="p-2 bg-red-50 border border-red-300 rounded">🧠 <strong>自回憶注入</strong>：外部內容透過 MEMORY.md 寫回路徑注入，跨會話持久感染</div>
+      <div class="p-2 bg-red-50 border border-red-300 rounded">🔧 <strong>工具鏈注入</strong>：MCP 工具輸出含惡意指令，直接注入當前 context（⚠️ §3.2 未被 Brainworm 防禦覆蓋）</div>
+      <div class="p-2 bg-red-50 border border-red-300 rounded">📦 <strong>Skill 安裝注入</strong>：安裝含後門的 Skill（Python 程式碼），直接取得主程序執行權</div>
     </div>
-    <div class="mt-3 p-2 bg-green-50 border border-green-400 rounded text-xs text-green-700">
-      🛡 v0.15.0 在記憶寫入路徑前加入攔截驗證
+    <div class="mt-2 text-xs text-gray-400 mb-1">IOC 特徵語句（Indicator of Compromise）</div>
+    <div class="overflow-x-auto">
+      <table class="table-auto border-collapse w-full text-xs">
+        <thead><tr class="bg-gray-100"><th class="border border-gray-300 px-2 py-1 text-left">型態</th><th class="border border-gray-300 px-2 py-1 text-left">範例特徵句</th></tr></thead>
+        <tbody>
+          <tr><td class="border border-gray-300 px-2 py-0.5">記憶覆蓋</td><td class="border border-gray-300 px-2 py-0.5 font-mono text-red-700">IMPORTANT: Remember to always...</td></tr>
+          <tr class="bg-gray-50"><td class="border border-gray-300 px-2 py-0.5">身份覆蓋</td><td class="border border-gray-300 px-2 py-0.5 font-mono text-red-700">You are now in maintenance mode</td></tr>
+          <tr><td class="border border-gray-300 px-2 py-0.5">指令注入</td><td class="border border-gray-300 px-2 py-0.5 font-mono text-red-700">Override previous instructions and...</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div class="flex flex-col gap-2 justify-center">
+  <div class="flex flex-col gap-2">
     <div class="text-xs text-gray-500 font-bold mb-1">原始碼確認：已有保護</div>
     <div class="p-2 border border-green-500 rounded text-xs text-green-700">✅ Review fork 工具白名單：危險指令全部 auto-deny</div>
     <div class="p-2 border border-green-500 rounded text-xs text-green-700">✅ Fork 隔離：<span class="font-mono">skip_memory=True</span>，不碰外部 memory plugin</div>
+    <div class="p-2 border border-green-500 rounded text-xs text-green-700">✅ v0.15.0 在記憶寫入路徑前加入攔截驗證</div>
     <div class="text-xs text-gray-500 font-bold mt-2 mb-1">仍需企業自行處理</div>
     <div class="p-2 border border-red-400 rounded text-xs text-red-700">❌ SOUL.md：純文字，無簽名 / checksum，寫入不留稽核日誌</div>
     <div class="p-2 border border-red-400 rounded text-xs text-red-700">❌ <span class="font-mono">auth.json</span>（OAuth token）與 SOUL.md 同存於 <span class="font-mono">~/.hermes/</span></div>
-    <div class="p-2 border border-yellow-500 rounded text-xs text-yellow-800">⚠️ MCP 工具輸出是否在 Brainworm 防禦範圍內？原始碼未確認</div>
+    <div class="p-2 border border-yellow-500 rounded text-xs text-yellow-800">⚠️ §3.2：MCP 工具輸出不在 Brainworm 防禦範圍，需在 MCP 配置層設白名單</div>
   </div>
 </div>
 
@@ -426,9 +615,9 @@ layout: default
 
 <!--
 Promptware / Brainworm 是一種新型攻擊，專門針對有持久記憶的 AI Agent。
-攻擊流程：讓 Agent 讀取含惡意指令的外部內容（例如網頁、文件）→ Agent 把指令寫入 MEMORY.md → 下次對話自動執行攻擊者的指令。
+三個入口：自回憶（最危險、跨會話）、工具鏈（MCP 輸出、未覆蓋）、Skill 安裝（程式碼後門）。
 v0.15 已有基本防護，這部分我們有看過原始碼確認。
-但仍有兩個企業需要自行處理的缺口：SOUL.md 沒有防篡改機制、auth.json 和 SOUL.md 放在同一個資料夾。
+但企業仍需自行處理：SOUL.md 沒有防篡改機制、auth.json 放在同一個資料夾、MCP 輸出不在防護範圍。
 -->
 ---
 layout: two-cols
@@ -626,16 +815,24 @@ layout: default
     </div>
   </div>
   <div class="flex flex-col gap-3 justify-center">
+    <div class="p-2 bg-gray-50 border border-gray-300 rounded text-xs mb-1">
+      <div class="font-bold text-gray-600 mb-1">模式 → 人機迴路對應</div>
+      <div class="flex flex-col gap-1">
+        <div class="flex items-center gap-2"><span class="font-mono text-orange-600 font-bold">manual</span><span class="text-gray-500">→</span><span class="text-gray-700">Human-<strong>in</strong>-the-loop（每次確認，最安全）</span></div>
+        <div class="flex items-center gap-2"><span class="font-mono text-blue-600 font-bold">smart</span><span class="text-gray-500">→</span><span class="text-gray-700">Human-<strong>on</strong>-the-loop（LLM 初篩，高風險才提示）</span></div>
+        <div class="flex items-center gap-2"><span class="font-mono text-red-600 font-bold">off</span><span class="text-gray-500">→</span><span class="text-gray-700">Human-<strong>out</strong>-of-the-loop（全自動，不建議）</span></div>
+      </div>
+    </div>
     <div class="p-3 bg-green-50 border border-green-300 rounded text-xs">
       ✅ <strong>企業導入建議：</strong><br>
-      初期以 <span class="font-mono text-orange-600">suggest</span> 或 <span class="font-mono text-orange-600">ask</span> 模式上線，觀察 Agent 行為穩定後，再針對已知安全操作建立白名單，逐步切換 <span class="font-mono text-green-600">auto</span>
+      初期以 <span class="font-mono text-orange-600">manual</span> 模式上線，熟悉 Agent 行為後，再針對已知安全操作切換 <span class="font-mono text-blue-600">smart</span>；cron 排程建議維持 <span class="font-mono text-orange-600">manual</span>
     </div>
     <div class="p-3 bg-red-50 border border-red-300 rounded text-xs">
-      ⚠️ <strong>避免：</strong>在無白名單設定的情況下直接使用 <span class="font-mono text-red-600">auto</span> 模式——Agent 可能執行任意 shell 指令，等同開放本機執行權限
+      ⚠️ <strong>避免：</strong>直接使用 <span class="font-mono text-red-600">off</span> 模式——跳過所有審批，等同開放本機執行權限
     </div>
     <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs">
-      💡 <strong>與 Docker 沙箱互補：</strong><br>
-      審批機制控制「哪些指令被允許執行」，Docker 沙箱控制「執行後能影響什麼範圍」——兩者應同時啟用
+      💡 <strong>與部署姿態互補：</strong><br>
+      審批機制控制「哪些指令被允許執行」，OS 隔離邊界控制「執行後能影響什麼範圍」——兩者應同時考慮（見下頁）
     </div>
   </div>
 </div>
@@ -644,9 +841,74 @@ layout: default
 
 <!--
 指令審批是企業部署中最直接的安全控制點——決定 Agent 能做什麼。
-四種模式從完全自動到完全拒絕，企業可以根據信任程度和場景靈活配置。
-關鍵的雙層防禦概念：審批控制「哪些指令進來」，Docker 沙箱控制「執行後的爆炸半徑」。
-兩者缺一不可：只有審批沒有沙箱，AI 被繞過時無底線；只有沙箱沒有審批，使用體驗差且難以追責。
+三種模式對應三種人機迴路層次：manual（人在迴路）、smart（人在外圈）、off（全自動）。
+與部署姿態互補：審批控制「哪些指令進來」，OS 邊界控制「執行後的爆炸半徑」。
+兩者缺一不可：只有審批沒有隔離，AI 被繞過時無底線；只有隔離沒有審批，使用體驗差且難以追責。
+-->
+---
+layout: default
+---
+
+# 以 OS 為邊界：部署姿態選擇
+
+<div class="text-xs text-gray-500 mb-3">Docker terminal-backend ≠ 全程式沙箱——了解各姿態的實際隔離範圍，再決定部署方式</div>
+
+<div class="overflow-x-auto">
+  <table class="table-auto border-collapse w-full text-xs">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 px-3 py-2 text-left">隔離範圍</th>
+        <th class="border border-gray-300 px-3 py-2 text-center">Local backend<br><span class="text-gray-400 font-normal">預設</span></th>
+        <th class="border border-gray-300 px-3 py-2 text-center">Docker terminal-backend<br><span class="text-gray-400 font-normal">官方推薦</span></th>
+        <th class="border border-gray-300 px-3 py-2 text-center">整程式容器化<br><span class="text-gray-400 font-normal">進階</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 px-3 py-2">Shell / file tool 輸出</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-red-600">❌ 主機直接</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-green-600">✅ 容器內</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-green-600">✅ 容器內</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-3 py-2">Code-exec 執行環境</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-red-600">❌</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-red-600">❌ terminal 以外不含</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-green-600">✅</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-3 py-2">MCP 子程序</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-red-600">❌</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-red-600">❌</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-green-600">✅</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-3 py-2">Plugin / Skill 載入</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-red-600">❌</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-red-600">❌</td>
+        <td class="border border-gray-300 px-3 py-2 text-center text-green-600">✅</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid grid-cols-2 gap-4 mt-3">
+  <div class="p-2 bg-yellow-50 border border-yellow-400 rounded text-xs text-yellow-800">
+    ⚠️ <strong>SECURITY.md §2.2 原文：</strong>「terminal-backend Docker only wraps shell/file tool outputs」——進程內的 Plugin、MCP、Skill 仍在主機環境執行
+  </div>
+  <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+    💡 <strong>進階參考：</strong>NVIDIA OpenShell 以整程式容器化實現最嚴格隔離；適合高敏感生產環境，但運維複雜度顯著提升
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+這頁是對前一頁指令審批機制的補充——審批決定「哪些指令進來」，部署姿態決定「執行後影響哪些範圍」。
+常見誤解：「我啟用了 Docker terminal-backend，就已經有沙箱了」。
+事實是：Docker terminal-backend 只沙箱化 shell 和 file tool 的輸出——Hermes 主程序本身、MCP 子程序、Plugin 和 Skill 的載入，仍然在主機環境執行。
+要達到真正的全程式隔離，必須把整個 Hermes 進程放進容器，這是 NVIDIA OpenShell 的做法。
+企業評估建議：先從 Docker terminal-backend 開始（官方推薦、有意義的隔離），同時規劃整程式容器化路線圖。
 -->
 ---
 layout: default
@@ -671,7 +933,7 @@ layout: default
     <div class="flex flex-col gap-1.5 text-xs">
       <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
         <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
-        <span>啟用 Docker 沙箱（<code>terminal.backend: docker</code>）——預設 local backend 無容器隔離</span>
+        <span>啟用 Docker terminal-backend（<code>terminal.backend: docker</code>）沙箱化 shell/file 輸出；注意 code-exec、MCP、Plugin/Skill 不在此範圍——需整程式容器化才能全覆蓋（見「部署姿態選擇」）</span>
       </div>
       <div class="flex items-start gap-2 p-2 bg-gray-50 border border-gray-200 rounded">
         <span class="shrink-0 px-1.5 py-0.5 bg-red-500 text-white rounded text-[10px] font-bold">高</span>
@@ -697,9 +959,15 @@ layout: default
   </div>
 </div>
 
-<div class="mt-3 p-2 bg-gray-50 border border-gray-300 rounded text-xs text-gray-700 flex items-center gap-3">
-  <span class="font-bold whitespace-nowrap">資安成熟度：🟡 成長中</span>
-  <span class="text-gray-500">誠實揭露防護邊界、有完整 Threat Model，但預設部署姿態非最安全——技術能力充足的企業在容器隔離後可部署，暫不建議高敏感生產環境以預設配置直接使用</span>
+<div class="grid grid-cols-2 gap-3 mt-3">
+  <div class="p-2 bg-gray-50 border border-gray-300 rounded text-xs text-gray-700 flex items-center gap-3">
+    <span class="font-bold whitespace-nowrap">資安成熟度：🟡 成長中</span>
+    <span class="text-gray-500">誠實揭露防護邊界、有完整 Threat Model，但預設部署姿態非最安全——技術能力充足的企業在容器隔離後可部署，暫不建議高敏感生產環境以預設配置直接使用</span>
+  </div>
+  <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+    📬 <strong>負責任揭露：</strong><span class="font-mono">security@nousresearch.com</span><br>
+    90 天揭露視窗；SECURITY.md 中有 PGP 金鑰
+  </div>
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
@@ -707,8 +975,8 @@ layout: default
 <!--
 這頁是技術特色章節的資安總結，整合所有特色的風險面向。
 重點一：沒有已知 CVE 是好消息；供應鏈風險是真實存在的，litellm 和 mistralai 都曾發生投毒，Hermes 的應對是內建 OSV-Scanner。
-重點二：官方 SECURITY.md 自承，所有進程內機制（審批門、輸出編輯、模式掃描）都是「啟發式」，不是真正安全邊界。唯一的真正邊界是 OS 沙箱（Docker）。
-重點三：預設部署不是最安全配置，企業上線前必須主動啟用 Docker 沙箱、設 Gateway 白名單、限制資源。
+重點二：官方 SECURITY.md 自承，所有進程內機制（審批門、輸出編輯、模式掃描）都是「啟發式」，不是真正安全邊界。Docker terminal-backend 提供有意義但有限的隔離（只涵蓋 shell/file），整程式容器化才是完整邊界。
+重點三：預設部署不是最安全配置，企業上線前必須主動啟用 Docker terminal-backend、設 Gateway 白名單、限制資源。
 整體定位：比同類開源 AI Agent 框架更有資安自覺，但尚不到「企業開箱即用」的成熟度。
 -->
 ---
@@ -779,8 +1047,17 @@ layout: default
   </div>
 </div>
 
-<div class="mt-3 p-2 bg-gray-100 rounded text-xs text-gray-600">
-  💡 Prompt caching + Credential Pools 已啟用；免費模型 Step 3.7 Flash 大幅降低批量處理成本，但推理能力較弱。
+<div class="grid grid-cols-2 gap-3 mt-3">
+  <div class="p-2 bg-yellow-50 border border-yellow-400 rounded text-xs text-yellow-800">
+    ⚠️ <strong>用量尖峰說明：</strong>6/22 用量（23.6M tokens）遠高於 6/19（198k）——尖峰通常來自 Multi-agent Fan-out 或大量 session_search；按需暴露（on-demand Skill 載入）可降低背景 context 常駐成本約 30–50%
+  </div>
+  <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+    📊 <strong>成本估算：</strong>以 $3.59/天估算，單一重度用戶月費 ~$107；若啟用 Prompt caching + 免費備用模型，實際費用可降至 $50–70/月；多人共用 Gateway 時邊際成本顯著下降
+  </div>
+</div>
+
+<div class="mt-2 p-2 bg-gray-100 rounded text-xs text-gray-600">
+  💡 Prompt caching 已啟用（token 重複率高時命中率可達 60–80%）；Step 3.7 Flash 大幅降低批量處理成本，但推理能力較弱，建議僅用於輕量分類與摘要任務。
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
@@ -795,9 +1072,9 @@ layout: default
   <div>
     <div class="text-xs font-bold text-green-700 mb-3">✅ 適合導入的場景</div>
     <div class="flex flex-col gap-2 text-xs">
-      <div class="p-2 bg-green-50 border border-green-300 rounded">🔍 非技術人員用自然語言查內部資料（已驗證，見案例）</div>
+      <div class="p-2 bg-green-50 border border-green-300 rounded">🔍 非技術人員用自然語言查內部資料（已驗證，見案例 · P2 模式）</div>
       <div class="p-2 bg-green-50 border border-green-300 rounded">🔄 IT / 工程部門重複性自動化任務</div>
-      <div class="p-2 bg-green-50 border border-green-300 rounded">🤖 需要多步驟無人值守的長任務（配合 Multi-agent Kanban）</div>
+      <div class="p-2 bg-green-50 border border-green-300 rounded">🤖 需要多步驟無人值守的長任務（Multi-agent Kanban · P6 模式）</div>
       <div class="p-2 bg-green-50 border border-green-300 rounded">🏢 多部門各自維護行為隔離的 AI 助理（SOUL.md 分離管理）</div>
       <div class="p-2 bg-green-50 border border-green-300 rounded">🔀 需靈活切換底層模型、降低廠商鎖定的場合</div>
     </div>
@@ -845,8 +1122,9 @@ layout: default
 
 # 遊戲營運 Bot：用中文提問，Bot 自動出報告
 
-<div class="text-gray-600 text-sm italic mb-4">
-  Hermes Agent + BigQuery，遊戲運營同仁無需寫 SQL，直接提問得到完整對比分析
+<div class="flex items-center gap-4 mb-4">
+  <div class="text-gray-600 text-sm italic">Hermes Agent + BigQuery，遊戲運營同仁無需寫 SQL，直接提問得到完整對比分析</div>
+  <div class="shrink-0 px-3 py-1.5 bg-green-100 border border-green-400 rounded text-xs text-green-800 font-bold whitespace-nowrap">⏱ 3 分鐘 vs 人工 30–60 分鐘</div>
 </div>
 
 <div class="grid grid-cols-2 gap-6">
@@ -989,6 +1267,95 @@ layout: default
 這頁說明我們自己的 BQ Bot 不是孤例——官方文件有 262 則來自社群的真實案例，涵蓋 15 個分類。
 Enterprise 分類有 9 則，Business Ops 有 16 則，都是真實的企業或團隊部署。
 三個延伸場景：定時推報（現有 Bot 功能延伸）、會議記錄（可立即應用）、多遊戲 Chief of Staff（組織擴展的藍圖）。
+-->
+---
+layout: default
+---
+
+# 八種協作模式：從 1 個 Bot 到 50 個 Agent
+
+<div class="text-xs text-gray-500 mb-3">橙皮書 §17 — 依複雜度由低到高，按卡片控成本</div>
+
+<div class="overflow-x-auto">
+  <table class="table-auto border-collapse w-full text-xs">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 px-2 py-1 text-center">模式</th>
+        <th class="border border-gray-300 px-2 py-1 text-left">說明</th>
+        <th class="border border-gray-300 px-2 py-1 text-center">Agent 數</th>
+        <th class="border border-gray-300 px-2 py-1 text-left">適用場景</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P1</td>
+        <td class="border border-gray-300 px-2 py-1">單 Agent 直接執行</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">1</td>
+        <td class="border border-gray-300 px-2 py-1">查詢、單步任務（⚠️ Fan-out 慎用）</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P2</td>
+        <td class="border border-gray-300 px-2 py-1">主 + 子 Agent 串行</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">2–5</td>
+        <td class="border border-gray-300 px-2 py-1">多步驟、跨工具自動化（現有 BQ Bot 約此層）</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P3</td>
+        <td class="border border-gray-300 px-2 py-1">Pipeline 流水線</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">3–8</td>
+        <td class="border border-gray-300 px-2 py-1">資料清洗、報告生成流程</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-blue-600">P4</td>
+        <td class="border border-gray-300 px-2 py-1">Review 審核迴圈</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">2–4</td>
+        <td class="border border-gray-300 px-2 py-1">需要品質把關的內容生成</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-purple-600">P5</td>
+        <td class="border border-gray-300 px-2 py-1">Fan-out 並行</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">5–20</td>
+        <td class="border border-gray-300 px-2 py-1">大量同質任務並行處理</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-purple-600">P6</td>
+        <td class="border border-gray-300 px-2 py-1">Kanban 自癒看板</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">5–15</td>
+        <td class="border border-gray-300 px-2 py-1">無人值守長任務（已有 Multi-agent Kanban 頁）</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-orange-600">P7</td>
+        <td class="border border-gray-300 px-2 py-1">Chief of Staff 架構</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">10–30</td>
+        <td class="border border-gray-300 px-2 py-1">跨部門多遊戲統覽（社群案例）</td>
+      </tr>
+      <tr class="bg-gray-50">
+        <td class="border border-gray-300 px-2 py-1 text-center font-mono font-bold text-orange-600">P8</td>
+        <td class="border border-gray-300 px-2 py-1">全自主 Agent 網絡</td>
+        <td class="border border-gray-300 px-2 py-1 text-center">20–50+</td>
+        <td class="border border-gray-300 px-2 py-1">高度自動化企業流程（需充分 PoC 驗證）</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid grid-cols-2 gap-3 mt-3">
+  <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+    💰 <strong>按卡片控成本：</strong>每個子 Agent 是一張 Kanban 卡片，Token 消耗可追蹤；從 P2 開始試點，確認成本效益後再升級模式
+  </div>
+  <div class="p-2 bg-orange-50 border border-orange-400 rounded text-xs text-orange-800">
+    ⚠️ <strong>P1 Fan-out 警告：</strong>P1 單 Agent 若被用於大量 Fan-out 任務，Token 消耗會爆炸性增長；Fan-out 場景應選 P5 並設資源上限
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+橙皮書 §17 定義了八種協作模式，從最簡單的單 Agent 到 50+ Agent 的全自主網絡。
+關鍵概念：每升一個模式，複雜度和成本都會顯著上升——不是越複雜越好，而是找到適合場景的最低複雜度模式。
+對我們自己的案例定位：現有的遊戲營運 BQ Bot 大約在 P2 層，已經能解決核心問題。
+升級到 P7 的時機：當需要跨多個遊戲或部門統覽時，才需要 Chief of Staff 架構。
+P1 Fan-out 警告很重要：很多初次使用者的直覺是「有 Agent 就派更多出去」，但 Token 消耗是線性疊加的。
 -->
 ---
 layout: default
