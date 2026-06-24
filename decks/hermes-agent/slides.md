@@ -210,7 +210,7 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
     </div>
   </div>
   <div class="flex flex-col justify-center">
-    <img src="/messaging-integrations.jpg" class="rounded-lg border border-gray-300 shadow-sm w-full" />
+    <img src="/messaging-integrations.jpg" class="rounded-lg border border-gray-300 shadow-sm max-h-[450px] object-contain mx-auto" />
     <div class="text-xs text-gray-500 mt-2">Hermes 內建 messaging integrations 列表（部分平台）</div>
   </div>
 </div>
