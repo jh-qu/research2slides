@@ -99,15 +99,15 @@ layout: two-cols
 
 <div class="flex flex-col gap-6 mt-8 ml-8 text-center">
   <div>
-    <div class="text-5xl font-bold text-blue-600">195K</div>
+    <div class="text-5xl font-bold text-blue-600">201K</div>
     <div class="text-gray-600 text-sm mt-1">GitHub Stars</div>
   </div>
   <div>
-    <div class="text-5xl font-bold text-green-600">34.1K</div>
+    <div class="text-5xl font-bold text-green-600">35.8K</div>
     <div class="text-gray-600 text-sm mt-1">Forks</div>
   </div>
   <div>
-    <div class="text-5xl font-bold text-purple-600">1,415</div>
+    <div class="text-5xl font-bold text-purple-600">1,534</div>
     <div class="text-gray-600 text-sm mt-1">Contributors</div>
   </div>
 </div>
@@ -119,6 +119,7 @@ layout: two-cols
 MIT 授權很關鍵：可以自由商用、修改、部署，不需要擔心版權問題。
 「self-improving」是最核心的定位，等一下會詳細說明這代表什麼。
 -->
+
 ---
 layout: default
 ---
@@ -951,6 +952,80 @@ layout: default
 重點三：預設部署不是最安全配置，企業上線前必須主動啟用 Docker 沙箱、設 Gateway 白名單、限制資源。
 整體定位：比同類開源 AI Agent 框架更有資安自覺，但尚不到「企業開箱即用」的成熟度。
 -->
+---
+layout: default
+---
+
+# Token 消耗 — 實際用量與成本分析
+
+<div class="text-xs text-gray-500 font-bold mb-3">Hermes 實際 API 用量（2026-06-18 ~ 2026-06-22）</div>
+
+<div class="overflow-x-auto">
+  <table class="table-auto border-collapse w-full text-xs">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border border-gray-300 px-2 py-1 text-left">日期</th>
+        <th class="border border-gray-300 px-2 py-1 text-left">模型</th>
+        <th class="border border-gray-300 px-2 py-1 text-right">Token 用量</th>
+        <th class="border border-gray-300 px-2 py-1 text-right">成本（USD）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1">2026-06-22</td>
+        <td class="border border-gray-300 px-2 py-1 font-mono">claude-sonnet-4-6</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono">11,579,765</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$8.71</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1">2026-06-22</td>
+        <td class="border border-gray-300 px-2 py-1 font-mono">stepfun/step-3.7-flash:free</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono">12,065,283</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$1.33</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1">2026-06-19</td>
+        <td class="border border-gray-300 px-2 py-1 font-mono">claude-sonnet-4-6</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono">198,187</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$0.15</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1">2026-06-18</td>
+        <td class="border border-gray-300 px-2 py-1 font-mono">claude-sonnet-4-6</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono">9,546,855</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$5.60</td>
+      </tr>
+      <tr>
+        <td class="border border-gray-300 px-2 py-1">2026-06-18</td>
+        <td class="border border-gray-300 px-2 py-1 font-mono">stepfun/step-3.7-flash:free</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono">21,102,926</td>
+        <td class="border border-gray-300 px-2 py-1 text-right font-mono text-green-600">$2.14</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="grid grid-cols-3 gap-3 mt-4">
+  <div class="p-2 border border-blue-300 rounded bg-blue-50 text-xs">
+    <div class="font-bold text-blue-700 mb-1">模型分散</div>
+    Sonnet 4-6 用於高推理任務，Step 3.7 Flash 處理大量輕量請求，兩者並行執行。
+  </div>
+  <div class="p-2 border border-orange-300 rounded bg-orange-50 text-xs">
+    <div class="font-bold text-orange-700 mb-1">成本落差</div>
+    Sonnet $8.71 vs Step $1.33（同一天）：相同 token 量，成本差 6.5 倍。
+  </div>
+  <div class="p-2 border border-green-300 rounded bg-green-50 text-xs">
+    <div class="font-bold text-green-700 mb-1">整體控制</div>
+    5 天總花費 <span class="font-mono font-bold">$17.93</span>，平均每天 ~$3.59。
+  </div>
+</div>
+
+<div class="mt-3 p-2 bg-gray-100 rounded text-xs text-gray-600">
+  💡 Prompt caching + Credential Pools 已啟用；免費模型 Step 3.7 Flash 大幅降低批量處理成本，但推理能力較弱。
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
 ---
 layout: default
 ---
