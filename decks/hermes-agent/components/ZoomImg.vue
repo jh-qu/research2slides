@@ -1,6 +1,6 @@
 <template>
   <div class="cursor-zoom-in" @click="showZoom" title="點擊放大">
-    <img :src="src" v-bind="$attrs" />
+    <slot />
   </div>
   <Teleport to="body">
     <div
@@ -17,7 +17,6 @@
 import { ref } from 'vue'
 
 defineProps(['src'])
-defineOptions({ inheritAttrs: false })
 
 const zoomed = ref(false)
 

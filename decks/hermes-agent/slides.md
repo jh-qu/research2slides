@@ -195,7 +195,9 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
     </div>
   </div>
   <div class="flex flex-col justify-center">
-    <ZoomImg src="/messaging-integrations.jpg" class="rounded-lg border border-gray-300 shadow-sm max-h-[280px] object-contain mx-auto" />
+    <ZoomImg src="/messaging-integrations.jpg">
+      <img src="/messaging-integrations.jpg" class="rounded-lg border border-gray-300 shadow-sm max-h-[280px] object-contain mx-auto" />
+    </ZoomImg>
     <div class="text-xs text-gray-500 mt-2 text-center">Hermes 內建 messaging integrations 列表（部分平台）</div>
   </div>
 </div>
@@ -950,7 +952,9 @@ layout: default
 
 <div class="grid grid-cols-2 gap-6 mt-3">
   <div>
-    <ZoomImg src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" />
+    <ZoomImg src="/user-stories-enterprise.png">
+      <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" />
+    </ZoomImg>
     <div class="text-xs text-gray-500 mt-2 text-center">hermes-agent.nousresearch.com/docs/user-stories</div>
   </div>
   <div class="flex flex-col gap-3 justify-center">
