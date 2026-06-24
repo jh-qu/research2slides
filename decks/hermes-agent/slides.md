@@ -1438,27 +1438,27 @@ layout: default
 
 ```mermaid {scale: 0.75}
 flowchart TB
-    subgraph IF[\"① 介面層\"]
+    subgraph IF["① 介面層"]
         direction TB
-        cli[\"CLI / TUI\"]
-        msg[\"Telegram · Discord\\nSlack · WhatsApp\"]
-        web[\"Web Dashboard\"]
-        ide[\"VS Code / Zed（ACP）\"]
+        cli["CLI / TUI"]
+        msg["Telegram / Discord\nSlack / WhatsApp"]
+        web["Web Dashboard"]
+        ide["VS Code / Zed（ACP）"]
     end
-    subgraph AG[\"② Agent 邏輯層\"]
+    subgraph AG["② Agent 邏輯層"]
         direction TB
-        aa[\"AIAgent\\nrun_agent.py\"]
-        mt[\"model_tools.py\\n動態工具派發\"]
+        aa["AIAgent\nrun_agent.py"]
+        mt["model_tools.py\n動態工具派發"]
     end
-    subgraph EX[\"③ 執行層\"]
+    subgraph EX["③ 執行層"]
         direction TB
-        local[\"Local · Docker · SSH\"]
-        cloud[\"Modal · Singularity\\n（GPU 叢集）\"]
+        local["Local / Docker / SSH"]
+        cloud["Modal / Singularity\nGPU 叢集"]
     end
     IF --> AG --> EX
 ```
 
-<div class=\"absolute bottom-4 right-4 text-sm text-gray-500\"><SlideCurrentNo /> / <SlidesTotal /></div>
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
 
 三層分離讓我們可以「換一層不動另一層」。
 例如：今天用 Slack，改天想換成 Line，只需要改介面層的設定，Agent 邏輯完全不用動。
