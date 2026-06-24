@@ -1,5 +1,5 @@
 <template>
-  <div class="cursor-zoom-in" @click="showZoom" title="點擊放大">
+  <div class="cursor-zoom-in" @click.stop="showZoom" title="點擊放大">
     <slot />
   </div>
   <Teleport to="body">
