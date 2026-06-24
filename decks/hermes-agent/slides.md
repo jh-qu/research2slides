@@ -1105,30 +1105,12 @@ layout: default
 「結論先講」的輸出格式是我們在知識庫裡定義的規則，Bot 自動遵守。
 -->
 ---
-layout: center
-class: text-center
----
-
-# 資料準備
-
-<div class="text-gray-400 mt-4 text-lg">Bot 要懂業務，得先給它正確的『地圖』和『字典』</div>
-
-<div class="text-gray-500 text-sm mt-2">DATA · KNOWLEDGE · QUERIES</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
-
-<!--
-Bot 能正確回答的前提，是我們事先把業務知識餵給它。
-這是一次性的準備工作，之後 Bot 會自己學習和更新。
-接下來三張投影片說明我們準備了哪三類知識。
--->
----
 layout: default
 ---
 
-# Bot 要餵的三類知識
+# 資料準備：Bot 要餵的三類知識
 
-<div class="text-gray-600 text-sm italic mb-5">少了哪一塊都會卡住：表結構、能跑的範例、聽得懂的詞彙</div>
+<div class="text-gray-600 text-sm italic mb-5">Bot 要懂業務，得先給它正確的地圖和字典——少了哪一塊都會卡住</div>
 
 <div class="grid grid-cols-3 gap-4">
   <div class="border border-blue-400 rounded-lg overflow-hidden">
