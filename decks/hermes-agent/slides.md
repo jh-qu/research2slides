@@ -1119,7 +1119,7 @@ layout: default
 <div class="text-xs text-gray-500 font-bold mb-2">官方 User Stories — Enterprise / Business Ops 精選場景</div>
 
 <ZoomImg src="/user-stories-enterprise.png">
-  <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" style="max-height: 200px; object-fit: contain; object-position: left;" />
+  <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 shadow-sm block mx-auto" style="max-height: 200px; max-width: 100%;" />
 </ZoomImg>
 
 <div class="text-xs text-gray-400 mt-1 mb-3 text-center">hermes-agent.nousresearch.com/docs/user-stories</div>
