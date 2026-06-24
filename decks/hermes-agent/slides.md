@@ -1110,33 +1110,37 @@ layout: default
 
 # 資料準備：Bot 要餵的三類知識
 
-<div class="text-gray-600 text-sm italic mb-5">Bot 要懂業務，得先給它正確的地圖和字典——少了哪一塊都會卡住</div>
+<div class="text-gray-600 text-sm italic mb-4">Bot 要懂業務，得先給它正確的地圖和字典——少了哪一塊都會卡住</div>
 
-<div class="grid grid-cols-3 gap-4">
-  <div class="border border-blue-400 rounded-lg overflow-hidden">
-    <div class="bg-blue-700 px-4 py-3 text-white font-bold text-sm">01 · 數據儀表</div>
-    <div class="p-4">
-      <div class="text-sm text-gray-700 mb-3">BigQuery 表的中文名、用途、寫入頻率、欄位語意。Bot 才知道「要打開哪張表」。</div>
-      <div class="text-xs text-gray-400 font-bold mb-1">EXAMPLES</div>
-      <div class="text-xs text-gray-500 italic">DailyUserInfoSnapshot · GameAccount · ...</div>
+<div class="grid grid-cols-3 gap-5">
+  <div class="border border-blue-300 rounded-lg p-5 bg-blue-50 flex flex-col gap-3">
+    <div class="font-bold text-blue-700 text-sm">01 · 數據儀表</div>
+    <div class="text-sm text-gray-700">BigQuery 表的中文名、用途、寫入頻率、欄位語意。Bot 才知道「要打開哪張表」。</div>
+    <div class="mt-auto">
+      <div class="text-xs text-gray-400 font-bold mb-1">包含範例</div>
+      <div class="text-xs text-gray-500">DailyUserInfoSnapshot · GameAccount · ...</div>
     </div>
   </div>
-  <div class="border border-amber-400 rounded-lg overflow-hidden">
-    <div class="bg-amber-700 px-4 py-3 text-white font-bold text-sm">02 · 歷史 Query 範例</div>
-    <div class="p-4">
-      <div class="text-sm text-gray-700 mb-3">把過去寫過的查 SQL 收進來。Bot 用最像的範本改造，避免從零亂湊。</div>
-      <div class="text-xs text-gray-400 font-bold mb-1">EXAMPLES</div>
-      <div class="text-xs text-gray-500 italic">計算 DAU · 計算營收 · 留存 · 重疊買家</div>
+  <div class="border border-amber-300 rounded-lg p-5 bg-amber-50 flex flex-col gap-3">
+    <div class="font-bold text-amber-700 text-sm">02 · 歷史 Query 範例</div>
+    <div class="text-sm text-gray-700">把過去寫過的 SQL 收進來。Bot 用最像的範本改造，避免從零亂湊出錯誤的查詢。</div>
+    <div class="mt-auto">
+      <div class="text-xs text-gray-400 font-bold mb-1">包含範例</div>
+      <div class="text-xs text-gray-500">計算 DAU · 計算營收 · 留存 · 重疊買家</div>
     </div>
   </div>
-  <div class="border border-green-400 rounded-lg overflow-hidden">
-    <div class="bg-green-700 px-4 py-3 text-white font-bold text-sm">03 · 一般營運知識</div>
-    <div class="p-4">
-      <div class="text-sm text-gray-700 mb-3">縮寫、行話、人話對映：DAU 是什麼、員工要不要排除、CN 什麼定義…</div>
-      <div class="text-xs text-gray-400 font-bold mb-1">EXAMPLES</div>
-      <div class="text-xs text-gray-500 italic">DAU = 日活躍 · DNU = 新玩家 · DOU = 老玩家</div>
+  <div class="border border-green-300 rounded-lg p-5 bg-green-50 flex flex-col gap-3">
+    <div class="font-bold text-green-700 text-sm">03 · 一般營運知識</div>
+    <div class="text-sm text-gray-700">縮寫、行話、人話對映：DAU 是什麼、員工要不要排除、CN 的定義…Bot 才聽得懂業務語言。</div>
+    <div class="mt-auto">
+      <div class="text-xs text-gray-400 font-bold mb-1">包含範例</div>
+      <div class="text-xs text-gray-500">DAU = 日活躍 · DNU = 新玩家 · DOU = 老玩家</div>
     </div>
   </div>
+</div>
+
+<div class="mt-5 p-3 bg-gray-100 border border-gray-300 rounded text-xs text-gray-600 text-center">
+  三類知識是一次性的初始準備——完成後 Bot 會透過 Learning Loop 持續自我更新
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
