@@ -201,31 +201,53 @@ layout: default
 
 Agent 透過主流通訊平台操作，使用者不需學新介面
 
-<div class="flex gap-4 mt-6 flex-wrap">
-  <div class="border border-gray-400 rounded-lg px-5 py-3 text-center">
-    <div class="text-2xl">💬</div>
-    <div class="text-sm mt-1">Telegram</div>
+<div class="grid grid-cols-2 gap-6 mt-4">
+  <div>
+    <div class="flex gap-3 flex-wrap">
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">💬</div>
+        <div class="text-xs mt-1">Telegram</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">🎮</div>
+        <div class="text-xs mt-1">Discord</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">💼</div>
+        <div class="text-xs mt-1">Slack</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">📱</div>
+        <div class="text-xs mt-1">WhatsApp</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">🔒</div>
+        <div class="text-xs mt-1">Signal</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">💼</div>
+        <div class="text-xs mt-1">Mattermost</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">🔒</div>
+        <div class="text-xs mt-1">Matrix</div>
+      </div>
+      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
+        <div class="text-2xl">📧</div>
+        <div class="text-xs mt-1">Email</div>
+      </div>
+    </div>
+    <div class="mt-4 p-3 bg-blue-50 border border-blue-300 rounded text-xs">
+      📌 <strong>實際場景：</strong>工程師或業務人員直接在 Slack 發指令給 Agent，完成自動化任務，不需切換工具
+    </div>
+    <div class="mt-3 p-3 bg-green-50 border border-green-300 rounded text-xs">
+      🔥 <strong>精選整合：</strong>Telegram / Discord / Slack / WhatsApp / Signal / Mattermost / Matrix / Email (SMTP)
+    </div>
   </div>
-  <div class="border border-gray-400 rounded-lg px-5 py-3 text-center">
-    <div class="text-2xl">🎮</div>
-    <div class="text-sm mt-1">Discord</div>
+  <div class="flex flex-col justify-center">
+    <img src="/messaging-integrations.jpg" class="rounded-lg border border-gray-300 shadow-sm w-full" />
+    <div class="text-xs text-gray-500 mt-2">Hermes 內建 messaging integrations 列表（部分平台）</div>
   </div>
-  <div class="border border-gray-400 rounded-lg px-5 py-3 text-center">
-    <div class="text-2xl">💼</div>
-    <div class="text-sm mt-1">Slack</div>
-  </div>
-  <div class="border border-gray-400 rounded-lg px-5 py-3 text-center">
-    <div class="text-2xl">📱</div>
-    <div class="text-sm mt-1">WhatsApp</div>
-  </div>
-  <div class="border border-gray-400 rounded-lg px-5 py-3 text-center">
-    <div class="text-2xl">🔒</div>
-    <div class="text-sm mt-1">Signal</div>
-  </div>
-</div>
-
-<div class="mt-6 p-4 bg-yellow-900 bg-opacity-30 rounded-lg border border-yellow-700 text-sm">
-  📌 <strong>實際場景：</strong>工程師或業務人員直接在 Slack 發指令給 Agent，完成自動化任務，不需切換工具
 </div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
