@@ -159,8 +159,11 @@ layout: default
 OpenRouter 是一個聚合平台，一個 API key 可以打 200+ 個模型，是最靈活的接入方式。
 -->
 
-<!--
-# 多平台整合 — 在現有工具中使用 AI（原P6，已移至 Appendix）
+---
+layout: default
+---
+
+# 多平台整合 — 在現有工具中使用 AI
 
 Agent 透過主流通訊平台操作，使用者不需學新介面
 
@@ -183,22 +186,6 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
         <div class="text-2xl">📱</div>
         <div class="text-xs mt-1">WhatsApp</div>
       </div>
-      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
-        <div class="text-2xl">🔒</div>
-        <div class="text-xs mt-1">Signal</div>
-      </div>
-      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
-        <div class="text-2xl">💼</div>
-        <div class="text-xs mt-1">Mattermost</div>
-      </div>
-      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
-        <div class="text-2xl">🔒</div>
-        <div class="text-xs mt-1">Matrix</div>
-      </div>
-      <div class="border border-gray-400 rounded-lg px-4 py-2 text-center">
-        <div class="text-2xl">📧</div>
-        <div class="text-xs mt-1">Email</div>
-      </div>
     </div>
     <div class="mt-4 p-3 bg-blue-50 border border-blue-300 rounded text-xs">
       📌 <strong>實際場景：</strong>工程師或業務人員直接在 Slack 發指令給 Agent，完成自動化任務，不需切換工具
@@ -208,8 +195,8 @@ Agent 透過主流通訊平台操作，使用者不需學新介面
     </div>
   </div>
   <div class="flex flex-col justify-center">
-    <img src="/messaging-integrations.jpg" class="rounded-lg border border-gray-300 shadow-sm max-h-[450px] object-contain mx-auto" />
-    <div class="text-xs text-gray-500 mt-2">Hermes 內建 messaging integrations 列表（部分平台）</div>
+    <ZoomImg src="/messaging-integrations.jpg" class="rounded-lg border border-gray-300 shadow-sm max-h-[280px] object-contain mx-auto" />
+    <div class="text-xs text-gray-500 mt-2 text-center">Hermes 內建 messaging integrations 列表（部分平台）</div>
   </div>
 </div>
 
@@ -963,7 +950,7 @@ layout: default
 
 <div class="grid grid-cols-2 gap-6 mt-3">
   <div>
-    <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" />
+    <ZoomImg src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" />
     <div class="text-xs text-gray-500 mt-2 text-center">hermes-agent.nousresearch.com/docs/user-stories</div>
   </div>
   <div class="flex flex-col gap-3 justify-center">
