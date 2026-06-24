@@ -1116,28 +1116,26 @@ layout: default
 
 # 社群驗證：262 則真實案例
 
-<div class="grid grid-cols-2 gap-6 mt-3">
-  <div>
-    <ZoomImg src="/user-stories-enterprise.png">
-      <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" />
-    </ZoomImg>
-    <div class="text-xs text-gray-500 mt-2 text-center">hermes-agent.nousresearch.com/docs/user-stories</div>
+<div class="text-xs text-gray-500 font-bold mb-2">官方 User Stories — Enterprise / Business Ops 精選場景</div>
+
+<ZoomImg src="/user-stories-enterprise.png">
+  <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 w-full shadow-sm" style="max-height: 200px; object-fit: contain; object-position: left;" />
+</ZoomImg>
+
+<div class="text-xs text-gray-400 mt-1 mb-3 text-center">hermes-agent.nousresearch.com/docs/user-stories</div>
+
+<div class="grid grid-cols-3 gap-3">
+  <div class="border border-blue-300 rounded-lg p-3 bg-blue-50">
+    <div class="font-bold text-blue-700 text-sm">定時自動推報</div>
+    <div class="text-xs text-gray-600 mt-1">「每個工作日早上 9 點整理收件夾推到 Slack」——現有 BQ Bot 延伸：每日 KPI 摘要主動推送，不需人工觸發</div>
   </div>
-  <div class="flex flex-col gap-3 justify-center">
-    <div class="text-xs text-gray-500 font-bold mb-1">Business Ops 精選場景</div>
-    <div class="border border-blue-300 rounded-lg p-3 bg-blue-50">
-      <div class="font-bold text-blue-700 text-sm">定時自動推報</div>
-      <div class="text-xs text-gray-600 mt-1">「每個工作日早上 9 點整理收件夾推到 Slack」——現有 BQ Bot 延伸：每日 KPI 摘要主動推送，不需人工觸發</div>
-    </div>
-    <div class="border border-green-300 rounded-lg p-3 bg-green-50">
-      <div class="font-bold text-green-700 text-sm">會議記錄自動化</div>
-      <div class="text-xs text-gray-600 mt-1">自動轉錄 Google Meet／Teams，產出摘要與行動項目；敏感資料走本地模型不出機器</div>
-    </div>
-    <div class="border border-purple-300 rounded-lg p-3 bg-purple-50">
-      <div class="font-bold text-purple-700 text-sm">多遊戲 Chief of Staff 架構</div>
-      <div class="text-xs text-gray-600 mt-1">主 Agent 跨專案統覽；每個遊戲 / 部門有獨立 sub-agent + 各自記憶，1 個 Slack 頻道 = 1 個 Agent</div>
-    </div>
-    <div class="text-xs text-gray-400 mt-1 text-right">來源：官方 User Stories · Enterprise / Business Ops 分類</div>
+  <div class="border border-green-300 rounded-lg p-3 bg-green-50">
+    <div class="font-bold text-green-700 text-sm">會議記錄自動化</div>
+    <div class="text-xs text-gray-600 mt-1">自動轉錄 Google Meet／Teams，產出摘要與行動項目；敏感資料走本地模型不出機器</div>
+  </div>
+  <div class="border border-purple-300 rounded-lg p-3 bg-purple-50">
+    <div class="font-bold text-purple-700 text-sm">多遊戲 Chief of Staff 架構</div>
+    <div class="text-xs text-gray-600 mt-1">主 Agent 跨專案統覽；每個遊戲 / 部門有獨立 sub-agent + 各自記憶，1 個 Slack 頻道 = 1 個 Agent</div>
   </div>
 </div>
 
