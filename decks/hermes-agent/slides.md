@@ -601,6 +601,8 @@ layout: default
 
 <div class="text-xs text-gray-500 font-bold mb-2">官方 User Stories — Enterprise / Business Ops 精選場景</div>
 
+你好，我是 Codex
+
 <ZoomImg src="/user-stories-enterprise.png">
   <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 shadow-sm block mx-auto" style="max-height: 200px; max-width: 100%;" />
 </ZoomImg>
@@ -777,7 +779,7 @@ layout: default
     <div class="font-bold text-blue-700 mb-3 text-sm">下一步</div>
     <ul class="text-xs text-gray-700 space-y-2">
       <li>🎯 啟動 PoC 試用場景</li>
-      <li>🐳 Docker 沙箱 + Gateway 白名單為基本前提</li>
+      <li>🐳 Docker 沙箱 + Gateway 白名單為前提</li>
       <li>📋 以遊戲營運查詢為起點，驗證業務場景</li>
       <li>🔒 確認資料治理策略後再擴大部署</li>
     </ul>
