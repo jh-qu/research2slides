@@ -601,8 +601,6 @@ layout: default
 
 <div class="text-xs text-gray-500 font-bold mb-2">官方 User Stories — Enterprise / Business Ops 精選場景</div>
 
-你好，我是 Codex
-
 <ZoomImg src="/user-stories-enterprise.png">
   <img src="/user-stories-enterprise.png" class="rounded-lg border border-gray-300 shadow-sm block mx-auto" style="max-height: 200px; max-width: 100%;" />
 </ZoomImg>
