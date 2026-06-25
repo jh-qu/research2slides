@@ -101,14 +101,14 @@ layout: default
     <div class="font-bold text-blue-700 text-sm mb-2">🧠 Skill 沉澱</div>
     <div class="text-xs text-gray-600 space-y-1">
       <div>Learning Loop</div>
-      <div>三態生命週期</div>
-      <div>負面學習黑名單</div>
+      <div>Skill 生命週期</div>
+      <div>background review</div>
     </div>
   </div>
   <div class="border border-purple-400 rounded-lg p-3 bg-purple-50">
     <div class="font-bold text-purple-700 text-sm mb-2">💾 長期記憶</div>
     <div class="text-xs text-gray-600 space-y-1">
-      <div>三層記憶架構</div>
+      <div>分層記憶架構</div>
       <div>session_search</div>
       <div>Honcho 整合</div>
     </div>
@@ -117,14 +117,12 @@ layout: default
     <div class="font-bold text-green-700 text-sm mb-2">💰 Token 成本</div>
     <div class="text-xs text-gray-600 space-y-1">
       <div>多模型路由</div>
-      <div>5 天實測用量</div>
-      <div>成本估算</div>
+      <div>5 天實測 token 用量</div>
     </div>
   </div>
   <div class="border border-amber-400 rounded-lg p-3 bg-amber-50">
     <div class="font-bold text-amber-700 text-sm mb-2">🎯 應用場景</div>
     <div class="text-xs text-gray-600 space-y-1">
-      <div>八種協作模式</div>
       <div>遊戲營運 Bot</div>
       <div>社群 262 案例</div>
     </div>
@@ -196,27 +194,18 @@ flowchart LR
 layout: default
 ---
 
-# Skill 生命週期：三態狀態機
+# Skill 生命週期狀態
 
 <div class="grid grid-cols-2 gap-6 mt-4">
   <div>
-    <div class="text-xs text-gray-500 mb-3">Skill 永不刪除，只沿三態流轉</div>
     <div class="flex flex-col items-center gap-1">
       <div class="px-6 py-3 bg-green-100 border-2 border-green-500 rounded-xl text-center">
         <div class="font-bold text-green-700 text-sm">active</div>
         <div class="text-xs text-gray-600 mt-0.5">正常使用中，自動套用</div>
       </div>
-      <div class="flex items-center gap-6 text-xs text-gray-500">
-        <span>← rollback</span>
-        <span>閒置 7 天 →</span>
-      </div>
       <div class="px-6 py-3 bg-yellow-100 border-2 border-yellow-500 rounded-xl text-center">
         <div class="font-bold text-yellow-700 text-sm">stale</div>
         <div class="text-xs text-gray-600 mt-0.5">Curator 標記，等待複查</div>
-      </div>
-      <div class="flex items-center gap-6 text-xs text-gray-500">
-        <span>← 人工 pin 保留</span>
-        <span>Curator 審定 →</span>
       </div>
       <div class="px-6 py-3 bg-gray-100 border-2 border-gray-400 rounded-xl text-center">
         <div class="font-bold text-gray-600 text-sm">archived</div>
@@ -224,18 +213,16 @@ layout: default
       </div>
     </div>
   </div>
-  <div class="flex flex-col gap-3 justify-center">
-    <div class="p-3 bg-blue-50 border border-blue-300 rounded text-xs">
-      🔒 <strong>永不刪除原則：</strong>所有 Skill 保留版本歷史，任何時候都可以 rollback 到上一個版本，防止知識意外流失
+  <div class="flex flex-col gap-2 justify-center">
+    <div class="text-xs text-gray-500 font-bold mb-1">實測：skills-meta.json · 點擊放大</div>
+    <ZoomImg src="/vscode-skills-meta-json.jpg">
+      <img src="/vscode-skills-meta-json.jpg" class="rounded border border-gray-300 w-full shadow-sm" style="max-height: 155px; object-fit: contain; object-position: left;" />
+    </ZoomImg>
+    <div class="p-2 bg-blue-50 border border-blue-300 rounded text-xs mt-1">
+      🔒 <strong>永不刪除：</strong>版本歷史完整保留，<code>patch_count</code> 追蹤每次修訂，隨時可 rollback
     </div>
-    <div class="p-3 bg-green-50 border border-green-300 rounded text-xs">
-      📌 <strong>pin 機制：</strong>對重要 Skill 加 pin 標記，Curator 不會自動將其標為 stale，即使長期閒置
-    </div>
-    <div class="p-3 bg-purple-50 border border-purple-300 rounded text-xs">
-      🧪 <strong>dry-run 模式：</strong>新 Skill 可先以 dry-run 執行，確認行為符合預期後再切換為 active
-    </div>
-    <div class="p-2 bg-gray-100 rounded text-xs text-gray-600">
-      閒置閾值（7 天）可在 <span class="font-mono">config.yaml</span> 的 <span class="font-mono">curator.stale_days</span> 調整
+    <div class="p-2 bg-green-50 border border-green-300 rounded text-xs">
+      📌 <strong>pin 機制：</strong>重要 Skill 加 pin，Curator 不自動淘汰，即使長期閒置
     </div>
   </div>
 </div>
@@ -248,11 +235,12 @@ Skill 生命週期管理是 Hermes 與一般對話機器人的根本差異之一
 永不刪除原則讓企業放心：知識不會因為 AI 自動清理而消失。
 pin 機制是企業部署的重要工具——針對業務核心的 Skill（例如報表格式規範），加 pin 防止 Curator 自動淘汰。
 -->
+
 ---
 layout: default
 ---
 
-# 負面學習：background_review.py 黑名單
+# background_review.py: 負面學習黑名單
 
 <div class="grid grid-cols-2 gap-6 mt-4">
   <div>
@@ -288,7 +276,6 @@ layout: default
   </div>
   <div class="flex flex-col gap-3 justify-center">
     <div class="p-3 bg-gray-800 rounded text-xs font-mono text-green-300 leading-relaxed">
-      <div class="text-gray-400 mb-1"># 橙皮書 §06 原文（英文）</div>
       "The goal of negative learning is not to punish the agent for mistakes, but to ensure the skill library only retains patterns that genuinely improve performance."
     </div>
     <div class="p-3 bg-orange-50 border border-orange-300 rounded text-xs text-orange-800">
@@ -604,98 +591,11 @@ class: text-center
 layout: default
 ---
 
-# 八種協作模式：從 1 個 Bot 到 50 個 Agent
-
-<div class="text-xs text-gray-500 mb-1">橙皮書 §17 — 依複雜度由低到高，按卡片控成本</div>
-
-<table class="table-auto border-collapse w-full text-xs">
-  <thead>
-    <tr class="bg-gray-100">
-      <th class="border border-gray-300 px-2 py-0.5 text-center">模式</th>
-      <th class="border border-gray-300 px-2 py-0.5 text-left">說明</th>
-      <th class="border border-gray-300 px-2 py-0.5 text-center">Agent 數</th>
-      <th class="border border-gray-300 px-2 py-0.5 text-left">適用場景</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P1</td>
-      <td class="border border-gray-300 px-2 py-0.5">單 Agent 直接執行</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">1</td>
-      <td class="border border-gray-300 px-2 py-0.5">查詢、單步任務（⚠️ Fan-out 慎用）</td>
-    </tr>
-    <tr class="bg-gray-50">
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P2</td>
-      <td class="border border-gray-300 px-2 py-0.5">主 + 子 Agent 串行</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">2–5</td>
-      <td class="border border-gray-300 px-2 py-0.5">多步驟、跨工具自動化（現有 BQ Bot 約此層）</td>
-    </tr>
-    <tr>
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P3</td>
-      <td class="border border-gray-300 px-2 py-0.5">Pipeline 流水線</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">3–8</td>
-      <td class="border border-gray-300 px-2 py-0.5">資料清洗、報告生成流程</td>
-    </tr>
-    <tr class="bg-gray-50">
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P4</td>
-      <td class="border border-gray-300 px-2 py-0.5">Review 審核迴圈</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">2–4</td>
-      <td class="border border-gray-300 px-2 py-0.5">需要品質把關的內容生成</td>
-    </tr>
-    <tr>
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-purple-600">P5</td>
-      <td class="border border-gray-300 px-2 py-0.5">Fan-out 並行</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">5–20</td>
-      <td class="border border-gray-300 px-2 py-0.5">大量同質任務並行處理</td>
-    </tr>
-    <tr class="bg-gray-50">
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-purple-600">P6</td>
-      <td class="border border-gray-300 px-2 py-0.5">Kanban 自癒看板</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">5–15</td>
-      <td class="border border-gray-300 px-2 py-0.5">無人值守長任務（已有 Multi-agent Kanban 頁）</td>
-    </tr>
-    <tr>
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-orange-600">P7</td>
-      <td class="border border-gray-300 px-2 py-0.5">Chief of Staff 架構</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">10–30</td>
-      <td class="border border-gray-300 px-2 py-0.5">跨部門多遊戲統覽（社群案例）</td>
-    </tr>
-    <tr class="bg-gray-50">
-      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-orange-600">P8</td>
-      <td class="border border-gray-300 px-2 py-0.5">全自主 Agent 網絡</td>
-      <td class="border border-gray-300 px-2 py-0.5 text-center">20–50+</td>
-      <td class="border border-gray-300 px-2 py-0.5">高度自動化企業流程（需充分 PoC 驗證）</td>
-    </tr>
-  </tbody>
-</table>
-
-<div class="grid grid-cols-2 gap-2 mt-2">
-  <div class="p-1.5 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
-    💰 <strong>按卡片控成本：</strong>每個子 Agent 是一張 Kanban 卡片，Token 消耗可追蹤；從 P2 開始試點，確認成本效益後再升級模式
-  </div>
-  <div class="p-1.5 bg-orange-50 border border-orange-400 rounded text-xs text-orange-800">
-    ⚠️ <strong>P1 Fan-out 警告：</strong>P1 單 Agent 若被用於大量 Fan-out 任務，Token 消耗會爆炸性增長；Fan-out 場景應選 P5 並設資源上限
-  </div>
-</div>
-
-<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
-
-<!--
-橙皮書 §17 定義了八種協作模式，從最簡單的單 Agent 到 50+ Agent 的全自主網絡。
-關鍵概念：每升一個模式，複雜度和成本都會顯著上升——不是越複雜越好，而是找到適合場景的最低複雜度模式。
-對我們自己的案例定位：現有的遊戲營運 BQ Bot 大約在 P2 層，已經能解決核心問題。
-升級到 P7 的時機：當需要跨多個遊戲或部門統覽時，才需要 Chief of Staff 架構。
-P1 Fan-out 警告很重要：很多初次使用者的直覺是「有 Agent 就派更多出去」，但 Token 消耗是線性疊加的。
--->
----
-layout: default
----
-
 # 遊戲營運 Bot：用中文提問，Bot 自動出報告
 
 <div class="flex items-center gap-4 mb-4">
   <div class="text-gray-600 text-sm italic">Hermes Agent + BigQuery，遊戲運營同仁無需寫 SQL，直接提問得到完整對比分析</div>
-  <div class="shrink-0 px-3 py-1.5 bg-green-100 border border-green-400 rounded text-xs text-green-800 font-bold whitespace-nowrap">⏱ 3 分鐘 vs 人工 30–60 分鐘</div>
+
 </div>
 
 <div class="grid grid-cols-2 gap-6">
@@ -706,7 +606,7 @@ layout: default
       <div class="bg-blue-600 rounded-lg px-3 py-2 text-white text-right mb-4 text-sm ml-8">
         黃金週與卡片最終戰成效交叉比對一下
       </div>
-      <div class="text-gray-400 text-xs mb-1">RD7 Bot · 14:35</div>
+      <div class="text-gray-400 text-xs mb-1">RD7 Bot</div>
       <div class="bg-gray-700 rounded-lg p-3 text-xs text-green-300 leading-relaxed">
         <span class="text-white font-bold">FXC 最終戰 × 黃金週 BP 交叉比對 (非CN)</span><br>
         查詢區間：2026/4/1 – 5/4<br><br>
@@ -740,6 +640,7 @@ layout: default
 使用者完全不需要懂 SQL，也不需要知道資料在哪張表。
 「結論先講」的輸出格式是我們在知識庫裡定義的規則，Bot 自動遵守。
 -->
+
 ---
 layout: default
 ---
@@ -1202,6 +1103,51 @@ layout: default
 layout: default
 ---
 
+# Claude 平台近期動向
+
+<div class="text-xs text-gray-500 mb-4">2026 Q1–Q2 發布，與 Hermes Agent 應用場景高度重疊的功能方向</div>
+
+<div class="grid grid-cols-2 gap-4 mt-2">
+  <div class="border border-purple-300 rounded-lg p-4 bg-purple-50">
+    <div class="font-bold text-purple-700 text-sm mb-2">💬 Claude Tag for Slack</div>
+    <div class="text-xs text-gray-600 space-y-1">
+      <div>在 Slack 頻道直接 @Claude 派任務</div>
+      <div>跨頻道 context memory，async 任務回報</div>
+      <div>Enterprise / Team 方案 beta</div>
+    </div>
+  </div>
+  <div class="border border-blue-300 rounded-lg p-4 bg-blue-50">
+    <div class="font-bold text-blue-700 text-sm mb-2">📱 Cowork + Dispatch</div>
+    <div class="text-xs text-gray-600 space-y-1">
+      <div>手機派任務 → 桌機執行，同一對話串跨裝置同步</div>
+      <div>出門在外用手機發指令，回到座位無縫接手</div>
+      <div>需同時開 Desktop app + 手機 app（Pro/Max）</div>
+    </div>
+  </div>
+  <div class="border border-green-300 rounded-lg p-4 bg-green-50">
+    <div class="font-bold text-green-700 text-sm mb-2">🖥️ Remote Control</div>
+    <div class="text-xs text-gray-600 space-y-1">
+      <div>手機透過 Claude 存取桌機的所有資源</div>
+      <div>檔案、connector、plugin、computer use 全部可遙控</div>
+      <div>桌機需保持開機且 app 在前景</div>
+    </div>
+  </div>
+  <div class="border border-amber-300 rounded-lg p-4 bg-amber-50">
+    <div class="font-bold text-amber-700 text-sm mb-2">🤖 Multi-agent Orchestration</div>
+    <div class="text-xs text-gray-600 space-y-1">
+      <div>Lead agent 拆解任務，sub-agent 平行執行</div>
+      <div>Claude Finance：預建 10 個財務 agent</div>
+      <div>Managed Agents 支援排程（cron）自動執行</div>
+    </div>
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+---
+layout: default
+---
+
 # 資料來源
 
 <div class="flex flex-col gap-4 mt-6">
@@ -1266,6 +1212,93 @@ class: text-center
 <div class="text-gray-400 mt-4 text-lg">技術細節與案例設定參考</div>
 
 <div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+---
+layout: default
+---
+
+# 八種協作模式：從 1 個 Bot 到 50 個 Agent
+
+<div class="text-xs text-gray-500 mb-1">橙皮書 §17 — 依複雜度由低到高，按卡片控成本</div>
+
+<table class="table-auto border-collapse w-full text-xs">
+  <thead>
+    <tr class="bg-gray-100">
+      <th class="border border-gray-300 px-2 py-0.5 text-center">模式</th>
+      <th class="border border-gray-300 px-2 py-0.5 text-left">說明</th>
+      <th class="border border-gray-300 px-2 py-0.5 text-center">Agent 數</th>
+      <th class="border border-gray-300 px-2 py-0.5 text-left">適用場景</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P1</td>
+      <td class="border border-gray-300 px-2 py-0.5">單 Agent 直接執行</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">1</td>
+      <td class="border border-gray-300 px-2 py-0.5">查詢、單步任務（⚠️ Fan-out 慎用）</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P2</td>
+      <td class="border border-gray-300 px-2 py-0.5">主 + 子 Agent 串行</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">2–5</td>
+      <td class="border border-gray-300 px-2 py-0.5">多步驟、跨工具自動化（現有 BQ Bot 約此層）</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P3</td>
+      <td class="border border-gray-300 px-2 py-0.5">Pipeline 流水線</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">3–8</td>
+      <td class="border border-gray-300 px-2 py-0.5">資料清洗、報告生成流程</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-blue-600">P4</td>
+      <td class="border border-gray-300 px-2 py-0.5">Review 審核迴圈</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">2–4</td>
+      <td class="border border-gray-300 px-2 py-0.5">需要品質把關的內容生成</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-purple-600">P5</td>
+      <td class="border border-gray-300 px-2 py-0.5">Fan-out 並行</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">5–20</td>
+      <td class="border border-gray-300 px-2 py-0.5">大量同質任務並行處理</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-purple-600">P6</td>
+      <td class="border border-gray-300 px-2 py-0.5">Kanban 自癒看板</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">5–15</td>
+      <td class="border border-gray-300 px-2 py-0.5">無人值守長任務（已有 Multi-agent Kanban 頁）</td>
+    </tr>
+    <tr>
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-orange-600">P7</td>
+      <td class="border border-gray-300 px-2 py-0.5">Chief of Staff 架構</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">10–30</td>
+      <td class="border border-gray-300 px-2 py-0.5">跨部門多遊戲統覽（社群案例）</td>
+    </tr>
+    <tr class="bg-gray-50">
+      <td class="border border-gray-300 px-2 py-0.5 text-center font-mono font-bold text-orange-600">P8</td>
+      <td class="border border-gray-300 px-2 py-0.5">全自主 Agent 網絡</td>
+      <td class="border border-gray-300 px-2 py-0.5 text-center">20–50+</td>
+      <td class="border border-gray-300 px-2 py-0.5">高度自動化企業流程（需充分 PoC 驗證）</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="grid grid-cols-2 gap-2 mt-2">
+  <div class="p-1.5 bg-blue-50 border border-blue-300 rounded text-xs text-blue-700">
+    💰 <strong>按卡片控成本：</strong>每個子 Agent 是一張 Kanban 卡片，Token 消耗可追蹤；從 P2 開始試點，確認成本效益後再升級模式
+  </div>
+  <div class="p-1.5 bg-orange-50 border border-orange-400 rounded text-xs text-orange-800">
+    ⚠️ <strong>P1 Fan-out 警告：</strong>P1 單 Agent 若被用於大量 Fan-out 任務，Token 消耗會爆炸性增長；Fan-out 場景應選 P5 並設資源上限
+  </div>
+</div>
+
+<div class="absolute bottom-4 right-4 text-sm text-gray-500"><SlideCurrentNo /> / <SlidesTotal /></div>
+
+<!--
+橙皮書 §17 定義了八種協作模式，從最簡單的單 Agent 到 50+ Agent 的全自主網絡。
+關鍵概念：每升一個模式，複雜度和成本都會顯著上升——不是越複雜越好，而是找到適合場景的最低複雜度模式。
+對我們自己的案例定位：現有的遊戲營運 BQ Bot 大約在 P2 層，已經能解決核心問題。
+升級到 P7 的時機：當需要跨多個遊戲或部門統覽時，才需要 Chief of Staff 架構。
+P1 Fan-out 警告很重要：很多初次使用者的直覺是「有 Agent 就派更多出去」，但 Token 消耗是線性疊加的。
+-->
 ---
 layout: two-cols
 class: kanban-slide
@@ -1525,7 +1558,7 @@ layout: default
 layout: default
 ---
 
-## 附錄C：架構解析 — 三層設計
+## 架構解析 — 三層設計
 
 ```mermaid {scale: 0.75}
 flowchart TB
@@ -1562,7 +1595,7 @@ flowchart TB
 layout: default
 ---
 
-## 附錄B：部署彈性 — 從個人到企業規模
+## 部署彈性 — 從個人到企業規模
 
 <div class="grid grid-cols-2 gap-6 mt-6">
   <div class="border border-green-700 rounded-lg p-5">
@@ -1593,6 +1626,7 @@ PoC 的門檻非常低：$5/月的 VPS，大約台幣 160 元，就能把 Hermes
 如果 PoC 成功，同一套程式碼可以直接擴展到 GPU 叢集，不需要重寫。
 這個彈性讓「先試再說」的策略非常合理。
 -->
+
 ---
 layout: default
 ---
